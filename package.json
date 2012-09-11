@@ -1,0 +1,22 @@
+{
+  "name": "datauri",
+  "version": "0.0.1",
+  "description": "A simple Data URI scheme generator",
+  "main": "datauri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/heldr/datauri.git"
+  },
+  "keywords": [
+    "datauri",
+    "png",
+    "jpg",
+    "woff",
+    "base64"
+  ],
+  "author": "Helder Santana",
+  "license": "MIT"
+}
