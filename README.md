@@ -1,7 +1,7 @@
 datauri
 =======
 
-A simple Data URI scheme generator built on top of [Node.js][nodejs]. To install datauri, just run:
+A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs]. To install datauri, just run:
 
 `npm install -g datauri` (maybe it would require Root privileges)
 
@@ -25,3 +25,4 @@ $ datauri brand.png asset/background.css MyNewClass
 ```
 
 [nodejs]: http://nodejs.org/download
+[datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
