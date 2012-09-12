@@ -9,14 +9,53 @@
  */
 
 var args = process.argv,
-    fs   = require('fs');
+    fs   = require('fs'),
+    path = require('path'),
+    mime = require('./lib/mime'),
+    uri  = require('./lib/uri'),
+    css  = require('./lib/css');
 
-function outputFile( path ) {
+function writeNewCssFile( file , content , action ) {
+    fs.writeFile( file , content , 'utf-8' , function(err) {
+        if(err) {
+            throw err;
+        }
 
+        console.log('File ' + action + ': ' + file);
+    });
+}
+
+function outputCSS( file , content ) {
+
+    content = css({
+        className: args[4] || path.basename( file , path.extname(file) ),
+        background: content
+    });
+
+    if ( fs.existsSync(file) ) {
+
+        if ( path.extname(file).match(/(css|sass|less)/) ) {
+            fs.readFile( file , 'utf-8' , function( err , cssContent ) {
+
+                cssContent += content;
+
+                writeNewCssFile( file , cssContent , 'updated' );
+
+            });
+        } else {
+            console.log( 'Must be a CSS file' );
+        }
+
+
+    } else {
+
+        writeNewCssFile( file , content , 'created' );
+
+    }
 }
 
 if (args.length > 2) {
-    var fileName = args[3];
+    var fileName = args[2];
 
     if ( fs.existsSync( fileName ) ) {
 
@@ -25,8 +64,19 @@ if (args.length > 2) {
                 throw err;
             }
 
-            ( args.length > 3 ) ?console.log( '\n' + content );
+            try {
+
+                content = uri({
+                    mimetype: mime.getFromFile( fileName ),
+                    base64: content
+                });
+
+                ( args.length < 4 ) ? console.log( content ) : outputCSS( args[3] , content );
+
+            } catch(err) {
+                throw err;
             }
+
         });
 
     }
