@@ -6,10 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "underscore":"latest"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/heldr/datauri.git"
   },
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "bin": {
+    "datauri": "./datauri.js"
+  },
+  "preferGlobal": true,
   "keywords": [
     "datauri",
     "png",
