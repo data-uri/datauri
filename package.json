@@ -1,23 +1,23 @@
 {
   "name": "datauri",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple Data URI scheme generator",
   "main": "datauri.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "dependencies": {
-    "underscore":"latest"
+    "lodash": "*"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/heldr/datauri.git"
   },
   "engines": {
-    "node": ">=0.6.0"
+    "node": ">= 0.8"
   },
   "bin": {
-    "datauri": "./datauri.js"
+    "datauri": "./bin/datauri"
   },
   "preferGlobal": true,
   "keywords": [
@@ -28,5 +28,8 @@
     "base64"
   ],
   "author": "Helder Santana",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jshint": "~0.9.1"
+  }
 }
