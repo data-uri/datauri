@@ -3,7 +3,7 @@ datauri
 
 A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs]. To install datauri, just run:
 
-`npm install -g datauri` (maybe it would require Root privileges)
+`npm install -g datauri` (it may require Root privileges)
 
 HOW TO USE
 ----------
