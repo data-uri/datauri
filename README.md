@@ -24,5 +24,26 @@ If you want to define a Class Name, just type:
 $ datauri brand.png asset/background.css MyNewClass
 ```
 
+DEVELOPING
+----------
+
+The only essential library to develop datauri is jshint.
+
+```CLI
+$ make install
+$ make test
+```
+
+If you'd like to test the full process including npm installer, just run:
+
+```CLI
+$ make fulltest
+```
+
+## License
+
+MIT License
+(c) [Helder Santana](http://heldr.com)
+
 [nodejs]: http://nodejs.org/download
 [datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
