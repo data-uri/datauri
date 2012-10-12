@@ -1,5 +1,6 @@
 var DataURI = require("../lib/exec.js"),
     assert  = require("assert"),
+    _       = require("lodash"),
     uri,
     cases   = {
         "should instance DataURI object" : function() {
@@ -22,7 +23,16 @@ var DataURI = require("../lib/exec.js"),
         }
     };
 
-for ( y in cases ) {
-    console.log( '\n - ' + y );
-    cases[y]();
-}
+var pairs = _.pairs(cases), last = _.last(pairs);
+
+_.each( pairs , function (test_case) {
+
+    console.log( '\n - ' + test_case[0] );
+    test_case[1]();
+    console.log(' - done!');
+
+    if( test_case === last ) {
+        console.log( '\n All specs working :D \n' );
+    }
+
+});
