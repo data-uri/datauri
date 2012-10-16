@@ -1,4 +1,4 @@
-datauri
+datauri [![Build Status](https://secure.travis-ci.org/heldr/datauri.png?branch=master)](http://travis-ci.org/heldr/datauri)
 =======
 
 A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs]. To install datauri, just run:
@@ -23,6 +23,27 @@ If you want to define a Class Name, just type:
 ```CLI
 $ datauri brand.png asset/background.css MyNewClass
 ```
+
+DEVELOPING
+----------
+
+The only essential library to develop datauri is jshint.
+
+```CLI
+$ make install
+$ make test
+```
+
+If you'd like to test the full process including npm installer, just run:
+
+```CLI
+$ make fulltest
+```
+
+## License
+
+MIT License
+(c) [Helder Santana](http://heldr.com)
 
 [nodejs]: http://nodejs.org/download
 [datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
