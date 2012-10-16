@@ -10,9 +10,7 @@ fulltest: clean install test
 clean:
 	rm -rf node_modules
 lint:
-	./node_modules/.bin/jshint \
-		datauri.js \
-		lib/**/*
+	./node_modules/.bin/jshint datauri.js lib/*
 spec:
 	@echo "Running test suite..."
 	$(NODE) test/run.js
