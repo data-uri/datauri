@@ -5,8 +5,17 @@ A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs].
 
 `npm install -g datauri` (it may require Root privileges)
 
-HOW TO USE
-----------
+HOW TO USE MODULE
+-----------------
+
+```js
+var Datauri = require('datauri');
+
+console.log(Datauri('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+```
+
+CLIENT
+------
 
 ### Print datauri scheme
 To print a datauri scheme from a file
