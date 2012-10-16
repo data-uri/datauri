@@ -19,6 +19,21 @@ var DataURI = require("../lib/exec.js"),
         },
         "should return a css with Class Name defined by user" : function() {
             assert.strictEqual( uri.getCss("foobar") , "\n.foobar {\n    background: url('data:text/plain;base64,Zm9vIGJhcgo=')\n}");
+        },
+        "should exist base64 param" : function() {
+            assert.strictEqual( DataURI('./test/case.txt').base64 , "Zm9vIGJhcgo=");
+        },
+        "should the right mimetype" : function() {
+            assert.strictEqual( DataURI('./test/case.txt').mimetype , "text/plain");
+        },
+        "should have the correct datauri format" : function() {
+            assert.strictEqual( DataURI('./test/case.txt').content , "data:text/plain;base64,Zm9vIGJhcgo=");
+        },
+        "should return a css with Class Name equal filename" : function() {
+            assert.strictEqual( DataURI('./test/case.txt').getCss() , "\n.case {\n    background: url('data:text/plain;base64,Zm9vIGJhcgo=')\n}");
+        },
+        "should return a css with Class Name defined by user" : function() {
+            assert.strictEqual( DataURI('./test/case.txt').getCss("foobar") , "\n.foobar {\n    background: url('data:text/plain;base64,Zm9vIGJhcgo=')\n}");
         }
     };
 
