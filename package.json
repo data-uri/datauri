@@ -1,6 +1,6 @@
 {
   "name": "datauri",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple Data URI scheme generator",
   "main": "datauri.js",
   "scripts": {
