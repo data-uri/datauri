@@ -5,8 +5,8 @@ A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs].
 
 `npm install -g datauri` (it may require Root privileges)
 
-HOW TO USE MODULE
------------------
+MODULE
+------
 
 ```js
 var Datauri = require('datauri');
