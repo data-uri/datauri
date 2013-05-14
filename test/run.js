@@ -2,12 +2,14 @@ var DataURI = require("../lib/exec.js"),
     assert  = require("assert"),
     _       = require("lodash"),
     uri,
+    remoteUri,
     cases   = {
         "should have the correct datauri format without instance" : function() {
             assert.strictEqual( DataURI('./test/case.txt') , "data:text/plain;base64,Zm9vIGJhcgo=");
         },
         "should instance DataURI object" : function() {
             uri = new DataURI('./test/case.txt');
+            assert.strictEqual( (uri instanceof DataURI) , true);
         },
         "should exist base64 param" : function() {
             assert.strictEqual( uri.base64 , "Zm9vIGJhcgo=");
