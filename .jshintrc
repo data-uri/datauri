@@ -1,5 +1,4 @@
 {
-    "es5": true,
     "esnext": true,
     "bitwise": true,
     "curly": true,
@@ -10,9 +9,11 @@
     "noempty": true,
     "regexp": true,
     "undef": true,
-    "strict": false,
+    "strict": true,
     "trailing": true,
     "smarttabs": true,
     "node": true,
-    "globalstrict": true
+    "globalstrict": true,
+    "white": true,
+    "indent": 4
 }

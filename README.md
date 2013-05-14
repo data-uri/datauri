@@ -5,14 +5,6 @@ A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs].
 
 `npm install -g datauri` (it may require Root privileges)
 
-MODULE
-------
-
-```js
-var Datauri = require('datauri');
-
-console.log(Datauri('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
-```
 
 CLIENT
 ------
@@ -31,6 +23,27 @@ $ datauri brand.png asset/background.css
 If you want to define a Class Name, just type:
 ```CLI
 $ datauri brand.png asset/background.css MyNewClass
+```
+
+API
+---
+
+```js
+var Datauri = require('datauri');
+
+// without instance
+var datauri = Datauri('test/myfile.png');
+console.log(datauri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+
+// with instance
+var dUri = new Datauri('test/myfile.png');
+
+console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+console.log(dUri.mimetype); //=> "image/png";
+console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
+console.log(dUri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
+console.log(dUri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+
 ```
 
 DEVELOPING
