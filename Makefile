@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 NPM   = npm
 NODE  = node
-GRUNT = node_modules/grunt/bin/grunt
+MODULE = ./node_modules/.bin/
 
 install:
 	$(NPM) install
@@ -10,8 +10,12 @@ fulltest: clean install test
 clean:
 	rm -rf node_modules
 lint:
-	./node_modules/.bin/jshint datauri.js cli.js lib/*
+	$(MODULE)jshint datauri.js cli.js lib/*
 spec:
 	@echo "Running test suite..."
-	$(NODE) test/run.js
+	$(MODULE)mocha \
+		--recursive \
+		--ui bdd \
+		--reporter spec \
+		--timeout 3000
 .PHONY: all test fulltest clean lint mocha
