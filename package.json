@@ -31,6 +31,8 @@
   "license": "MIT",
   "devDependencies": {
     "jshint": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "mocha": "~1.12.1",
+    "chai": "~1.7.2"
   }
 }
