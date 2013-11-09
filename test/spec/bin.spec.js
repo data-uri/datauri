@@ -52,7 +52,7 @@ describe('Data-uri Client', function () {
             });
         });
 
-        describe('create a file', function () {
+        describe('create a css file', function () {
 
             afterEach(function () {
                 fs.unlinkSync(createdFile);
@@ -84,9 +84,9 @@ describe('Data-uri Client', function () {
             });
         });
 
-        describe('update a file', function () {
+        describe('update a css file', function () {
 
-            var updateFile  = 'test/ratamahatta.css',
+            var updateFile  = 'test/ratamahatta.scss',
                 fakeContent = '.small-icon {color: #000;}',
                 updateClass = fakeContent + createdClass;
 

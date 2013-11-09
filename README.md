@@ -28,23 +28,68 @@ $ datauri brand.png asset/background.css MyNewClass
 API
 ---
 
+### Function
 ```js
-var Datauri = require('datauri');
+var Datauri = require('datauri'),
+    dUri    = Datauri('test/myfile.png');
 
-// without instance
-var datauri = Datauri('test/myfile.png');
-console.log(datauri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+console.log(dUri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+```
 
-// with instance
-var dUri = new Datauri('test/myfile.png');
+### Class
+```js
+var Datauri = require('datauri'),
+    dUri    = new Datauri('test/myfile.png');
 
 console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
 console.log(dUri.mimetype); //=> "image/png";
 console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
 console.log(dUri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
 console.log(dUri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+```
+
+### Async
+
+```js
+var Datauri = require('datauri'),
+    dUri    = new Datauri();
+
+dUri.on('encoded', function (content) {
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+});
+
+dUri.on('error', function (content) {
+    console.log('Fail!');
+});
+
+dUri.encode('test/myfile.png');
+```
+
+#### Chaining all stuff
+```js
+dUri.on('encoded', function (content) {
+        console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+    })
+    .on('error', function (content) {
+        console.log('Fail!');
+    })
+    .encode('test/myfile.png');
+```
+
+### The famous callback async approach (haters gonna hate)
+```js
+var Datauri = require('datauri');
+
+DataURI('test/myfile.png', function (err, content) {
+    if (err) {
+        throw err;
+    }
+
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+});
 
 ```
+
 
 DEVELOPING
 ----------
