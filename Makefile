@@ -9,7 +9,7 @@ install:
 clean:
 	rm -rf node_modules
 lint:
-	$(MODULE)jshint datauri.js cli.js lib/*
+	$(MODULE)jshint datauri.js lib/*
 spec:
 	$(MOCHA) --reporter spec
 dot:
