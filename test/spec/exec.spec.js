@@ -1,4 +1,4 @@
-describe('DataURI Class', function () {
+describe('Data-uri Class', function () {
     'use strict';
 
     var should    = require('chai').should(),
