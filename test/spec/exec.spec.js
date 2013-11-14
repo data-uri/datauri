@@ -165,8 +165,14 @@ describe('Data-uri Class', function () {
             it('should call event "encoded" when a datauri format is done', function (done) {
                 dUri = new DataURI();
 
-                dUri.on('encoded', function (content) {
+                dUri.on('encoded', function (content, fullTree) {
                     content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+
+                    fullTree.should.have.property('fileName', fixture);
+                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
+                    fullTree.should.have.property('mimetype', 'text/plain');
+                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+
                     done();
                 });
 
@@ -176,8 +182,14 @@ describe('Data-uri Class', function () {
             it('should chain methods and call event "encoded" when a datauri format is done', function (done) {
                 dUri = new DataURI();
 
-                dUri.on('encoded', function (content) {
+                dUri.on('encoded', function (content, fullTree) {
                     content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+
+                    fullTree.should.have.property('fileName', fixture);
+                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
+                    fullTree.should.have.property('mimetype', 'text/plain');
+                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+
                     done();
                 }).encode(fixture);
             });
