@@ -67,8 +67,14 @@ dUri.encode('test/myfile.png');
 
 #### Chaining all stuff
 ```js
-dUri.on('encoded', function (content) {
+dUri.on('encoded', function (content, datauri) {
+
         console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+
+        console.log(datauri.mimetype); //=> "image/png";
+        console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
+        console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
+        console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
     })
     .on('error', function (content) {
         console.log('Fail!');
@@ -76,20 +82,35 @@ dUri.on('encoded', function (content) {
     .encode('test/myfile.png');
 ```
 
-### The famous callback async approach (haters gonna hate)
+### The famous callback async approach
 ```js
 var Datauri = require('datauri');
 
-DataURI('test/myfile.png', function (err, content) {
+DataURI('test/myfile.png', function (err, content, datauri) {
     if (err) {
         throw err;
     }
 
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+
+    console.log(datauri.mimetype); //=> "image/png";
+    console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
+    console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
+    console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
 });
 
 ```
 
+GRUNT
+-----
+
+There are a bunch of grunt plugins running on top of datauri module.
+
+* [grunt-datauri](https://npmjs.org/package/grunt-datauri) - Create base64 encoded data-uris for css from images
+* [grunt-imweb](https://npmjs.org/package/grunt-imweb) - IMWEB Tasks Collection For Daily Workflow.
+* [grunt-static-inline](https://npmjs.org/package/grunt-static-inline) - A grunt plugin to replace url from static files such as img,js,css an put inline in a template.
+* [grunt-data-uri](https://npmjs.org/package/grunt-data-uri) - Convert to data-uri from image path.
+* [grunt-inline](https://npmjs.org/package/grunt-inline)
 
 DEVELOPING
 ----------
@@ -109,9 +130,9 @@ $ make fulltest
 
 ## Release notes
 
-0.3 - API Rewritten from the top to the bottom + full async compatibility
-0.2 - Splitted in submodules mimer and templayed
-0.1 - First release
+* 0.3 - API Rewritten from the top to the bottom + full async compatibility
+* 0.2 - Splitted in submodules mimer and templayed
+* 0.1 - First release
 
 ## License
 
