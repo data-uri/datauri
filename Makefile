@@ -16,4 +16,4 @@ dot:
 	$(MOCHA) --reporter dot
 test_editor: lint dot
 fulltest: clean install test
-test: lint spec
+test: lint dot
