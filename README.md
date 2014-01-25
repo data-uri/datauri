@@ -82,9 +82,9 @@ dUri.on('encoded', function (content, datauri) {
     .encode('test/myfile.png');
 ```
 
-### The famous callback async approach
+### Function callback
 ```js
-var Datauri = require('datauri');
+var DataURI = require('datauri');
 
 DataURI('test/myfile.png', function (err, content, datauri) {
     if (err) {
@@ -97,6 +97,19 @@ DataURI('test/myfile.png', function (err, content, datauri) {
     console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
     console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
     console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+});
+
+```
+
+### Promises [/A+ standard][promisesaplus]
+```js
+var DataURI = require('datauri').promises;
+
+DataURI('test/myfile.png').then(function (content) {
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+},
+function (err) {
+    throw err;
 });
 
 ```
@@ -130,6 +143,7 @@ $ make fulltest
 
 ## Release notes
 
+* 0.3.2 - Promises support
 * 0.3 - API Rewritten from the top to the bottom + full async compatibility
 * 0.2 - Splitted in submodules mimer and templayed
 * 0.1 - First release
@@ -141,3 +155,4 @@ MIT License
 
 [nodejs]: http://nodejs.org/download
 [datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
+[promisesaplus]: http://promises-aplus.github.io/promises-spec/
