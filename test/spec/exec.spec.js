@@ -2,6 +2,7 @@ describe('Data-uri Class', function () {
     'use strict';
 
     var should    = require('chai').should(),
+        sinon     = require('sinon'),
         DataURI   = require('../../lib/exec'),
         fixture   = 'test/fixture.txt',
         wrongFile = 'PAPARIPUPI',
@@ -202,6 +203,37 @@ describe('Data-uri Class', function () {
                     should.exist(err);
                     done();
                 }).encode('^&%76868');
+            });
+        });
+
+    });
+
+    describe('promise', function () {
+
+        describe('running with then function', function () {
+            it('should fulfill a promise', function (done) {
+                var dPromises = DataURI.promises,
+                    fulfill   = sinon.spy(),
+                    reject    = sinon.spy(),
+                    expected  = 'data:text/plain;base64,Zm9vIGJhcgo=';
+
+                dPromises(fixture).then(fulfill, reject).then(function () {
+                    fulfill.calledOnce.should.be.ok;
+                    fulfill.calledWith(expected).should.be.ok;
+                    reject.callCount.should.equal(0);
+
+                    done();
+                });
+
+            });
+
+            it('should reject a promise', function (done) {
+                var dPromises = DataURI.promises;
+
+                dPromises('^&%76868').then(null, function (err) {
+                    should.exist(err);
+                    done();
+                });
             });
         });
 
