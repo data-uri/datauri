@@ -143,7 +143,7 @@ $ make fulltest
 
 ## Release notes
 
-* 0.3.2 - Promises support
+* 0.4 - Promises support
 * 0.3 - API Rewritten from the top to the bottom + full async compatibility
 * 0.2 - Splitted in submodules mimer and templayed
 * 0.1 - First release
