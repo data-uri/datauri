@@ -1,1 +1,1 @@
-module.exports = require('./lib/exec');
+module.exports = require('./lib/api');
