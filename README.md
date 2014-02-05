@@ -33,7 +33,7 @@ API
 var Datauri = require('datauri'),
     dUri    = Datauri('test/myfile.png');
 
-console.log(dUri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+console.log(dUri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 ```
 
 ### Class
@@ -41,11 +41,11 @@ console.log(dUri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
 var Datauri = require('datauri'),
     dUri    = new Datauri('test/myfile.png');
 
-console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
-console.log(dUri.mimetype); //=> "image/png";
-console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
-console.log(dUri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
-console.log(dUri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(dUri.mimetype); //=> "image/png"
+console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(dUri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+console.log(dUri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
 ```
 
 ### Async
@@ -69,12 +69,12 @@ dUri.encode('test/myfile.png');
 ```js
 dUri.on('encoded', function (content, datauri) {
 
-        console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+        console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 
-        console.log(datauri.mimetype); //=> "image/png";
-        console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
-        console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
-        console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+        console.log(datauri.mimetype); //=> "image/png"
+        console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+        console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
     })
     .on('error', function (content) {
         console.log('Fail!');
@@ -91,12 +91,12 @@ DataURI('test/myfile.png', function (err, content, datauri) {
         throw err;
     }
 
-    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 
-    console.log(datauri.mimetype); //=> "image/png";
-    console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA...";
-    console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw...";
-    console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw...";
+    console.log(datauri.mimetype); //=> "image/png"
+    console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+    console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
 });
 
 ```
@@ -106,11 +106,25 @@ DataURI('test/myfile.png', function (err, content, datauri) {
 var DataURI = require('datauri').promises;
 
 DataURI('test/myfile.png').then(function (content) {
-    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 },
 function (err) {
     throw err;
 });
+
+```
+
+### Create from a string
+```js
+var Datauri = require('datauri'),
+    dUri    = new Datauri();
+
+dUri.format('.png', 'xkcd');
+
+console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
+console.log(dUri.mimetype); //=> "image/png"
+console.log(dUri.base64); //=> "eGtjZA=="
+console.log(dUri.getCSS("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
