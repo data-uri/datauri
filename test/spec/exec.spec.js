@@ -147,9 +147,14 @@ describe('Data-uri Class', function () {
 
         describe('running with callback function', function () {
             it('should run datauri as function with callback', function (done) {
-                DataURI(fixture, function (err, content) {
+                DataURI(fixture, function (err, content, fullTree) {
                     should.not.exist(err);
                     content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+                    fullTree.should.have.property('fileName', fixture);
+                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
+                    fullTree.should.have.property('mimetype', 'text/plain');
+                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+
                     done();
                 });
             });
