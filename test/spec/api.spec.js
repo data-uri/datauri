@@ -8,6 +8,17 @@ describe('Data-uri Class', function () {
         wrongFile = 'PAPARIPUPI',
         dUri, cssContent;
 
+    it('should format', function () {
+        dUri = new DataURI();
+
+        dUri.format('.png', 'xkcd');
+
+        dUri.should.have.property('fileName', '.png');
+        dUri.should.have.property('base64', 'eGtjZA==');
+        dUri.should.have.property('mimetype', 'image/png');
+        dUri.should.have.property('content', 'data:image/png;base64,eGtjZA==');
+    });
+
     describe('sync', function () {
         describe('running without arguments', function () {
 
@@ -159,7 +170,7 @@ describe('Data-uri Class', function () {
                 });
             });
 
-            it('should return error when file does not exist', function (done) {
+            it('should return error when a file does not exist', function (done) {
                 DataURI('^&%76868', function (err, content) {
                     should.exist(err);
                     done();
@@ -201,7 +212,7 @@ describe('Data-uri Class', function () {
             });
 
 
-            it('should call event "error" when a file doesnt exist', function (done) {
+            it('should call event "error" when a file does not exist', function (done) {
                 dUri = new DataURI();
 
                 dUri.on('error', function (err) {
