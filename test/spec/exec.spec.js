@@ -23,28 +23,28 @@ describe('Data-uri Class', function () {
                 dUri.should.be.an.instanceOf(DataURI)
             });
 
-            describe('#createConfig errors', function () {
+            describe('#encodeSync errors', function () {
 
                 it('should throw error if a file name is not given', function () {
                     var errorMsg = 'Insert a File path as string argument';
 
                     (function () {
-                        dUri.createConfig();
+                        dUri.encodeSync();
                     }).should.throw(errorMsg);
                     (function () {
-                        dUri.createConfig('');
+                        dUri.encodeSync('');
                     }).should.throw(errorMsg);
                     (function () {
-                        dUri.createConfig(' ');
+                        dUri.encodeSync(' ');
                     }).should.throw(errorMsg);
                     (function () {
-                        dUri.createConfig({});
+                        dUri.encodeSync({});
                     }).should.throw(errorMsg);
                     (function () {
-                        dUri.createConfig([]);
+                        dUri.encodeSync([]);
                     }).should.throw(errorMsg);
                     (function () {
-                        dUri.createConfig(88);
+                        dUri.encodeSync(88);
                     }).should.throw(errorMsg);
                 });
 
@@ -52,7 +52,7 @@ describe('Data-uri Class', function () {
                     var expectedMsg = 'The file ' + wrongFile + ' was not found!';
 
                     (function () {
-                        dUri.createConfig(wrongFile);
+                        dUri.encodeSync(wrongFile);
                     }).should.throw(expectedMsg);
                 });
 
@@ -60,15 +60,15 @@ describe('Data-uri Class', function () {
                     it('should throw an error because a config is missing', function () {
                         (function () {
                             dUri.getCss();
-                        }).should.throw('Create a data-uri config using the method createConfig');
+                        }).should.throw('Create a data-uri config using the method encodeSync');
                     });
                 });
             });
 
-            describe('#createConfig', function () {
+            describe('#encodeSync', function () {
 
                 beforeEach(function () {
-                    dUri.createConfig(fixture);
+                    dUri.encodeSync(fixture);
                 });
 
                 it('should have properties with datauri format splitted', function () {
@@ -81,11 +81,11 @@ describe('Data-uri Class', function () {
 
                 describe('#getCss' , function () {
                     it('should create a class with datauri background using target file name', function () {
-                        dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\')\n}');
+                        dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
                     });
 
                     it('should create a class with datauri background using a defined name', function () {
-                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\')\n}');
+                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
                     });
                 });
             });
@@ -132,11 +132,11 @@ describe('Data-uri Class', function () {
 
             describe('#getCss' , function () {
                 it('should create a class with datauri background using target file name', function () {
-                    dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\')\n}');
+                    dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
                 });
 
                 it('should create a class with datauri background using a defined name', function () {
-                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\')\n}');
+                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
                 });
             });
 
