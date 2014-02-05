@@ -157,6 +157,7 @@ $ make fulltest
 
 ## Release notes
 
+* 0.5 - Format data uri from a string
 * 0.4 - Promises support
 * 0.3 - API Rewritten from the top to the bottom + full async compatibility
 * 0.2 - Splitted in submodules mimer and templayed
