@@ -1,6 +1,6 @@
 {
   "name": "datauri",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A simple Data URI scheme generator",
   "main": "datauri.js",
   "scripts": {
@@ -22,6 +22,12 @@
   },
   "keywords": [
     "datauri",
+    "data uri",
+    "data-uri",
+    "optimization",
+    "uri",
+    "optimize",
+    "inline",
     "png",
     "jpg",
     "woff",
