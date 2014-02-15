@@ -1,11 +1,11 @@
 describe('Data-uri Class', function () {
     'use strict';
 
-    var should    = require('chai').should(),
-        sinon     = require('sinon'),
-        DataURI   = require('../../datauri'),
-        fixture   = 'test/fixture.txt',
-        wrongFile = 'PAPARIPUPI',
+    var should     = require('chai').should(),
+        sinon      = require('sinon'),
+        DataURI    = require('../../datauri'),
+        fixture    = 'test/fixture.gif',
+        wrongFile  = 'PAPARIPUPI',
         dUri, cssContent;
 
     it('should format', function () {
@@ -84,19 +84,19 @@ describe('Data-uri Class', function () {
 
                 it('should have properties with datauri format splitted', function () {
                     dUri.should.have.property('fileName', fixture);
-                    dUri.should.have.property('base64', 'Zm9vIGJhcgo=');
-                    dUri.should.have.property('mimetype', 'text/plain');
-                    dUri.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+                    dUri.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    dUri.should.have.property('mimetype', 'image/gif');
+                    dUri.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
                 });
 
 
                 describe('#getCss' , function () {
                     it('should create a class with datauri background using target file name', function () {
-                        dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
+                        dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
 
                     it('should create a class with datauri background using a defined name', function () {
-                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
+                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
                 });
             });
@@ -119,15 +119,15 @@ describe('Data-uri Class', function () {
 
             it('should have properties with datauri format splitted', function () {
                 dUri.should.have.property('fileName', fixture);
-                dUri.should.have.property('base64', 'Zm9vIGJhcgo=');
-                dUri.should.have.property('mimetype', 'text/plain');
-                dUri.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+                dUri.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                dUri.should.have.property('mimetype', 'image/gif');
+                dUri.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
             });
 
             it('should run datauri as function and return a string', function () {
                 var dFunc = DataURI(fixture);
 
-                dFunc.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+                dFunc.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
             });
 
             it('should throw an error if a specific file doesn\'t exist', function () {
@@ -143,11 +143,11 @@ describe('Data-uri Class', function () {
 
             describe('#getCss' , function () {
                 it('should create a class with datauri background using target file name', function () {
-                    dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
+                    dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
 
                 it('should create a class with datauri background using a defined name', function () {
-                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:text/plain;base64,Zm9vIGJhcgo=\');\n}');
+                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
             });
 
@@ -160,11 +160,12 @@ describe('Data-uri Class', function () {
             it('should run datauri as function with callback', function (done) {
                 DataURI(fixture, function (err, content, fullTree) {
                     should.not.exist(err);
-                    content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+
                     fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
-                    fullTree.should.have.property('mimetype', 'text/plain');
-                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    fullTree.should.have.property('mimetype', 'image/gif');
+                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 
                     done();
                 });
@@ -183,12 +184,12 @@ describe('Data-uri Class', function () {
                 dUri = new DataURI();
 
                 dUri.on('encoded', function (content, fullTree) {
-                    content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 
                     fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
-                    fullTree.should.have.property('mimetype', 'text/plain');
-                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    fullTree.should.have.property('mimetype', 'image/gif');
+                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 
                     done();
                 });
@@ -200,12 +201,12 @@ describe('Data-uri Class', function () {
                 dUri = new DataURI();
 
                 dUri.on('encoded', function (content, fullTree) {
-                    content.should.equal('data:text/plain;base64,Zm9vIGJhcgo=');
+                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 
                     fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'Zm9vIGJhcgo=');
-                    fullTree.should.have.property('mimetype', 'text/plain');
-                    fullTree.should.have.property('content', 'data:text/plain;base64,Zm9vIGJhcgo=');
+                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    fullTree.should.have.property('mimetype', 'image/gif');
+                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 
                     done();
                 }).encode(fixture);
@@ -231,7 +232,7 @@ describe('Data-uri Class', function () {
                 var dPromises = DataURI.promises,
                     fulfill   = sinon.spy(),
                     reject    = sinon.spy(),
-                    expected  = 'data:text/plain;base64,Zm9vIGJhcgo=';
+                    expected  = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
                 dPromises(fixture).then(fulfill, reject).then(function () {
                     fulfill.calledOnce.should.be.ok;
