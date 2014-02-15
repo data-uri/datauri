@@ -10,13 +10,13 @@ CLIENT
 ------
 
 ### Print datauri scheme
-To print a datauri scheme from a file
+To print a data-uri scheme from a file
 ```CLI
 $ datauri brand.png
 ```
 
 ### CSS Background
-You can generate or update an output css file with datauri background:
+You can generate or update an output css file with data-uri background:
 ```CLI
 $ datauri brand.png asset/background.css
 ```
