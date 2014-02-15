@@ -1,1 +1,1 @@
-module.exports = require('./lib/api');
+module.exports = require('./lib/datauri/module');
