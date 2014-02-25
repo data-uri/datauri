@@ -6,6 +6,12 @@ describe('Data-uri Class', function () {
         DataURI    = require('../../datauri'),
         fixture    = 'test/fixture.gif',
         wrongFile  = 'PAPARIPUPI',
+        expected   = {
+            fileName: fixture,
+            base64: 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+            mimetype: 'image/gif',
+            content: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+        },
         dUri, cssContent;
 
     it('should format', function () {
@@ -83,10 +89,10 @@ describe('Data-uri Class', function () {
                 });
 
                 it('should have properties with datauri format splitted', function () {
-                    dUri.should.have.property('fileName', fixture);
-                    dUri.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                    dUri.should.have.property('mimetype', 'image/gif');
-                    dUri.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    dUri.should.have.property('fileName', expected.fileName);
+                    dUri.should.have.property('base64', expected.base64);
+                    dUri.should.have.property('mimetype', expected.mimetype);
+                    dUri.should.have.property('content', expected.content);
                 });
 
 
@@ -118,16 +124,16 @@ describe('Data-uri Class', function () {
             });
 
             it('should have properties with datauri format splitted', function () {
-                dUri.should.have.property('fileName', fixture);
-                dUri.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                dUri.should.have.property('mimetype', 'image/gif');
-                dUri.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                dUri.should.have.property('fileName', expected.fileName);
+                dUri.should.have.property('base64', expected.base64);
+                dUri.should.have.property('mimetype', expected.mimetype);
+                dUri.should.have.property('content', expected.content);
             });
 
             it('should run datauri as function and return a string', function () {
                 var dFunc = DataURI(fixture);
 
-                dFunc.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                dFunc.should.equal(expected.content);
             });
 
             it('should throw an error if a specific file doesn\'t exist', function () {
@@ -160,12 +166,17 @@ describe('Data-uri Class', function () {
             it('should run datauri as function with callback', function (done) {
                 DataURI(fixture, function (err, content, fullTree) {
                     should.not.exist(err);
-                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    content.should.equal(expected.content);
 
-                    fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                    fullTree.should.have.property('mimetype', 'image/gif');
-                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    this.should.have.property('fileName', expected.fileName);
+                    this.should.have.property('base64', expected.base64);
+                    this.should.have.property('mimetype', expected.mimetype);
+                    this.should.have.property('content', expected.content);
+
+                    fullTree.should.have.property('fileName', expected.fileName);
+                    fullTree.should.have.property('base64', expected.base64);
+                    fullTree.should.have.property('mimetype', expected.mimetype);
+                    fullTree.should.have.property('content', expected.content);
 
                     done();
                 });
@@ -184,12 +195,17 @@ describe('Data-uri Class', function () {
                 dUri = new DataURI();
 
                 dUri.on('encoded', function (content, fullTree) {
-                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    content.should.equal(expected.content);
 
-                    fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                    fullTree.should.have.property('mimetype', 'image/gif');
-                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    this.should.have.property('fileName', expected.fileName);
+                    this.should.have.property('base64', expected.base64);
+                    this.should.have.property('mimetype', expected.mimetype);
+                    this.should.have.property('content', expected.content);
+
+                    fullTree.should.have.property('fileName', expected.fileName);
+                    fullTree.should.have.property('base64', expected.base64);
+                    fullTree.should.have.property('mimetype', expected.mimetype);
+                    fullTree.should.have.property('content', expected.content);
 
                     done();
                 });
@@ -201,12 +217,17 @@ describe('Data-uri Class', function () {
                 dUri = new DataURI();
 
                 dUri.on('encoded', function (content, fullTree) {
-                    content.should.equal('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    content.should.equal(expected.content);
 
-                    fullTree.should.have.property('fileName', fixture);
-                    fullTree.should.have.property('base64', 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                    fullTree.should.have.property('mimetype', 'image/gif');
-                    fullTree.should.have.property('content', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                    this.should.have.property('fileName', expected.fileName);
+                    this.should.have.property('base64', expected.base64);
+                    this.should.have.property('mimetype', expected.mimetype);
+                    this.should.have.property('content', expected.content);
+
+                    fullTree.should.have.property('fileName', expected.fileName);
+                    fullTree.should.have.property('base64', expected.base64);
+                    fullTree.should.have.property('mimetype', expected.mimetype);
+                    fullTree.should.have.property('content', expected.content);
 
                     done();
                 }).encode(fixture);
@@ -231,12 +252,11 @@ describe('Data-uri Class', function () {
             it('should fulfill a promise', function (done) {
                 var dPromises = DataURI.promises,
                     fulfill   = sinon.spy(),
-                    reject    = sinon.spy(),
-                    expected  = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                    reject    = sinon.spy();
 
                 dPromises(fixture).then(fulfill, reject).then(function () {
                     fulfill.calledOnce.should.be.ok;
-                    fulfill.calledWith(expected).should.be.ok;
+                    fulfill.calledWith(expected.content).should.be.ok;
                     reject.callCount.should.equal(0);
 
                     done();

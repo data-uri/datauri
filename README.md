@@ -67,14 +67,14 @@ dUri.encode('test/myfile.png');
 
 #### Chaining all stuff
 ```js
-dUri.on('encoded', function (content, datauri) {
+dUri.on('encoded', function (content) {
 
         console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 
-        console.log(datauri.mimetype); //=> "image/png"
-        console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-        console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-        console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(this.mimetype); //=> "image/png"
+        console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+        console.log(this.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
     })
     .on('error', function (content) {
         console.log('Fail!');
@@ -86,17 +86,17 @@ dUri.on('encoded', function (content, datauri) {
 ```js
 var DataURI = require('datauri');
 
-DataURI('test/myfile.png', function (err, content, datauri) {
+DataURI('test/myfile.png', function (err, content) {
     if (err) {
         throw err;
     }
 
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 
-    console.log(datauri.mimetype); //=> "image/png"
-    console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-    console.log(datauri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-    console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(this.mimetype); //=> "image/png"
+    console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+    console.log(this.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
 });
 
 ```
