@@ -1,7 +1,7 @@
 {
   "name": "datauri",
-  "version": "0.5.3",
-  "description": "A simple Data URI scheme generator",
+  "version": "0.5.4",
+  "description": "Data-URI scheme tools and generators",
   "main": "datauri.js",
   "scripts": {
     "test": "make ci"
