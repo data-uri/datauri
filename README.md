@@ -1,4 +1,4 @@
-datauri [![Build Status](https://secure.travis-ci.org/heldr/datauri.png?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.png)](https://coveralls.io/r/heldr/datauri) [![NPM version](https://badge.fury.io/js/datauri.png)](http://badge.fury.io/js/datauri)
+datauri [![Build Status](http://img.shields.io/travis/heldr/datauri/master.svg?style=flat)](http://travis-ci.org/heldr/datauri) [![Coverage Status](http://img.shields.io/coveralls/heldr/datauri/master.svg?style=flat)](https://coveralls.io/r/heldr/datauri) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 =======
 
 A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs]. To install datauri, just run:
