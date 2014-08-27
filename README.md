@@ -44,8 +44,8 @@ var Datauri = require('datauri'),
 console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(dUri.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-console.log(dUri.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+console.log(dUri.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+console.log(dUri.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
 ```
 
 ### Async
@@ -73,8 +73,8 @@ dUri.on('encoded', function (content) {
 
         console.log(this.mimetype); //=> "image/png"
         console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-        console.log(this.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-        console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
     })
     .on('error', function (content) {
         console.log('Fail!');
@@ -95,8 +95,8 @@ DataURI('test/myfile.png', function (err, content) {
 
     console.log(this.mimetype); //=> "image/png"
     console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-    console.log(this.getCSS()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-    console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
 });
 
 ```
@@ -124,7 +124,7 @@ dUri.format('.png', 'xkcd');
 console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCSS("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
+console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
