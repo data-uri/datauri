@@ -128,6 +128,26 @@ console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background:
 
 ```
 
+### Create from a Buffer
+If you already have your file as a Buffer, use this. It's much faster than passing a string.
+
+```js
+var Datauri = require('datauri'),
+    dUri    = new Datauri();
+
+//...
+var buffer = fs.readFileSync('./hello');
+//...
+
+dUri.format('.png', buffer);
+
+console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
+console.log(dUri.mimetype); //=> "image/png"
+console.log(dUri.base64); //=> "eGtjZA=="
+console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
+
+```
+
 GRUNT
 -----
 
