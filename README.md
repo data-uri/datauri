@@ -159,6 +159,11 @@ There are a bunch of grunt plugins running on top of datauri module.
 * [grunt-data-uri](https://npmjs.org/package/grunt-data-uri) - Convert to data-uri from image path.
 * [grunt-inline](https://npmjs.org/package/grunt-inline)
 
+GULP
+-----
+
+* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri). 
+
 DEVELOPING
 ----------
 
