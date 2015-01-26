@@ -1,13 +1,12 @@
-datauri [![Build Status](http://img.shields.io/travis/heldr/datauri/master.svg?style=flat)](http://travis-ci.org/heldr/datauri) [![Coverage Status](http://img.shields.io/coveralls/heldr/datauri/master.svg?style=flat)](https://coveralls.io/r/heldr/datauri) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
-=======
+# datauri
+[![Build Status](http://img.shields.io/travis/heldr/datauri/master.svg?style=flat)](http://travis-ci.org/heldr/datauri) [![Coverage Status](http://img.shields.io/coveralls/heldr/datauri/master.svg?style=flat)](https://coveralls.io/r/heldr/datauri) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
-A simple [Data URI scheme][datauri] generator built on top of [Node.js][nodejs]. To install datauri, just run:
+A simple [Data URI scheme][datauri] module and client for [Node.js][nodejs] and [io.js][iojs]. To install datauri, just run:
 
 `npm install -g datauri` (it may require Root privileges)
 
 
-CLIENT
-------
+## CLIENT
 
 ### Print datauri scheme
 To print a data-uri scheme from a file
@@ -25,8 +24,7 @@ If you want to define a Class Name, just type:
 $ datauri brand.png asset/background.css MyNewClass
 ```
 
-API
----
+## MODULE
 
 ### Function
 ```js
@@ -162,7 +160,7 @@ There are a bunch of grunt plugins running on top of datauri module.
 GULP
 -----
 
-* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri). 
+* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
 
 DEVELOPING
 ----------
@@ -182,6 +180,7 @@ $ make fulltest
 
 ## Release notes
 
+* 0.6 - io.js support
 * 0.5 - Format data uri from a string
 * 0.4 - Promises support
 * 0.3 - API Rewritten from the top to the bottom + full async compatibility
@@ -194,5 +193,6 @@ MIT License
 (c) [Helder Santana](http://heldr.com)
 
 [nodejs]: http://nodejs.org/download
+[iojs]: https://iojs.org/
 [datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
 [promisesaplus]: http://promises-aplus.github.io/promises-spec/

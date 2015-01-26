@@ -1,14 +1,14 @@
 {
   "name": "datauri",
   "version": "0.5.5",
-  "description": "Data-URI scheme tools and generators",
+  "description": "A simple Data URI scheme module and client for Node.js and io.js",
   "main": "datauri.js",
   "scripts": {
     "test": "make ci"
   },
   "dependencies": {
-    "mimer": "~0.2.1",
-    "rsvp": "~3.0.3"
+    "mimer": "^0.2.1",
+    "rsvp": "^3.0.16"
   },
   "repository": {
     "type": "git",
