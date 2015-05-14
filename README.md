@@ -71,7 +71,7 @@ dUri.on('encoded', function (content) {
 
         console.log(this.mimetype); //=> "image/png"
         console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-        console.log(this.getCss()); //=> "\n.case {\n    backgroundi-image: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
         console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
     })
     .on('error', function (content) {
