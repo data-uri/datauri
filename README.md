@@ -42,8 +42,8 @@ var Datauri = require('datauri'),
 console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(dUri.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-console.log(dUri.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+console.log(dUri.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(dUri.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
 ```
 
 ### Async
@@ -71,8 +71,8 @@ dUri.on('encoded', function (content) {
 
         console.log(this.mimetype); //=> "image/png"
         console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-        console.log(this.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-        console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCss()); //=> "\n.case {\n    backgroundi-image: url('data:image/png;base64,iVBORw..."
+        console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
     })
     .on('error', function (content) {
         console.log('Fail!');
@@ -93,8 +93,8 @@ DataURI('test/myfile.png', function (err, content) {
 
     console.log(this.mimetype); //=> "image/png"
     console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-    console.log(this.getCss()); //=> "\n.case {\n    background: url('data:image/png;base64,iVBORw..."
-    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
 });
 
 ```
@@ -122,7 +122,7 @@ dUri.format('.png', 'xkcd');
 console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
+console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
@@ -142,7 +142,7 @@ dUri.format('.png', buffer);
 console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background: url('data:image/png;base64,eGtjZA==..."
+console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
@@ -180,6 +180,7 @@ $ make fulltest
 
 ## Release notes
 
+* 0.7 - generate css background-image instead of background shorthand
 * 0.6 - io.js support
 * 0.5 - Format data uri from a string
 * 0.4 - Promises support
