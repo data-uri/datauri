@@ -38,7 +38,7 @@ describe('Data-uri Client', function () {
     describe('generate a data-uri string into a css file', function () {
 
         var createdFile  = 'test/duality.css',
-            createdClass = "\n.fixture {\n    background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');\n}";
+            createdClass = "\n.fixture {\n    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');\n}";
 
         it('should not run if given css path has no compatible extension', function (done) {
             var expected = 'Your css file must have extension: .css, .sass, .scss, .styl or .less\n';
