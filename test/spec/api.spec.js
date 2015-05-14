@@ -98,11 +98,11 @@ describe('Data-uri Class', function () {
 
                 describe('#getCss' , function () {
                     it('should create a class with datauri background using target file name', function () {
-                        dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                        dUri.getCss().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
 
                     it('should create a class with datauri background using a defined name', function () {
-                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
                 });
             });
@@ -149,11 +149,11 @@ describe('Data-uri Class', function () {
 
             describe('#getCss' , function () {
                 it('should create a class with datauri background using target file name', function () {
-                    dUri.getCss().should.equal('\n.fixture {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                    dUri.getCss().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
 
                 it('should create a class with datauri background using a defined name', function () {
-                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
             });
 
