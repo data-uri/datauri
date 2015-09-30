@@ -1,5 +1,5 @@
 # datauri
-[![Build Status](http://img.shields.io/travis/heldr/datauri/master.svg?style=flat)](http://travis-ci.org/heldr/datauri) [![Coverage Status](http://img.shields.io/coveralls/heldr/datauri/master.svg?style=flat)](https://coveralls.io/r/heldr/datauri) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
+[![Build Status](https://travis-ci.org/heldr/grunt-smushit.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 A simple [Data URI scheme][datauri] module and client for [Node.js][nodejs] and [io.js][iojs]. To install datauri, just run:
 
