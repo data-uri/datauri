@@ -15,7 +15,7 @@
     "url": "git://github.com/heldr/datauri.git"
   },
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 0.10"
   },
   "bin": {
     "datauri": "./bin/datauri"

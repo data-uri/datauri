@@ -180,6 +180,7 @@ $ make fulltest
 
 ## Release notes
 
+* 0.8 - remove node 0.8 support
 * 0.7 - generate css background-image instead of background shorthand
 * 0.6 - io.js support
 * 0.5 - Format data uri from a string
