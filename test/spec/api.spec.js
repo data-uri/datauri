@@ -3,7 +3,7 @@ describe('Data-uri Class', function () {
 
     var should     = require('chai').should(),
         sinon      = require('sinon'),
-        DataURI    = require('../../datauri'),
+        DataURI    = require('../../'),
         fixture    = 'test/fixture.gif',
         wrongFile  = 'PAPARIPUPI',
         expected   = {
