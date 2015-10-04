@@ -168,14 +168,14 @@ DEVELOPING
 The only essential library to develop datauri is jshint.
 
 ```CLI
-$ make install
-$ make test
+$ npm install
+$ npm run mocha
 ```
 
 If you'd like to test the full process including npm installer, just run:
 
 ```CLI
-$ make fulltest
+$ npm run fulltest
 ```
 
 ## Release notes

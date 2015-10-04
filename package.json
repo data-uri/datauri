@@ -4,7 +4,17 @@
   "description": "A simple Data URI scheme module and client for Node.js and io.js",
   "main": "datauri.js",
   "scripts": {
-    "test": "make ci"
+    "test": "npm run lint && npm run coveralls",
+    "lint": "jshint datauri.js lib/* --config .jshintrc",
+    "spec": "mocha --recursive --ui bdd --timeout 3000 --reporter spec",
+    "dot": "mocha --recursive --ui bdd --timeout 3000 --reporter dot",
+    "coverage-lcov": "mocha --recursive --ui bdd --timeout 3000 --reporter mocha-lcov-reporter --require blanket",
+    "coverage-html": "touch test/coverage/results.html && mocha --recursive --ui bdd --timeout 3000 --reporter html-cov --require blanket > test/coverage/results.html",
+    "coveralls": "npm run coverage-lcov | coveralls",
+    "mocha": "npm run lint && npm run spec",
+    "ci": "npm run lint && npm run coverage && npm run coveralls",
+    "clean": "rm -rf node_modules",
+    "fulltest": "npm run clean && npm install && npm run mocha"
   },
   "dependencies": {
     "mimer": "^0.2.1",
