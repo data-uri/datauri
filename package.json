@@ -1,23 +1,25 @@
 {
   "name": "datauri",
   "version": "0.8.0",
-  "description": "A simple Data URI scheme module and client for Node.js and io.js",
+  "description": "A simple DataURI scheme module and client for Node.js",
   "scripts": {
-    "test": "npm run lint && npm run coveralls",
-    "lint": "jshint index.js lib/* --config .jshintrc",
-    "spec": "mocha --recursive --ui bdd --timeout 3000 --reporter spec",
-    "dot": "mocha --recursive --ui bdd --timeout 3000 --reporter dot",
+    "test": "npm run check && npm run coveralls",
+    "mocha": "mocha --recursive --ui bdd --timeout 3000 --reporter spec",
     "coverage-lcov": "mocha --recursive --ui bdd --timeout 3000 --reporter mocha-lcov-reporter --require blanket",
     "coverage-html": "touch test/coverage/results.html && mocha --recursive --ui bdd --timeout 3000 --reporter html-cov --require blanket > test/coverage/results.html",
     "coveralls": "npm run coverage-lcov | coveralls",
-    "mocha": "npm run lint && npm run spec",
-    "ci": "npm run lint && npm run coverage && npm run coveralls",
-    "clean": "rm -rf node_modules",
-    "fulltest": "npm run clean && npm install && npm run mocha"
+    "spec": "npm run mocha",
+    "ci": "npm run coverage && npm run coveralls",
+    "clean-deps": "rm -rf node_modules",
+    "clean": "rm -rf dist",
+    "fulltest": "npm run clean-deps && npm install && npm run build && npm run spec",
+    "build": "npm run clean && mkdir -p dist && babel -d dist/ src/",
+    "watch": "npm run clean &&  mkdir -p dist && babel -w -d dist/ src/",
+    "check": "npm run build && npm run spec",
+    "preversion": "npm run check"
   },
   "dependencies": {
-    "mimer": "^0.2.1",
-    "rsvp": "^3.0.16"
+    "mimer": "^0.2.1"
   },
   "repository": {
     "type": "git",
@@ -45,17 +47,19 @@
   "author": "Helder Santana",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "~1.17.1",
-    "chai": "~1.9.0",
-    "jshint": "~2.4.3",
-    "sinon": "~1.8.1",
-    "mocha-lcov-reporter": "0.0.1",
+    "babel": "^5.8.23",
     "blanket": "~1.1.6",
-    "coveralls": "~2.8.0"
+    "chai": "~1.9.0",
+    "coveralls": "~2.8.0",
+    "jshint": "~2.4.3",
+    "mocha": "~1.17.1",
+    "mocha-lcov-reporter": "0.0.1",
+    "semver": "^5.0.3",
+    "sinon": "~1.8.1"
   },
   "config": {
     "blanket": {
-      "pattern": "datauri/lib/"
+      "pattern": "datauri/dist/"
     }
   }
 }

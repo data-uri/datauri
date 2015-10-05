@@ -1,3 +1,6 @@
+var semver = require('semver');
+var nodeVersion = semver.clean(process.version);
+
 describe('Data-uri Class', function () {
     'use strict';
 
@@ -131,7 +134,7 @@ describe('Data-uri Class', function () {
             });
 
             it('should run datauri as function and return a string', function () {
-                var dFunc = DataURI(fixture);
+                var dFunc = DataURI.sync(fixture);
 
                 dFunc.should.equal(expected.content);
             });
@@ -143,7 +146,7 @@ describe('Data-uri Class', function () {
                     new DataURI(wrongFile);
                 }).should.throw(expectedMsg);
                 (function () {
-                    DataURI(wrongFile);
+                    DataURI.sync(wrongFile);
                 }).should.throw(expectedMsg);
             });
 
@@ -162,9 +165,14 @@ describe('Data-uri Class', function () {
 
     describe('async', function () {
 
+      beforeEach(function () {
+          dUri = new DataURI();
+      });
+
         describe('running with callback function', function () {
+
             it('should run datauri as function with callback', function (done) {
-                DataURI(fixture, function (err, content, fullTree) {
+                dUri.encode(fixture, function (err, content, fullTree) {
                     should.not.exist(err);
                     content.should.equal(expected.content);
 
@@ -183,7 +191,7 @@ describe('Data-uri Class', function () {
             });
 
             it('should return error when a file does not exist', function (done) {
-                DataURI('^&%76868', function (err, content) {
+                dUri.encode('^&%76868', function (err, content) {
                     should.exist(err);
                     done();
                 });
@@ -192,8 +200,6 @@ describe('Data-uri Class', function () {
 
         describe('running with event', function () {
             it('should call event "encoded" when a datauri format is done', function (done) {
-                dUri = new DataURI();
-
                 dUri.on('encoded', function (content, fullTree) {
                     content.should.equal(expected.content);
 
@@ -214,8 +220,6 @@ describe('Data-uri Class', function () {
             });
 
             it('should chain methods and call event "encoded" when a datauri format is done', function (done) {
-                dUri = new DataURI();
-
                 dUri.on('encoded', function (content, fullTree) {
                     content.should.equal(expected.content);
 
@@ -246,34 +250,36 @@ describe('Data-uri Class', function () {
 
     });
 
-    describe('promise', function () {
+    if (semver.satisfies(nodeVersion, '0.12.x')) {
+      describe('promise', function () {
 
-        describe('running with then function', function () {
-            it('should fulfill a promise', function (done) {
-                var dPromises = DataURI.promises,
-                    fulfill   = sinon.spy(),
-                    reject    = sinon.spy();
+          describe('running with then function', function () {
+              it('should fulfill a promise', function (done) {
+                  var dPromises = DataURI.promise,
+                      fulfill   = sinon.spy(),
+                      reject    = sinon.spy();
 
-                dPromises(fixture).then(fulfill, reject).then(function () {
-                    fulfill.calledOnce.should.be.ok;
-                    fulfill.calledWith(expected.content).should.be.ok;
-                    reject.callCount.should.equal(0);
+                  dPromises(fixture).then(fulfill).catch(reject).then(function () {
+                      fulfill.calledOnce.should.be.ok;
+                      fulfill.calledWith(expected.content).should.be.ok;
+                      reject.callCount.should.equal(0);
 
-                    done();
-                });
+                      done();
+                  });
 
-            });
+              });
 
-            it('should reject a promise', function (done) {
-                var dPromises = DataURI.promises;
+              it('should reject a promise', function (done) {
+                  var dPromises = DataURI.promise;
 
-                dPromises('^&%76868').then(null, function (err) {
-                    should.exist(err);
-                    done();
-                });
-            });
-        });
+                  dPromises('^&%76868').catch(function (err) {
+                      should.exist(err);
+                      done();
+                  });
+              });
+          });
 
-    });
+      });
+    }
 
 });

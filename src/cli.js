@@ -3,7 +3,7 @@
 var args    = process.argv,
     fs      = require('fs'),
     path    = require('path'),
-    DataURI = require('./datauri/module');
+    DataURI = require('./');
 
 function writeNewCssFile(file, content, action) {
     fs.writeFile(file, content, 'utf-8', function (err) {

@@ -1,1 +1,1 @@
-module.exports = require('./lib/datauri/module');
+module.exports = require('./dist');
