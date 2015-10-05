@@ -3,10 +3,11 @@
 
 A simple [Data URI scheme][datauri] module and client for [Node.js][nodejs]. To install datauri, just run:
 
-`npm install -g datauri` (it may require Root privileges)
+
 
 
 ## CLIENT
+`npm install -g datauri` (it may require Root privileges)
 
 ### Print datauri scheme
 To print a data-uri scheme from a file
@@ -25,104 +26,67 @@ $ datauri brand.png asset/background.css MyNewClass
 ```
 
 ## MODULE
-
-### Function
-```js
-var Datauri = require('datauri'),
-    dUri    = Datauri('test/myfile.png');
-
-console.log(dUri); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-```
-
-### Class
-```js
-var Datauri = require('datauri'),
-    dUri    = new Datauri('test/myfile.png');
-
-console.log(dUri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(dUri.mimetype); //=> "image/png"
-console.log(dUri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(dUri.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-console.log(dUri.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
-```
-
-### Async
+`npm install --save datauri`
 
 ```js
-var Datauri = require('datauri'),
-    dUri    = new Datauri();
+const Datauri = require('datauri');
+let   datauri = new Datauri();
 
-dUri.on('encoded', function (content) {
+datauri.on('encoded', function (content) {
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
 });
 
-dUri.on('error', function (content) {
+datauri.on('error', function (content) {
     console.log('Fail!');
 });
 
-dUri.encode('test/myfile.png');
+datauri.encode('test/myfile.png');
 ```
 
-#### Chaining all stuff
+### Promise (node 0.12+)
 ```js
-dUri.on('encoded', function (content) {
+import { promise as DataURI } from 'datauri';
+// or var DataURI = require('datauri').promise;
 
-        console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-
-        console.log(this.mimetype); //=> "image/png"
-        console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-        console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-        console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
-    })
-    .on('error', function (content) {
-        console.log('Fail!');
-    })
-    .encode('test/myfile.png');
-```
-
-### Function callback
-```js
-var DataURI = require('datauri');
-
-DataURI('test/myfile.png', function (err, content) {
-    if (err) {
-        throw err;
-    }
-
+DataURI('test/myfile.png')
+  .then((content) => {
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-
-    console.log(this.mimetype); //=> "image/png"
-    console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-    console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
-});
-
-```
-
-### Promises [/A+ standard][promisesaplus] (ES6 soon)
-```js
-var DataURI = require('datauri').promises;
-
-DataURI('test/myfile.png').then(function (content) {
-    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-},
-function (err) {
+  }).catch((err) => {
     throw err;
+  });
+```
+
+### Callback for vintage users
+```js
+const DataURI = require('datauri');
+let   datauri = new DataURI();
+
+datauri.encode('test/myfile.png', function (err, content) {
+  if (err) {
+      throw err;
+  }
+
+  console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+
+  console.log(this.mimetype); //=> "image/png"
+  console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+  console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+  console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
 });
 
 ```
 
 ### Create from a string
 ```js
-var Datauri = require('datauri'),
-    dUri    = new Datauri();
+const DataURI = require('datauri');
+let datauri   = new Datauri();
 
-dUri.format('.png', 'xkcd');
+datauri.format('.png', 'xkcd');
 
-console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
-console.log(dUri.mimetype); //=> "image/png"
-console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
+console.log(datauri.content); //=> "data:image/png;base64,eGtjZA=="
+console.log(datauri.mimetype); //=> "image/png"
+console.log(datauri.base64); //=> "eGtjZA=="
+console.log(datauri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
@@ -146,6 +110,53 @@ console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background-
 
 ```
 
+#### Chaining all stuff
+```js
+//...
+datauri
+  .on('encoded', function (content) {
+    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+    console.log(this.mimetype); //=> "image/png"
+    console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+    console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+  })
+  .on('error', function (content) {
+      console.log('Fail!');
+  })
+  .encode('test/myfile.png');
+```
+
+### Sync (kids! Don't use it at home!)
+
+#### Sync Class
+If DataURI class is instanciated with a file path, the same will be processed synchronously.
+
+```js
+const Datauri = require('datauri');
+let   datauri = new Datauri('test/myfile.png');
+
+console.log(datauri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(datauri.mimetype); //=> "image/png"
+console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(datauri.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(datauri.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+```
+
+#### Sync Function
+```js
+const Datauri = require('datauri').sync;
+
+console.log(Datauri('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+```
+or for ES2015/6 lovers
+
+```js
+import { sync as DataURI } from 'datauri';
+
+console.log(DataURI('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+```
+
 GRUNT
 -----
 
@@ -165,11 +176,15 @@ GULP
 DEVELOPING
 ----------
 
-The only essential library to develop datauri is jshint.
-
 ```CLI
 $ npm install
-$ npm run mocha
+$ npm run watch
+```
+
+To run test specs
+
+```CLI
+$ npm run spec
 ```
 
 If you'd like to test the full process including npm installer, just run:
