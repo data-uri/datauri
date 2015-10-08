@@ -70,8 +70,8 @@ datauri.encode('test/myfile.png', function (err, content) {
 
   console.log(this.mimetype); //=> "image/png"
   console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-  console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-  console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+  console.log(this.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+  console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
 });
 
 ```
@@ -86,7 +86,7 @@ datauri.format('.png', 'xkcd');
 console.log(datauri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(datauri.mimetype); //=> "image/png"
 console.log(datauri.base64); //=> "eGtjZA=="
-console.log(datauri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
+console.log(datauri.getCSS("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
@@ -106,7 +106,7 @@ dUri.format('.png', buffer);
 console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCss("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
+console.log(dUri.getCSS("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
 
 ```
 
@@ -118,8 +118,8 @@ datauri
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
     console.log(this.mimetype); //=> "image/png"
     console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-    console.log(this.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-    console.log(this.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
   })
   .on('error', function (content) {
       console.log('Fail!');
@@ -139,8 +139,8 @@ let   datauri = new Datauri('test/myfile.png');
 console.log(datauri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(datauri.mimetype); //=> "image/png"
 console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(datauri.getCss()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-console.log(datauri.getCss("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(datauri.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
 ```
 
 #### Sync Function

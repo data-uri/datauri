@@ -44,7 +44,7 @@ if (args.length > 2) {
         content = uri.content;
         console.log(content);
     } else {
-        content = uri.getCss(cls);
+        content = uri.getCSS(cls);
         outputCSS(args[3], content);
     }
 
