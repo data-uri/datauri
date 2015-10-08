@@ -76,10 +76,10 @@ describe('Data-uri Class', function () {
                     }).should.throw(expectedMsg);
                 });
 
-                describe('#getCss errors' , function () {
+                describe('#getCSS errors' , function () {
                     it('should throw an error because a config is missing', function () {
                         (function () {
-                            dUri.getCss();
+                            dUri.getCSS();
                         }).should.throw('Create a data-uri config using the method encodeSync');
                     });
                 });
@@ -99,13 +99,13 @@ describe('Data-uri Class', function () {
                 });
 
 
-                describe('#getCss' , function () {
+                describe('#getCSS' , function () {
                     it('should create a class with datauri background using target file name', function () {
-                        dUri.getCss().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                        dUri.getCSS().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
 
                     it('should create a class with datauri background using a defined name', function () {
-                        dUri.getCss('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                        dUri.getCSS('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                     });
                 });
             });
@@ -150,13 +150,13 @@ describe('Data-uri Class', function () {
                 }).should.throw(expectedMsg);
             });
 
-            describe('#getCss' , function () {
+            describe('#getCSS' , function () {
                 it('should create a class with datauri background using target file name', function () {
-                    dUri.getCss().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                    dUri.getCSS().should.equal('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
 
                 it('should create a class with datauri background using a defined name', function () {
-                    dUri.getCss('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+                    dUri.getCSS('foobar').should.equal('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
                 });
             });
 
@@ -250,7 +250,7 @@ describe('Data-uri Class', function () {
 
     });
 
-    if (semver.satisfies(nodeVersion, '0.12.x')) {
+    if (semver.satisfies(nodeVersion, '0.12.x || >= 4.0.0')) {
       describe('promise', function () {
 
           describe('running with then function', function () {

@@ -76,7 +76,7 @@ class Api extends EventEmitter {
       });
   }
 
-  getCss(className) {
+  getCSS(className) {
 
       if (!this.content) {
           throw new Error('Create a data-uri config using the method encodeSync');
