@@ -4,6 +4,7 @@
   "description": "A simple DataURI scheme module and client for Node.js",
   "scripts": {
     "test": "npm run check && npm run coveralls",
+    "lint": "eslint src",
     "mocha": "mocha --recursive --ui bdd --timeout 3000 --reporter spec",
     "coverage-lcov": "mocha --recursive --ui bdd --timeout 3000 --reporter mocha-lcov-reporter --require blanket",
     "coverage-html": "touch test/coverage/results.html && mocha --recursive --ui bdd --timeout 3000 --reporter html-cov --require blanket > test/coverage/results.html",
@@ -15,11 +16,12 @@
     "fulltest": "npm run clean-deps && npm install && npm run build && npm run spec",
     "build": "npm run clean && mkdir -p dist && babel -d dist/ src/",
     "watch": "npm run clean &&  mkdir -p dist && babel -w -d dist/ src/",
-    "check": "npm run build && npm run spec",
+    "check": "npm run lint && npm run build && npm run spec",
     "preversion": "npm run check"
   },
   "dependencies": {
-    "mimer": "^0.2.1"
+    "mimer": "^0.2.1",
+    "minimist": "^1.2.0"
   },
   "repository": {
     "type": "git",
@@ -51,7 +53,7 @@
     "blanket": "~1.1.6",
     "chai": "~1.9.0",
     "coveralls": "~2.8.0",
-    "jshint": "~2.4.3",
+    "eslint": "^1.6.0",
     "mocha": "~1.17.1",
     "mocha-lcov-reporter": "0.0.1",
     "semver": "^5.0.3",

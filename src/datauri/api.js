@@ -6,7 +6,7 @@ import uri from './template/uri';
 import css from './template/css';
 
 const existsSync = fs.existsSync;
-const exists     = fs.exists;
+const exists = fs.exists;
 
 class Api extends EventEmitter {
   constructor() {
@@ -14,80 +14,77 @@ class Api extends EventEmitter {
   }
 
   format(fileName, fileContent) {
-      fileContent   = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
-      this.fileName = fileName;
-      this.base64   = fileContent.toString('base64');
-      this.mimetype = mimer(fileName);
-      this.content  = uri({
-        base64: this.base64,
-        mimetype: this.mimetype
-      });
+    fileContent = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
+    this.fileName = fileName;
+    this.base64 = fileContent.toString('base64');
+    this.mimetype = mimer(fileName);
+    this.content = uri({
+      base64: this.base64,
+      mimetype: this.mimetype
+    });
 
-      return this;
+    return this;
   }
 
   encode(fileName, handler) {
-      this.async(fileName, function (err) {
-          if (handler) {
-              if (err) {
-                  return handler(err);
-              }
+    return this.async(fileName, (err) => {
+      if (handler) {
+        if (err) {
+          return handler(err);
+        }
 
-              handler.call(this, null, this.content, this);
+        handler.call(this, null, this.content, this);
 
-              return;
-          }
+        return this;
+      }
 
-          if (err) {
-              this.emit('error', err);
+      if (err) {
+        this.emit('error', err);
 
-              return;
-          }
+        return this;
+      }
 
-          this.emit('encoded', this.content, this);
-      });
+      this.emit('encoded', this.content, this);
+    });
   }
 
   encodeSync(fileName) {
-      if (!fileName || !fileName.trim || fileName.trim() === '') {
-          throw new Error('Insert a File path as string argument');
-      }
+    if (!fileName || !fileName.trim || fileName.trim() === '') {
+      throw new Error('Insert a File path as string argument');
+    }
 
-      if (existsSync(fileName)) {
-          var fileContent = fs.readFileSync(fileName);
+    if (existsSync(fileName)) {
+      let fileContent = fs.readFileSync(fileName);
 
-          return this.format(fileName, fileContent).content;
-      } else {
-          throw new Error('The file ' + fileName + ' was not found!');
-      }
+      return this.format(fileName, fileContent).content;
+    }
+
+    throw new Error(`The file ${fileName} was not found!`);
   }
 
   async(fileName, handler) {
-      var self = this;
+    exists(fileName, () => {
+      fs.readFile(fileName, (err, fileContent) => {
+        if (err) {
+          return handler.call(this, err);
+        }
 
-      exists(fileName, function () {
-          fs.readFile(fileName, function (err, fileContent) {
-              if (err) {
-                  return handler.call(self, err);
-              }
-
-              handler.call(self.format(fileName, fileContent));
-          });
+        handler.call(this.format(fileName, fileContent));
       });
+    });
   }
 
   getCSS(className) {
+    if (!this.content) {
+      throw new Error('Create a data-uri config using the method encodeSync');
+    }
 
-      if (!this.content) {
-          throw new Error('Create a data-uri config using the method encodeSync');
-      }
+    className = className || path.basename(this.fileName, path.extname(this.fileName));
 
-      className = className || path.basename(this.fileName, path.extname(this.fileName));
-
-      return css({
-          className: className,
-          background: this.content
-      });
+    return css({
+      className: className,
+      background: this.content
+    });
   }
 }
 
