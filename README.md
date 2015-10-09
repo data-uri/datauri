@@ -1,28 +1,39 @@
 # datauri
 [![Build Status](https://travis-ci.org/heldr/grunt-smushit.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
-A simple [Data URI scheme][datauri] module and client for [Node.js][nodejs]. To install datauri, just run:
-
-
-
+[Module](#module) and [Client](#client) to generate [Data URI scheme][datauri] using Node.js.
 
 ## CLIENT
 `npm install -g datauri` (it may require Root privileges)
 
-### Print datauri scheme
+### Print
 To print a data-uri scheme from a file
 ```CLI
 $ datauri brand.png
 ```
 
+### Copy
+To copy a data-uri scheme from a file
+```CLI
+$ datauri brand.png --copy
+$ datauri brand.png -c
+```
+
 ### CSS Background
 You can generate or update an output css file with data-uri background:
 ```CLI
-$ datauri brand.png asset/background.css
+$ datauri brand.png --css=asset/background.css
 ```
-If you want to define a Class Name, just type:
+
+Or even copy
 ```CLI
-$ datauri brand.png asset/background.css MyNewClass
+$ datauri brand.png --css --copy
+```
+
+If you want to define a Class Name, just type:
+
+```CLI
+$ datauri brand.png --css=asset/background.css --class=MyNewClass
 ```
 
 ## MODULE
@@ -45,8 +56,8 @@ datauri.encode('test/myfile.png');
 
 ### Promise (node 0.12+)
 ```js
-import { promise as DataURI } from 'datauri';
-// or var DataURI = require('datauri').promise;
+const DataURI = require('datauri').promise;
+// babelers: import { promise as DataURI } from 'datauri';
 
 DataURI('test/myfile.png')
   .then((content) => {

@@ -9,7 +9,9 @@ class DataURI extends Api {
 
     let configSize = config.length;
 
-    configSize && this[ENC_TYPE(configSize)].apply(this, config);
+    if (configSize) {
+      this[ENC_TYPE(configSize)].apply(this, config);
+    }
   }
 
   static promise(fileName) {

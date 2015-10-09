@@ -13,7 +13,7 @@ describe('Data-uri Client', function () {
 
     describe('generate a data-uri string', function () {
         it('should give advice when a user do not type anything after datauri', function (done) {
-            var expected = new RegExp('How to use Data-uri client:');
+            var expected = new RegExp('Data-uri usage:');
 
             execute(cli, function (err, stdout) {
                 should.not.exist(err);
@@ -40,26 +40,14 @@ describe('Data-uri Client', function () {
         var createdFile  = 'test/duality.css',
             createdClass = "\n.fixture {\n    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');\n}";
 
-        it('should not run if given css path has no compatible extension', function (done) {
-            var expected = 'Your css file must have extension: .css, .sass, .scss, .styl or .less\n';
-
-            execute(cli + fixture + ' test/duality.js', function (err, stdout) {
-                should.not.exist(err);
-                stdout.should.not.be.empty;
-                stdout.should.equal(expected);
-
-                done();
-            });
-        });
-
         describe('create a css file', function () {
 
-            afterEach(function () {
-                fs.unlinkSync(createdFile);
+            afterEach(function (done) {
+                fs.unlink(createdFile, done);
             });
 
             it('should insert a css class with the target file name', function (done) {
-                execute(cli + fixture + ' ' + createdFile, function (err, stdout) {
+                execute(cli + fixture + ' --css=' + createdFile, function (err, stdout) {
                     should.not.exist(err);
                     stdout.should.not.be.empty;
                     stdout.should.match(/created/);
@@ -73,7 +61,7 @@ describe('Data-uri Client', function () {
                 var cssClass    = 'pipoca',
                     fileContent = createdClass.replace('fixture', cssClass);
 
-                execute(cli + fixture + ' ' + createdFile + ' ' + cssClass, function (err, stdout) {
+                execute(cli + fixture + ' --css=' + createdFile + ' --class=' + cssClass, function (err, stdout) {
                     should.not.exist(err);
                     stdout.should.not.be.empty;
                     stdout.should.match(/created/);
@@ -99,7 +87,7 @@ describe('Data-uri Client', function () {
             });
 
             it('should insert a css class with the target file name', function (done) {
-                execute(cli + fixture + ' ' + updateFile, function (err, stdout) {
+                execute(cli + fixture + ' --css=' + updateFile, function (err, stdout) {
                     should.not.exist(err);
                     stdout.should.not.be.empty;
                     stdout.should.match(/updated/);
@@ -112,7 +100,7 @@ describe('Data-uri Client', function () {
                 var cssClass    = 'pipoca',
                     fileContent = updateClass.replace('fixture', cssClass);
 
-                execute(cli + fixture + ' ' + updateFile + ' ' + cssClass, function (err, stdout) {
+                execute(cli + fixture + ' --css=' + updateFile + ' --class=' + cssClass, function (err, stdout) {
                     should.not.exist(err);
                     stdout.should.not.be.empty;
                     stdout.should.match(/updated/);
