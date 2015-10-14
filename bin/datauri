@@ -1,6 +1,13 @@
 #!/usr/bin/env node
-var Cli = require('../dist/cli');
+var Cli = null;
 var flags = require('minimist')(process.argv.slice(2));
+
+if (flags.hasOwnProperty('env') && flags.env === 'watch') {
+  require("babel/register");
+  Cli = require('../src/cli');
+}
+
+Cli = Cli || require('../dist/cli');
 
 if (flags.hasOwnProperty('_') && flags._.length) {
   new Cli(flags);
@@ -11,6 +18,8 @@ if (flags.hasOwnProperty('_') && flags._.length) {
     'datauri <target_file> --copy',
     'datauri <target_file> --css=<css_output>',
     'datauri <target_file> --css --copy',
-    'datauri <target_file> --css=<css_output> --class=<css_class_name>'
+    'datauri <target_file> --css=<css_output> --class=<css_class_name>',
+    'datauri <target_file> --css=<css_output> --class=<css_class_name> --width --height',
+    'datauri <target_file> --css=<css_output> --class=<css_class_name> --background-size'
   ].join('\n'));
 }
