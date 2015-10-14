@@ -30,10 +30,12 @@ Or even copy
 $ datauri brand.png --css --copy
 ```
 
-If you want to define a Class Name, just type:
+If you want to define a Class Name, width and etc just type:
 
 ```CLI
 $ datauri brand.png --css=asset/background.css --class=MyNewClass
+$ datauri brand.png --css=asset/background.css --width --height
+$ datauri brand.png --css=asset/background.css --background-size
 ```
 
 ## MODULE
@@ -56,6 +58,8 @@ datauri.encode('test/myfile.png');
 
 ### Promise (node 0.12+)
 ```js
+'use strict';
+
 const DataURI = require('datauri').promise;
 // babelers: import { promise as DataURI } from 'datauri';
 
@@ -82,7 +86,11 @@ datauri.encode('test/myfile.png', function (err, content) {
   console.log(this.mimetype); //=> "image/png"
   console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
   console.log(this.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-  console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+  console.log(this.getCSS({
+    class: "myClass",
+    width: true,
+    height: true
+  })); //=> adds image width and height and custom class name
 });
 
 ```
@@ -97,7 +105,11 @@ datauri.format('.png', 'xkcd');
 console.log(datauri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(datauri.mimetype); //=> "image/png"
 console.log(datauri.base64); //=> "eGtjZA=="
-console.log(datauri.getCSS("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
+console.log(datauri.getCSS({
+  class: "myClass",
+  width: true,
+  height: true
+})); //=> adds image width and height and custom class name
 
 ```
 
@@ -117,7 +129,11 @@ dUri.format('.png', buffer);
 console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
 console.log(dUri.mimetype); //=> "image/png"
 console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCSS("myClassName")); //=> "\n.myClassName {\n    background-image: url('data:image/png;base64,eGtjZA==..."
+console.log(dUri.getCSS({
+  class: "myClass",
+  width: true,
+  height: true
+})); //=> adds image width and height and custom class name
 
 ```
 
@@ -130,7 +146,9 @@ datauri
     console.log(this.mimetype); //=> "image/png"
     console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
     console.log(this.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-    console.log(this.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+    console.log(this.getCSS({
+      class: "myClass"
+    }); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
   })
   .on('error', function (content) {
       console.log('Fail!');
@@ -189,7 +207,7 @@ DEVELOPING
 
 ```CLI
 $ npm install
-$ npm run watch
+$ npm run check
 ```
 
 To run test specs

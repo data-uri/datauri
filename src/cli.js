@@ -11,10 +11,10 @@ class Cli {
 
   output() {
     if (this.flags.css) {
-      this.css(this.flags.css, this.dataURI.getCSS(this.flags.class));
-    } else {
-      console.log(this.dataURI.content);
+      return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
     }
+
+    console.log(this.dataURI.content);
   }
 
   writeCSS(file, content, action) {

@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import path from 'path';
 import fs from 'fs';
 import mimer from 'mimer';
+import getDimensions from 'image-size';
 import uri from './template/uri';
 import css from './template/css';
 
@@ -74,17 +75,19 @@ class Api extends EventEmitter {
     });
   }
 
-  getCSS(className) {
+  getCSS(config={}) {
     if (!this.content) {
       throw new Error('Create a data-uri config using the method encodeSync');
     }
 
-    className = className || path.basename(this.fileName, path.extname(this.fileName));
+    config.class = config.class || path.basename(this.fileName, path.extname(this.fileName));
+    config.background = this.content;
 
-    return css({
-      className: className,
-      background: this.content
-    });
+    if (config.width || config.height || config['background-size']) {
+      config.dimensions = getDimensions(this.fileName);
+    }
+
+    return css(config);
   }
 }
 
