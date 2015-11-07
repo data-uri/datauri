@@ -3,6 +3,28 @@
 
 [Module](http://npm.im/datauri) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme][datauri].
 
+## CLIENT
+`npm install -g datauri-cli` (it may require Root privileges)
+
+### Print
+To print a data-uri scheme from a file
+```CLI
+$ datauri brand.png
+```
+
+### CSS Background
+You can generate or update an output css file with data-uri background:
+```CLI
+$ datauri brand.png --css=asset/background.css
+```
+
+If you want to define a Class Name, width and etc just type:
+
+```CLI
+$ datauri brand.png --css=asset/background.css --class=MyNewClass
+$ datauri brand.png --css=asset/background.css --width --height
+$ datauri brand.png --css=asset/background.css --background-size
+```
 ## Release notes
 
 * 1.0-alpha - many changes, will be documented soon
