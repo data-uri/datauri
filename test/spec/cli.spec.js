@@ -9,11 +9,10 @@ const expected = new RegExp(
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 );
 
-let cli = './bin/datauri';
+let cli = cli_cmd;
 
-if (process.argv.join('').match('watch')) {
-  cli += ' --env=watch'
-}
+
+console.log(cli);
 
 let dUri, cssContent;
 

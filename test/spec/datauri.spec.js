@@ -1,9 +1,9 @@
 import semver from 'semver';
 import sinon from 'sinon';
-import DataURI from '../../src';
 import { should as Should } from 'chai';
 import * as cssExp from '../expected/css';
 
+const DataURI = require(datauri_path)
 const should = Should();
 const nodeVersion = semver.clean(process.version);
 const fixture    = 'test/fixture.gif';
