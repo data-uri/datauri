@@ -42,13 +42,5 @@ function getMetadata(name) {
 
   return meta;
 }
-//
-// const run = async() => {
-//     await Promise.all([
-//         createPkg(names[1], getMetadata(names[1])),
-//         createPkg(names[1], getMetadata(names[1]))
-//     ]);
-// }
-// run();
 
 names.forEach(async(name) => await createPkg(name, getMetadata(name)))
