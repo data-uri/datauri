@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 var semver = require('semver');
 var nodeVersion = semver.clean(process.version);
 var build = './';
