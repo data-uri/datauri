@@ -25,7 +25,8 @@ const createPkg = async(name, meta) => {
   await fs.writeFile(`lib/${name}/.npmignore`, 'node_modules');
 
   const index = await fs.readFile('index.js');
-  await fs.writeFile(`lib/${name}/index.js`, index);
+
+  return fs.writeFile(`lib/${name}/index.js`, index);
 }
 
 function getMetadata(name) {
@@ -34,7 +35,20 @@ function getMetadata(name) {
     dependencies: createConfig(pkg.devDependencies, buildConfig[name].dependencies)
   }
 
+  if (name.endsWith('cli')) {
+    meta.dependencies[names[0]] = pkg.version;
+    meta.bin = buildConfig[name].bin;
+  }
+
   return meta;
 }
+//
+// const run = async() => {
+//     await Promise.all([
+//         createPkg(names[1], getMetadata(names[1])),
+//         createPkg(names[1], getMetadata(names[1]))
+//     ]);
+// }
+// run();
 
 names.forEach(async(name) => await createPkg(name, getMetadata(name)))
