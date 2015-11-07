@@ -1,12 +1,12 @@
 import fs from 'fs';
-import DataURI from './';
+
+const DataURIPath = process.env.DATAURI_N || 'datauri';
+const DataURI = require(DataURIPath);
 
 class Cli {
   constructor(flags) {
     this.flags = flags;
     this.dataURI = new DataURI(flags._[0]);
-
-    this.output();
   }
 
   output() {
@@ -38,4 +38,8 @@ class Cli {
   }
 }
 
-export default Cli;
+export default (flags) => {
+  const cli = new Cli(flags);
+
+  cli.output();
+};

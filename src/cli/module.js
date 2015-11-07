@@ -1,16 +1,10 @@
-#!/usr/bin/env node
-var Cli = null;
-var flags = require('minimist')(process.argv.slice(2));
+import minimist from 'minimist';
+import cli from './cli';
 
-if (flags.hasOwnProperty('env') && flags.env === 'watch') {
-  require("babel/register");
-  Cli = require('../src/cli');
-}
-
-Cli = Cli || require('../dist/cli');
+const flags = minimist(process.argv.slice(2));
 
 if (flags.hasOwnProperty('_') && flags._.length) {
-  new Cli(flags);
+  cli(flags);
 } else {
   console.log([
     '\nData-uri usage:',
