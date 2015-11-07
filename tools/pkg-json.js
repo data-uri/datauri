@@ -25,8 +25,10 @@ const createPkg = async(name, meta) => {
   await fs.writeFile(`lib/${name}/.npmignore`, 'node_modules');
 
   const index = await fs.readFile('index.js');
+  const readme = await fs.readFile(`docs/${name}.md`);
 
-  return fs.writeFile(`lib/${name}/index.js`, index);
+  await fs.writeFile(`lib/${name}/index.js`, index);
+  await fs.writeFile(`lib/${name}/README.md`, readme);
 }
 
 function getMetadata(name) {
