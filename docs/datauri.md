@@ -189,7 +189,7 @@ $ npm run fulltest
 
 ## Release notes
 
-* 1.0-alpha - many changes, will be documented soon
+* 1.0-alpha - many changes, will be well documented soon
 * 0.8 - remove node 0.8 support
 * 0.7 - generate css background-image instead of background shorthand
 * 0.6 - io.js support
