@@ -1,7 +1,10 @@
 import fs from 'fs';
+import cliparoo from 'cliparoo';
 
 const DataURIPath = process.env.DATAURI_N || 'datauri';
 const DataURI = require(DataURIPath);
+const clipboard = content =>
+  cliparoo(content, err => console.log(!err ? 'Copied!' : err));
 
 class Cli {
   constructor(flags) {
@@ -9,12 +12,17 @@ class Cli {
     this.dataURI = new DataURI(flags._[0]);
   }
 
-  output() {
+  setOutputHandler(output) {
+    this.output = output;
+  }
+
+  run() {
     if (this.flags.css) {
       return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
     }
 
-    console.log(this.dataURI.content);
+    console.log('output', this.output);
+    this.output(this.dataURI.content);
   }
 
   writeCSS(file, content, action) {
@@ -27,19 +35,29 @@ class Cli {
     });
   }
 
-  css(file, content) {
+  processCSSFile(file, content) {
     if (fs.existsSync(file)) {
-      fs.readFile(file, 'utf-8', (err, cssContent) => {
+      return fs.readFile(file, 'utf-8', (err, cssContent) => {
         this.writeCSS(file, cssContent + content, 'updated');
       });
-    } else {
-      this.writeCSS(file, content, 'created');
     }
+
+    this.writeCSS(file, content, 'created');
+  }
+
+  css(...config) {
+    if (typeof config[0] === 'string') {
+      return this.processCSSFile.apply(this, config);
+    }
+
+    this.output(config[1]);
   }
 }
 
 export default (flags) => {
   const cli = new Cli(flags);
+  const outputHandler = flags.copy ? clipboard : console.log;
 
-  cli.output();
+  cli.setOutputHandler(outputHandler);
+  cli.run();
 };

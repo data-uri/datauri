@@ -1,7 +1,7 @@
 {
   "name": "datauri-build",
   "private": true,
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "scripts": {
     "test": "npm run check",
     "lint": "eslint src",
@@ -54,10 +54,11 @@
     "babel-core": "^6.1.2",
     "babel-polyfill": "^6.0.16",
     "babel-preset-es2015": "^6.1.2",
-    "babel-preset-es2015-node4": "^1.0.0",
+    "babel-preset-es2015-node4": "^1.0.1",
     "babel-preset-stage-0": "^6.1.2",
     "blanket": "~1.1.6",
     "chai": "~3.4.0",
+    "cliparoo": "^1.1.0",
     "coveralls": "~2.11.4",
     "eslint": "^1.9.0",
     "image-size": "^0.3.5",
@@ -84,7 +85,8 @@
     },
     "datauri-cli": {
       "dependencies": [
-        "minimist"
+        "minimist",
+        "cliparoo"
       ],
       "bin": {
         "datauri": "./index.js"

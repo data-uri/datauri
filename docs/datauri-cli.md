@@ -12,8 +12,23 @@ To print a data-uri scheme from a file
 $ datauri brand.png
 ```
 
+or copy into your clipboard
+
+```CLI
+$ datauri brand.png --copy
+```
+
 ### CSS Background
-You can generate or update an output css file with data-uri background:
+
+To output css with data-uri background:
+
+```CLI
+$ datauri brand.png --css
+$ datauri brand.png --css --copy
+```
+
+or create/update file:
+
 ```CLI
 $ datauri brand.png --css=asset/background.css
 ```
@@ -21,13 +36,13 @@ $ datauri brand.png --css=asset/background.css
 If you want to define a Class Name, width and etc just type:
 
 ```CLI
-$ datauri brand.png --css=asset/background.css --class=MyNewClass
-$ datauri brand.png --css=asset/background.css --width --height
-$ datauri brand.png --css=asset/background.css --background-size
+$ datauri brand.png --css --class=MyNewClass
+$ datauri brand.png --css --width --height
+$ datauri brand.png --css --background-size
 ```
 ## Release notes
 
-* 1.0-alpha - many changes, will be documented soon
+* 1.0-alpha - many changes, will be well documented soon
 * 0.8 - remove node 0.8 support
 * 0.7 - generate css background-image instead of background shorthand
 * 0.6 - io.js support
