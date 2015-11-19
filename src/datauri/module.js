@@ -7,7 +7,7 @@ class DataURI extends Api {
   constructor(...config) {
     super();
 
-    let configSize = config.length;
+    const { length: configSize } = config;
 
     if (configSize) {
       this[ENC_TYPE(configSize)].apply(this, config);
@@ -15,7 +15,7 @@ class DataURI extends Api {
   }
 
   static promise(fileName) {
-    let datauri = new DataURI();
+    const datauri = new DataURI();
 
     return new Promise((resolve, reject) => {
       datauri.on('encoded', resolve)
@@ -25,9 +25,9 @@ class DataURI extends Api {
   }
 
   static sync(fileName) {
-    let datauri = new DataURI(fileName);
+    const { content } = new DataURI(fileName);
 
-    return datauri.content;
+    return content;
   }
 
 }

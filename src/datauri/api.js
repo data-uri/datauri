@@ -1,20 +1,20 @@
 import { EventEmitter } from 'events';
 import path from 'path';
-import fs, { existsSync } from 'fs';
+import {
+  existsSync,
+  readFileSync,
+  createReadStream
+} from 'fs';
 import mimer from 'mimer';
 import getDimensions from 'image-size';
 import uri from './template/uri';
 import css from './template/css';
 
 class Api extends EventEmitter {
-  constructor() {
-    super();
-  }
-
   format(fileName, fileContent) {
-    fileContent = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
+    const fileBuffer = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
 
-    this.base64 = fileContent.toString('base64');
+    this.base64 = fileBuffer.toString('base64');
     this.createMetadata(fileName);
 
     return this;
@@ -23,53 +23,42 @@ class Api extends EventEmitter {
   createMetadata(fileName) {
     this.fileName = fileName;
     this.mimetype = mimer(fileName);
-    this.content = uri({
-      base64: this.base64,
-      mimetype: this.mimetype
-    });
+    const { mimetype, base64 = '' } = this;
+    this.content = uri({ mimetype, base64 });
 
     return this;
   }
 
-  encode(fileName, handler) {
-    return this.async(fileName, err => {
-      if (handler) {
-        if (err) {
-          return handler(err);
-        }
-
-        handler.call(this, null, this.content, this);
-
-        return this;
-      }
-    });
-  }
-
-  streamData(chunk) {
-    if (!chunk.match('base64,')) {
-      this.base64 += chunk;
+  callback(handler, err) {
+    if (err) {
+      return handler(err);
     }
 
-    this.emit('data', chunk);
+    handler.call(this, null, this.content, this);
+  }
+
+  encode(fileName, handler) {
+    return this.async(fileName, err => handler && this.callback(handler, err));
   }
 
   async(fileName, handler) {
-    const fstream = fs.createReadStream(fileName, {
-      encoding: 'base64'
-    });
+    const base64Chunks = [];
+    const propagateStream = chunk => this.emit('data', chunk);
 
-    this.base64 = '';
-    this.streamData(this.createMetadata(fileName).content);
-    fstream.on('data', this.streamData.bind(this));
-    fstream.on('error', err => {
-      handler.call(this, err);
-      this.emit('error', err);
-    });
-    fstream.on('end', () => {
-      this.emit('end');
-      handler.call(this.createMetadata(fileName));
-      this.emit('encoded', this.content, this);
-    });
+    propagateStream(this.createMetadata(fileName).content);
+    createReadStream(fileName, { encoding: 'base64' })
+      .on('data', propagateStream)
+      .on('data', chunk => base64Chunks.push(chunk))
+      .on('error', err => {
+        handler(err);
+        this.emit('error', err);
+      })
+      .on('end', () => {
+        this.base64 = base64Chunks.join('');
+        this.emit('end');
+        handler.call(this.createMetadata(fileName));
+        this.emit('encoded', this.content, this);
+      });
   }
 
   encodeSync(fileName) {
@@ -78,7 +67,7 @@ class Api extends EventEmitter {
     }
 
     if (existsSync(fileName)) {
-      let fileContent = fs.readFileSync(fileName);
+      let fileContent = readFileSync(fileName);
 
       return this.format(fileName, fileContent).content;
     }
