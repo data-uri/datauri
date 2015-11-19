@@ -1,10 +1,10 @@
 import fs from 'fs';
-import cliparoo from 'cliparoo';
+import clip from 'to-clipboard';
 
 const DataURIPath = process.env.DATAURI_N || 'datauri';
 const DataURI = require(DataURIPath);
 const clipboard = content =>
-  cliparoo(content, err => console.log(!err ? 'Copied!' : err));
+  clip(content, err => console.log(!err ? 'Copied!' : err));
 
 class Cli {
   constructor(flags) {
@@ -21,7 +21,6 @@ class Cli {
       return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
     }
 
-    console.log('output', this.output);
     this.output(this.dataURI.content);
   }
 

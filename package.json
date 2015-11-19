@@ -58,7 +58,7 @@
     "babel-preset-stage-0": "^6.1.2",
     "blanket": "~1.1.6",
     "chai": "~3.4.0",
-    "cliparoo": "^1.1.0",
+    "to-clipboard": "^0.2.0",
     "coveralls": "~2.11.4",
     "eslint": "^1.9.0",
     "image-size": "^0.3.5",
@@ -86,7 +86,7 @@
     "datauri-cli": {
       "dependencies": [
         "minimist",
-        "cliparoo"
+        "to-clipboard"
       ],
       "bin": {
         "datauri": "./index.js"
