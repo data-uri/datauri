@@ -282,7 +282,7 @@ describe('Data-uri Client', () => {
       stdout.should.have.string('Copied!');
     });
 
-    it.skip('should copy css with datauri', async() => {
+    it('should copy css with datauri', async() => {
 
       const stdout = await execute(`${cli} ${fixture} --copy --css`);
 

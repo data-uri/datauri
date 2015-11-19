@@ -1,13 +1,10 @@
 import { EventEmitter } from 'events';
 import path from 'path';
-import fs from 'fs';
+import fs, { existsSync } from 'fs';
 import mimer from 'mimer';
 import getDimensions from 'image-size';
 import uri from './template/uri';
 import css from './template/css';
-
-const existsSync = fs.existsSync;
-const exists = fs.exists;
 
 class Api extends EventEmitter {
   constructor() {
@@ -16,8 +13,15 @@ class Api extends EventEmitter {
 
   format(fileName, fileContent) {
     fileContent = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
-    this.fileName = fileName;
+
     this.base64 = fileContent.toString('base64');
+    this.createMetadata(fileName);
+
+    return this;
+  }
+
+  createMetadata(fileName) {
+    this.fileName = fileName;
     this.mimetype = mimer(fileName);
     this.content = uri({
       base64: this.base64,
@@ -28,7 +32,7 @@ class Api extends EventEmitter {
   }
 
   encode(fileName, handler) {
-    return this.async(fileName, (err) => {
+    return this.async(fileName, err => {
       if (handler) {
         if (err) {
           return handler(err);
@@ -38,13 +42,32 @@ class Api extends EventEmitter {
 
         return this;
       }
+    });
+  }
 
-      if (err) {
-        this.emit('error', err);
+  streamData(chunk) {
+    if (!chunk.match('base64,')) {
+      this.base64 += chunk;
+    }
 
-        return this;
-      }
+    this.emit('data', chunk);
+  }
 
+  async(fileName, handler) {
+    const fstream = fs.createReadStream(fileName, {
+      encoding: 'base64'
+    });
+
+    this.base64 = '';
+    this.streamData(this.createMetadata(fileName).content);
+    fstream.on('data', this.streamData.bind(this));
+    fstream.on('error', err => {
+      handler.call(this, err);
+      this.emit('error', err);
+    });
+    fstream.on('end', () => {
+      this.emit('end');
+      handler.call(this.createMetadata(fileName));
       this.emit('encoded', this.content, this);
     });
   }
@@ -61,18 +84,6 @@ class Api extends EventEmitter {
     }
 
     throw new Error(`The file ${fileName} was not found!`);
-  }
-
-  async(fileName, handler) {
-    exists(fileName, () => {
-      fs.readFile(fileName, (err, fileContent) => {
-        if (err) {
-          return handler.call(this, err);
-        }
-
-        handler.call(this.format(fileName, fileContent));
-      });
-    });
   }
 
   getCSS(config={}) {

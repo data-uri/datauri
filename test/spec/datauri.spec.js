@@ -261,6 +261,25 @@ describe('Data-uri Module', () => {
     });
   });
 
+  describe('read stream', () => {
+    it('should run through events "data" and "end"', (done) => {
+      const datauri = new DataURI();
+      let data = '';
+
+      datauri
+        .on('data', chunk => {
+          data += chunk;
+        })
+        .on('end', function() {
+          data.should.equal(expected.content);
+          done();
+        }).
+        encode(fixture);
+    });
+
+    it.skip('should run through pipe');
+  });
+
   if (semver.satisfies(nodeVersion, '0.12.x || >= 4.0.0')) {
     describe('promise', () => {
 
