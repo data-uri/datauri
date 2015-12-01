@@ -2,7 +2,7 @@ import fs from 'fs';
 import { should as Should } from 'chai';
 import { exec } from 'child_process';
 import * as cssExp from '../expected/css';
-import clipboard from 'cliparoo';
+import clipboard from 'to-clipboard';
 
 const should = Should();
 const fixture = 'test/fixture.gif';
