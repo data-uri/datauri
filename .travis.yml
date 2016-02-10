@@ -1,7 +1,9 @@
+sudo: false
 language: node_js
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq xclip
+addons:
+  apt:
+    packages:
+    - xclip
 node_js:
   - "stable"
   - "4"
