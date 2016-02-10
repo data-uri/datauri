@@ -2,6 +2,8 @@ import semver from 'semver';
 import sinon from 'sinon';
 import { should as Should } from 'chai';
 import * as cssExp from '../expected/css';
+import fs from 'fs';
+import { Writable } from 'stream';
 
 const DataURI = require(datauri_path)
 const should = Should();
@@ -261,7 +263,7 @@ describe('Data-uri Module', () => {
     });
   });
 
-  describe('read stream', () => {
+  describe('readable stream', () => {
     it('should run through events "data" and "end"', (done) => {
       const datauri = new DataURI();
       let data = '';
@@ -270,14 +272,32 @@ describe('Data-uri Module', () => {
         .on('data', chunk => {
           data += chunk;
         })
-        .on('end', function() {
+        .on('end', () => {
           data.should.equal(expected.content);
           done();
         }).
         encode(fixture);
     });
 
-    it.skip('should run through pipe');
+    it('should run through pipe', done => {
+      const datauri = new DataURI();
+      const ws = Writable();
+      const content = [];
+
+      ws._write = (chunk, enc, next) => {
+        content.push(chunk);
+        next();
+      };
+
+      datauri.pipe(ws);
+
+      datauri.on('end', () => {
+        content.join('').should.equal(expected.content);
+
+        done();
+      }).encode(fixture);
+
+    });
   });
 
   if (semver.satisfies(nodeVersion, '0.12.x || >= 4.0.0')) {

@@ -1,4 +1,3 @@
-import { EventEmitter } from 'events';
 import path from 'path';
 import {
   existsSync,
@@ -9,8 +8,15 @@ import mimer from 'mimer';
 import getDimensions from 'image-size';
 import uri from './template/uri';
 import css from './template/css';
+import Stream from 'stream';
 
-class Api extends EventEmitter {
+class Api extends Stream {
+  constructor() {
+    super();
+
+    this.readable = true;
+  }
+
   format(fileName, fileContent) {
     const fileBuffer = (fileContent instanceof Buffer) ? fileContent : new Buffer(fileContent);
 
@@ -29,7 +35,7 @@ class Api extends EventEmitter {
     return this;
   }
 
-  callback(handler, err) {
+  runCallback(handler, err) {
     if (err) {
       return handler(err);
     }
@@ -38,7 +44,7 @@ class Api extends EventEmitter {
   }
 
   encode(fileName, handler) {
-    return this.async(fileName, err => handler && this.callback(handler, err));
+    return this.async(fileName, err => handler && this.runCallback(handler, err));
   }
 
   async(fileName, handler) {
