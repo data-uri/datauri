@@ -2,7 +2,7 @@ import fs from 'fs';
 import { should as Should } from 'chai';
 import { exec } from 'child_process';
 import * as cssExp from '../expected/css';
-import clipboard from 'to-clipboard';
+import { paste } from 'copy-paste';
 
 const should = Should();
 const fixture = 'test/fixture.gif';
@@ -279,7 +279,7 @@ describe('Data-uri Client', () => {
       const stdout = await execute(`${cli} ${fixture} --copy`);
 
       stdout.should.not.be.empty;
-      stdout.should.have.string('Copied!');
+      paste().should.have.string(expectedString);
     });
 
     it('should copy css with datauri', async() => {
@@ -287,7 +287,7 @@ describe('Data-uri Client', () => {
       const stdout = await execute(`${cli} ${fixture} --copy --css`);
 
       stdout.should.not.be.empty;
-      stdout.should.have.string('Copied!');
+      paste().should.have.string(cssExp.simple);
     });
   });
 });
