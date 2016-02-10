@@ -58,6 +58,7 @@
     "babel-preset-stage-0": "^6.1.2",
     "blanket": "~1.1.6",
     "chai": "~3.4.0",
+    "copy-paste": "^1.1.4",
     "coveralls": "~2.11.4",
     "eslint": "^1.9.0",
     "image-size": "^0.3.5",
@@ -66,8 +67,7 @@
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "1.0.0",
     "semver": "^5.0.3",
-    "sinon": "~1.17.2",
-    "copy-paste": "^1.1.4"
+    "sinon": "~1.17.2"
   },
   "config": {
     "blanket": {
