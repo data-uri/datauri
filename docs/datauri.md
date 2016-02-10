@@ -21,6 +21,15 @@ datauri.on('error', function (content) {
 datauri.encode('test/myfile.png');
 ```
 
+### Readable Stream
+```js
+const Datauri = require('datauri');
+let   datauri = new Datauri();
+
+datauri.pipe(process.stdout);
+datauri.encode('test/myfile.png');
+```
+
 ### Promise (node 0.12+)
 ```js
 'use strict';
