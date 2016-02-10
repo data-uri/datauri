@@ -8,7 +8,7 @@
 
 ```js
 const Datauri = require('datauri');
-let   datauri = new Datauri();
+const datauri = new Datauri();
 
 datauri.on('encoded', function (content) {
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
@@ -24,13 +24,13 @@ datauri.encode('test/myfile.png');
 ### Readable Stream
 ```js
 const Datauri = require('datauri');
-let   datauri = new Datauri();
+const datauri = new Datauri();
 
 datauri.pipe(process.stdout);
 datauri.encode('test/myfile.png');
 ```
 
-### Promise (node 0.12+)
+### Promise (node 0.12+, works with es2016 async/await)
 ```js
 'use strict';
 
@@ -48,7 +48,7 @@ DataURI('test/myfile.png')
 ### Callback for vintage users
 ```js
 const DataURI = require('datauri');
-let   datauri = new DataURI();
+const datauri = new DataURI();
 
 datauri.encode('test/myfile.png', function (err, content) {
   if (err) {
@@ -72,7 +72,7 @@ datauri.encode('test/myfile.png', function (err, content) {
 ### Create from a string
 ```js
 const DataURI = require('datauri');
-let datauri   = new Datauri();
+const datauri   = new Datauri();
 
 datauri.format('.png', 'xkcd');
 
@@ -160,6 +160,16 @@ import { sync as DataURI } from 'datauri';
 console.log(DataURI('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 ```
 
+NPM SCRIPT AND TERMINAL CLIENT
+-------
+* [datauri-cli](https://npmjs.org/package/datauri-cli)
+
+
+GULP
+-----
+
+* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
+
 GRUNT
 -----
 
@@ -170,11 +180,6 @@ There are a bunch of grunt plugins running on top of datauri module.
 * [grunt-static-inline](https://npmjs.org/package/grunt-static-inline) - A grunt plugin to replace url from static files such as img,js,css an put inline in a template.
 * [grunt-data-uri](https://npmjs.org/package/grunt-data-uri) - Convert to data-uri from image path.
 * [grunt-inline](https://npmjs.org/package/grunt-inline)
-
-GULP
------
-
-* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
 
 DEVELOPING
 ----------
@@ -198,7 +203,7 @@ $ npm run fulltest
 
 ## Release notes
 
-* 1.0-alpha - many changes, will be well documented soon
+* 1.0 - async by default, native promise, streams, split between datauri and datauri-cli package
 * 0.8 - remove node 0.8 support
 * 0.7 - generate css background-image instead of background shorthand
 * 0.6 - io.js support
