@@ -13,11 +13,12 @@ const execute = cmd => new Promise((resolve, reject) => {
   exec(cmd, (err, data) => err ? reject(err) : resolve(data));
 });
 
-let cli = cli_cmd;
+const cli = cli_cmd;
 
 let dUri, cssContent;
 
 describe('Data-uri Client', () => {
+
   describe('generate a data-uri string', () => {
     it('should give advice when a user do not type anything after datauri', async() => {
       const stdout = await execute(cli);
@@ -273,21 +274,24 @@ describe('Data-uri Client', () => {
     });
   });
 
-  describe('--copy', () => {
-    it('should copy a datauri', async() => {
+  if (!process.env.TRAVIS) {
+    describe('--copy', () => {
+      it('should copy a datauri', async() => {
 
-      const stdout = await execute(`${cli} ${fixture} --copy`);
+        const stdout = await execute(`${cli} ${fixture} --copy`);
 
-      stdout.should.not.be.empty;
-      paste().should.have.string(expectedString);
+        stdout.should.not.be.empty;
+
+        paste().should.have.string(expectedString);
+      });
+
+      it('should copy css with datauri', async() => {
+
+        const stdout = await execute(`${cli} ${fixture} --copy --css`);
+
+        stdout.should.not.be.empty;
+        paste().should.have.string(cssExp.simple);
+      });
     });
-
-    it('should copy css with datauri', async() => {
-
-      const stdout = await execute(`${cli} ${fixture} --copy --css`);
-
-      stdout.should.not.be.empty;
-      paste().should.have.string(cssExp.simple);
-    });
-  });
+  }
 });
