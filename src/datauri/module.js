@@ -10,7 +10,7 @@ class DataURI extends Api {
     const { length: configSize } = config;
 
     if (configSize) {
-      this[ENC_TYPE(configSize)].apply(this, config);
+      this[ENC_TYPE(configSize)](...config);
     }
   }
 
