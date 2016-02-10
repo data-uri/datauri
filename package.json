@@ -86,7 +86,8 @@
     "datauri-cli": {
       "dependencies": [
         "minimist",
-        "copy-paste"
+        "copy-paste",
+        "semver"
       ],
       "bin": {
         "datauri": "./index.js"
