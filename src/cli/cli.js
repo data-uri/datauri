@@ -1,10 +1,10 @@
 import fs from 'fs';
-import clip from 'to-clipboard';
+import { copy } from 'copy-paste';
 
 const DataURIPath = process.env.DATAURI_N || 'datauri';
 const DataURI = require(DataURIPath);
 const clipboard = content =>
-  clip(content, err => console.log(!err ? 'Copied!' : err));
+  copy(content, err => console.log(!err ? 'Copied!' : err));
 
 class Cli {
   constructor(flags) {
