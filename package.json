@@ -21,7 +21,7 @@
     "build-cli": "babel --presets es2015-node4 -d lib/datauri-cli src/cli && babel --presets es2015 -d lib/datauri-cli/old src/cli",
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && babel-node tools/pkg-json.js",
     "check": "npm run lint && npm run spec-prod",
-    "deploy": "npm publish lib/datauri-cli && npm publish lib/datauri",
+    "deploy": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
     "preversion": "npm run check",
     "postversion": "npm run build"
   },
@@ -81,7 +81,7 @@
         "mimer",
         "semver"
       ],
-      "description": "Simple DataURI scheme module"
+      "description": "Create DataURI scheme easily"
     },
     "datauri-cli": {
       "dependencies": [
@@ -92,7 +92,7 @@
       "bin": {
         "datauri": "./index.js"
       },
-      "description": "Simple DataURI scheme client"
+      "description": "Create DataURI scheme using terminal"
     }
   }
 }
