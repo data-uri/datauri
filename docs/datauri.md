@@ -1,10 +1,9 @@
-
 <h1 align="center">
-  <br />
-  <img width="365" src="https://cdn.rawgit.com/heldr/datauri/master/media/datauri.svg" alt="datauri" />
-  <br />
-  <br />
-  <br />
+  <br>
+  <img width="365" src="https://cdn.rawgit.com/heldr/datauri/master/media/datauri.svg" alt="datauri">
+  <br>
+  <br>
+  <br>
 </h1>
 
 Node.js [Module](#module) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
