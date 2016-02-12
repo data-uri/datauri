@@ -43,6 +43,8 @@ function getMetadata(name) {
     meta.bin = buildConfig[name].bin;
   }
 
+  meta.description = buildConfig[name].description;
+
   return meta;
 }
 
