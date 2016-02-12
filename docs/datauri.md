@@ -36,7 +36,7 @@ MODULE
   * [grunt](#grunt)
 6. [Develop](#develop)
 7. [License](#license)
-8. [ChangeLog](/releases)
+8. [ChangeLog](https://github.com/heldr/datauri/releases)
 9. [Tools using datauri](https://github.com/heldr/datauri/blob/master/README.md#tools-using-datauri)
 
 ### Readable Stream

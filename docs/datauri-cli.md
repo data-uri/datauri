@@ -45,7 +45,7 @@ $ datauri brand.png --css --class=MyNewClass
 $ datauri brand.png --css --width --height
 $ datauri brand.png --css --background-size
 ```
-## [ChangeLog](/releases)
+## [ChangeLog](https://github.com/heldr/datauri/releases)
 
 ## License
 
