@@ -1,25 +1,38 @@
-# datauri
-[Module](http://npm.im/datauri) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme][datauri].
+
+<h1 align="center">
+  <br />
+  <img width="365" src="media/datauri.svg" alt="datauri" />
+  <br />
+</h1>
+
+Node.js [Module](#module) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme][datauri].
+
+>  The data URI scheme is a uniform resource identifier (URI) scheme that provides a way to include data in-line in web pages as if they were external resources.
+
+from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
 [![Build Status](https://travis-ci.org/heldr/grunt-smushit.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 ## MODULE
 `npm install --save datauri`
 
-```js
-const Datauri = require('datauri');
-const datauri = new Datauri();
-
-datauri.on('encoded', function (content) {
-    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
-});
-
-datauri.on('error', function (content) {
-    console.log('Fail!');
-});
-
-datauri.encode('test/myfile.png');
-```
+1. [From file path](#readable-stream)
+  * [Asynchronous](#readable-stream)
+    * [Readable Stream](#readable-stream)
+    * [Promise](#promise-node-012-works-with-es2016-asyncawait)
+    * [Callback](#callback)
+  * [Synchronous](#synchronous-class)
+    * [Class](#synchronous-class)
+    * [Function](#synchronous-function)
+2. [From a Buffer](#from-a-buffer)
+3. [From a String](#from-a-string)
+4. [Method chaining](#from-a-string)
+5. [Task plugins using datauri](#tools-using-datauri)
+  * [npm script](#npm-script)
+  * [gulp](#gulp)
+  * [grunt](#grunt)
+6. [Develop](#develop)
+6. [License](#license)
 
 ### Readable Stream
 ```js
@@ -27,6 +40,17 @@ const Datauri = require('datauri');
 const datauri = new Datauri();
 
 datauri.pipe(process.stdout);
+datauri.encode('test/myfile.png');
+```
+
+```js
+const Datauri = require('datauri');
+const datauri = new Datauri();
+
+datauri.on('encoded', content => console.log(content));
+//=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...";
+
+datauri.on('error', err => console.log(err));
 datauri.encode('test/myfile.png');
 ```
 
@@ -38,19 +62,17 @@ const DataURI = require('datauri').promise;
 // babelers: import { promise as DataURI } from 'datauri';
 
 DataURI('test/myfile.png')
-  .then((content) => {
-    console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-  }).catch((err) => {
-    throw err;
-  });
+  .then(content => console.log(content))
+  //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+  .catch(err => { throw err; });
 ```
 
-### Callback for vintage users
+### Callback
 ```js
 const DataURI = require('datauri');
 const datauri = new DataURI();
 
-datauri.encode('test/myfile.png', function (err, content) {
+datauri.encode('test/myfile.png', (err, content) => {
   if (err) {
       throw err;
   }
@@ -69,10 +91,63 @@ datauri.encode('test/myfile.png', function (err, content) {
 
 ```
 
-### Create from a string
+
+### Synchronous Class
+If DataURI class is instanciated with a file path, the same will be processed synchronously.
+
+```js
+const Datauri = require('datauri');
+let   datauri = new Datauri('test/myfile.png');
+
+console.log(datauri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(datauri.mimetype); //=> "image/png"
+console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(datauri.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+```
+
+### Synchronous Function
+```js
+const Datauri = require('datauri').sync;
+
+console.log(Datauri('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+```
+or for ES2015/6 lovers
+
+```js
+import { sync as DataURI } from 'datauri';
+
+console.log(DataURI('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+```
+
+### From a Buffer
+If you already have your file as a Buffer, use this. It's much faster than passing a string.
+
+```js
+const Datauri = require('datauri'),
+const datauri = new Datauri();
+
+//...
+const buffer = fs.readFileSync('./hello');
+//...
+
+datauri.format('.png', buffer);
+
+console.log(datauri.content); //=> "data:image/png;base64,eGtjZA=="
+console.log(datauri.mimetype); //=> "image/png"
+console.log(datauri.base64); //=> "eGtjZA=="
+console.log(datauri.getCSS({
+  class: "myClass",
+  width: true,
+  height: true
+})); //=> adds image width and height and custom class name
+
+```
+
+### From a string
 ```js
 const DataURI = require('datauri');
-const datauri   = new Datauri();
+const datauri = new Datauri();
 
 datauri.format('.png', 'xkcd');
 
@@ -87,35 +162,11 @@ console.log(datauri.getCSS({
 
 ```
 
-### Create from a Buffer
-If you already have your file as a Buffer, use this. It's much faster than passing a string.
-
-```js
-var Datauri = require('datauri'),
-    dUri    = new Datauri();
-
-//...
-var buffer = fs.readFileSync('./hello');
-//...
-
-dUri.format('.png', buffer);
-
-console.log(dUri.content); //=> "data:image/png;base64,eGtjZA=="
-console.log(dUri.mimetype); //=> "image/png"
-console.log(dUri.base64); //=> "eGtjZA=="
-console.log(dUri.getCSS({
-  class: "myClass",
-  width: true,
-  height: true
-})); //=> adds image width and height and custom class name
-
-```
-
-#### Chaining all stuff
+#### Method chaining
 ```js
 //...
 datauri
-  .on('encoded', function (content) {
+  .on('encoded', content => {
     console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
     console.log(this.mimetype); //=> "image/png"
     console.log(this.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
@@ -124,41 +175,11 @@ datauri
       class: "myClass"
     }); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
   })
-  .on('error', function (content) {
-      console.log('Fail!');
-  })
+  .on('error', err => console.error(err))
   .encode('test/myfile.png');
 ```
 
-### Sync (kids! Don't use it at home!)
-
-#### Sync Class
-If DataURI class is instanciated with a file path, the same will be processed synchronously.
-
-```js
-const Datauri = require('datauri');
-let   datauri = new Datauri('test/myfile.png');
-
-console.log(datauri.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(datauri.mimetype); //=> "image/png"
-console.log(datauri.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(datauri.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-console.log(datauri.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
-```
-
-#### Sync Function
-```js
-const Datauri = require('datauri').sync;
-
-console.log(Datauri('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-```
-or for ES2015/6 lovers
-
-```js
-import { sync as DataURI } from 'datauri';
-
-console.log(DataURI('test/myfile.png')); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-```
+### Tools using datauri
 
 NPM SCRIPT AND TERMINAL CLIENT
 -------
@@ -181,8 +202,8 @@ There are a bunch of grunt plugins running on top of datauri module.
 * [grunt-data-uri](https://npmjs.org/package/grunt-data-uri) - Convert to data-uri from image path.
 * [grunt-inline](https://npmjs.org/package/grunt-inline)
 
-DEVELOPING
-----------
+DEVELOP
+-------
 
 ```CLI
 $ npm install
@@ -217,8 +238,3 @@ $ npm run fulltest
 
 MIT License
 (c) [Helder Santana](http://heldr.com)
-
-[nodejs]: http://nodejs.org/download
-[iojs]: https://iojs.org/
-[datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
-[promisesaplus]: http://promises-aplus.github.io/promises-spec/
