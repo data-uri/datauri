@@ -25,7 +25,7 @@
 
 ## Tools using datauri
 
-#### NPM SCRIPT AND TERMINAL CLIENT
+#### NPM SCRIPT
 * [datauri-cli](https://npmjs.org/package/datauri-cli)
 
 
