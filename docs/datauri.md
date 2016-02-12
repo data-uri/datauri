@@ -1,7 +1,9 @@
 
 <h1 align="center">
   <br />
-  <img width="365" src="media/datauri.svg" alt="datauri" />
+  <img width="365" src="https://cdn.rawgit.com/heldr/datauri/master/media/datauri.svg" alt="datauri" />
+  <br />
+  <br />
   <br />
 </h1>
 
@@ -26,7 +28,7 @@ from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
     * [Function](#synchronous-function)
 2. [From a Buffer](#from-a-buffer)
 3. [From a String](#from-a-string)
-4. [Method chaining](#from-a-string)
+4. [Method chaining](#method-chaining)
 5. [Task plugins using datauri](#tools-using-datauri)
   * [npm script](#npm-script)
   * [gulp](#gulp)
