@@ -11,30 +11,29 @@
 
 [![Build Status](https://travis-ci.org/heldr/grunt-smushit.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
-## Release notes
+## Module
+`npm i --save datauri`
 
-* 1.0 - async by default, native promise, streams, split between datauri and datauri-cli package
-* 0.8 - remove node 0.8 support
-* 0.7 - generate css background-image instead of background shorthand
-* 0.6 - io.js support
-* 0.5 - Format data uri from a string
-* 0.4 - Promises support
-* 0.3 - API Rewritten from the top to the bottom + full async compatibility
-* 0.2 - Splitted in submodules mimer and templayed
-* 0.1 - First release
+[See more in NPM page](http://npm.im/datauri)
 
-NPM SCRIPT
--------
+## Client
+`npm i -g datauri-cli`
+
+[See more in NPM page](http://npm.im/datauri-cli)
+
+## [ChangeLog](/releases)
+
+## Tools using datauri
+
+#### NPM SCRIPT AND TERMINAL CLIENT
 * [datauri-cli](https://npmjs.org/package/datauri-cli)
 
 
-GULP
------
+#### GULP
 
 * [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
 
-GRUNT
------
+#### GRUNT
 
 There are a bunch of grunt plugins running on top of datauri module.
 
@@ -48,8 +47,3 @@ There are a bunch of grunt plugins running on top of datauri module.
 
 MIT License
 (c) [Helder Santana](http://heldr.com)
-
-[nodejs]: http://nodejs.org/download
-[iojs]: https://iojs.org/
-[datauri]: http://en.wikipedia.org/wiki/Data_URI_scheme
-[promisesaplus]: http://promises-aplus.github.io/promises-spec/
