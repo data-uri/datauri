@@ -7,7 +7,7 @@
   <br />
 </h1>
 
-Node.js [Module](#module) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme][datauri].
+Node.js [Module](#module) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
 
 >  The data URI scheme is a uniform resource identifier (URI) scheme that provides a way to include data in-line in web pages as if they were external resources.
 
@@ -15,7 +15,8 @@ from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
 [![Build Status](https://travis-ci.org/heldr/grunt-smushit.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
-## MODULE
+MODULE
+-------
 `npm install --save datauri`
 
 1. [From file path](#readable-stream)
@@ -34,7 +35,9 @@ from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
   * [gulp](#gulp)
   * [grunt](#grunt)
 6. [Develop](#develop)
-6. [License](#license)
+7. [License](#license)
+8. [ChangeLog](/releases)
+9. [Tools using datauri](https://github.com/heldr/datauri/blob/master/README.md#tools-using-datauri)
 
 ### Readable Stream
 ```js
@@ -181,29 +184,6 @@ datauri
   .encode('test/myfile.png');
 ```
 
-### Tools using datauri
-
-NPM SCRIPT AND TERMINAL CLIENT
--------
-* [datauri-cli](https://npmjs.org/package/datauri-cli)
-
-
-GULP
------
-
-* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
-
-GRUNT
------
-
-There are a bunch of grunt plugins running on top of datauri module.
-
-* [grunt-datauri](https://npmjs.org/package/grunt-datauri) - Create base64 encoded data-uris for css from images
-* [grunt-imweb](https://npmjs.org/package/grunt-imweb) - IMWEB Tasks Collection For Daily Workflow.
-* [grunt-static-inline](https://npmjs.org/package/grunt-static-inline) - A grunt plugin to replace url from static files such as img,js,css an put inline in a template.
-* [grunt-data-uri](https://npmjs.org/package/grunt-data-uri) - Convert to data-uri from image path.
-* [grunt-inline](https://npmjs.org/package/grunt-inline)
-
 DEVELOP
 -------
 
@@ -223,18 +203,6 @@ If you'd like to test the full process including npm installer, just run:
 ```CLI
 $ npm run fulltest
 ```
-
-## Release notes
-
-* 1.0 - async by default, native promise, streams, split between datauri and datauri-cli package
-* 0.8 - remove node 0.8 support
-* 0.7 - generate css background-image instead of background shorthand
-* 0.6 - io.js support
-* 0.5 - Format data uri from a string
-* 0.4 - Promises support
-* 0.3 - API Rewritten from the top to the bottom + full async compatibility
-* 0.2 - Splitted in submodules mimer and templayed
-* 0.1 - First release
 
 ## License
 
