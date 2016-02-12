@@ -22,8 +22,8 @@
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && babel-node tools/pkg-json.js",
     "check": "npm run lint && npm run spec-prod",
     "deploy": "npm publish lib/datauri-cli && npm publish lib/datauri",
-    "preversion": "npm run check",
-    "prepublish": "npm run check"
+    "preversion": "npm run lint && npm run spec",
+    "postversion": "npm run build"
   },
   "repository": {
     "type": "git",
