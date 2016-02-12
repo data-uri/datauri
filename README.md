@@ -21,7 +21,7 @@
 
 [See more in NPM page](http://npm.im/datauri-cli)
 
-## [ChangeLog](/releases)
+## [ChangeLog](https://github.com/heldr/datauri/releases)
 
 ## Tools using datauri
 
