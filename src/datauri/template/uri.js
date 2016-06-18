@@ -1,1 +1,1 @@
-export default data => `data:${data.mimetype};base64,${data.base64}`;
+module.exports = data => `data:${data.mimetype};base64,${data.base64}`;

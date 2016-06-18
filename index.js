@@ -1,10 +1,6 @@
 #!/usr/bin/env node
-var semver = require('semver');
-var nodeVersion = semver.clean(process.version);
-var build = './';
 
-if (!semver.satisfies(nodeVersion, '>= 4.0.0')) {
-  build += 'old/';
-}
+// ./lib versions lower than Node 6
+var datauri = (parseInt(process.version.charAt(1)) < 6) ? './src' : './lib';
 
-module.exports = require(build + 'module');
+module.exports = require(datauri);

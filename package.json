@@ -17,8 +17,8 @@
     "clean": "rm -rf lib",
     "fulltest": "npm run clean-deps && npm install && npm run build && npm run spec",
     "build": "npm run clean && mkdir -p lib && npm run build-datauri && npm run build-cli && npm run pkg-json",
-    "build-datauri": "babel --presets es2015-node4 -d lib/datauri src/datauri && babel --presets es2015 -d lib/datauri/old src/datauri",
-    "build-cli": "babel --presets es2015-node4 -d lib/datauri-cli src/cli && babel --presets es2015 -d lib/datauri-cli/old src/cli",
+    "build-datauri": "babel -d lib/datauri src/datauri",
+    "build-cli": "babel -d lib/datauri-cli src/cli",
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && babel-node tools/pkg-json.js",
     "check": "npm run lint && npm run spec-prod",
     "deploy": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
@@ -54,7 +54,6 @@
     "babel-core": "^6.1.2",
     "babel-polyfill": "^6.0.16",
     "babel-preset-es2015": "^6.1.2",
-    "babel-preset-es2015-node4": "^1.0.1",
     "babel-preset-stage-0": "^6.1.2",
     "blanket": "~1.1.6",
     "chai": "~3.4.0",
@@ -78,16 +77,14 @@
     "datauri": {
       "dependencies": [
         "image-size",
-        "mimer",
-        "semver"
+        "mimer"
       ],
       "description": "Create DataURI scheme easily"
     },
     "datauri-cli": {
       "dependencies": [
         "minimist",
-        "copy-paste",
-        "semver"
+        "copy-paste"
       ],
       "bin": {
         "datauri": "./index.js"
