@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { should as Should } from 'chai';
 import { exec } from 'child_process';
-import * as cssExp from '../expected/css';
+import * as cssExp from '../constants/css';
 import { paste } from 'copy-paste';
 
 const should = Should();

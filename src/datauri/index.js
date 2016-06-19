@@ -1,19 +1,15 @@
-const asyncEncode = require('./async');
+const factory = require('./factory');
 
-function datauri(fileName) {
-  return new Promise((resolve, reject) => {
-    asyncEncode.on('encoded', resolve)
-      .on('error', reject)
-      .encode(fileName);
-  });
-}
+Object.defineProperties(factory, {
+  format: {
+    value: require('./format')
+  },
+  sync: {
+    get: () => require('./sync')
+  },
+  stream: {
+    get: () => require('./stream')()
+  }
+});
 
-datauri.format = require('./format');
-datauri.sync = require('./sync');
-
-// ONLY exposes on, emit and pipe methods from Stream
-// exports.on = asyncEncode.stream.on;
-// exports.emit = asyncEncode.stream.emit;
-// exports.pipe = asyncEncode.stream.pipe;
-
-module.exports = datauri;
+module.exports = factory;

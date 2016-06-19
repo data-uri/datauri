@@ -1,10 +1,10 @@
-import * as cssExp from '../expected/css';
+import { fixture, wrongFile, expected } from '../constants';
+import * as cssExp from '../constants/css';
 import { sync as datauriSync } from '../../src/datauri';
-import { fixture, wrongFile, expected } from '../config';
 
 describe('sync', () => {
   describe('#sync errors', () => {
-    it.skip('should throw error if a file name is not given', () => {
+    it('should throw error if a file name is not given', () => {
       const errorMsg = 'Insert a File path as string argument';
       const types = [null, '', ' ', {}, [], 8];
 
