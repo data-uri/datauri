@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="365" src="https://cdn.rawgit.com/heldr/datauri/master/media/datauri.svg" alt="datauri">
+  <img width="365" src="https://cdn.rawgit.com/data-uri/datauri/master/media/datauri.svg" alt="datauri">
   <br>
   <br>
   <br>
@@ -8,19 +8,19 @@
 
 [Module](http://npm.im/datauri) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
 
-[![Build Status](https://travis-ci.org/heldr/datauri.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
+[![Build Status](https://travis-ci.org/data-uri/datauri.svg?branch=master)](http://travis-ci.org/data-uri/datauri) [![Coverage Status](https://coveralls.io/repos/data-uri/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/data-uri/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 ## Module
 `npm i --save datauri`
 
 [See more in NPM page](http://npm.im/datauri)
 
-## Client
+## CLI
 `npm i -g datauri-cli`
 
 [See more in NPM page](http://npm.im/datauri-cli)
 
-## [ChangeLog](https://github.com/heldr/datauri/releases)
+## [ChangeLog](https://github.com/data-uri/datauri/releases)
 
 ## Tools using datauri
 
@@ -30,7 +30,7 @@
 
 #### GULP
 
-* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [heldr/datauri](https://github.com/heldr/datauri).
+* [gulp-image-data-uri](https://github.com/adam-lynch/gulp-image-data-uri) - A [Gulp](http://github.com/gulpjs/gulp) plugin for converting images to inline data-URIs. Intended to be a simple single-purpose wrapper for [data-uri/datauri](https://github.com/data-uri/datauri).
 
 #### GRUNT
 

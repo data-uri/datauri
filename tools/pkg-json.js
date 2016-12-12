@@ -17,7 +17,7 @@ function createConfig(source, keys) {
 
 
 const createPkg = async(name, meta) => {
-  const props = ['version', 'repository', 'engines', 'keywords', 'author', 'license'];
+  const props = ['version', 'repository', 'engines', 'keywords', 'author', 'license', 'maintainers'];
   const config = createConfig(pkg, props);
   const newPkg = Object.assign({}, config, meta);
   const encoding = 'utf-8';

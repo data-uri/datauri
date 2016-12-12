@@ -1,33 +1,48 @@
 {
   "name": "datauri-build",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "test": "npm run check",
+    "check": "npm run lint && npm run spec-prod",
     "lint": "eslint src",
     "mocha": "mocha --require test/test.js --recursive --ui bdd --timeout 3000 --reporter spec",
     "coverage-lcov": "mocha --require test/test.js --recursive --ui bdd --timeout 3000 --reporter mocha-lcov-reporter --require blanket",
-    "watch": "mocha --require test/test.js --watch --recursive --ui bdd --timeout 3000 --reporter spec",
     "coverage-html": "touch test/coverage/results.html && mocha --require test/test.js --recursive --ui bdd --timeout 3000 --reporter html-cov --require blanket > test/coverage/results.html",
     "coveralls": "npm run coverage-lcov | ./node_modules/coveralls/bin/coveralls.js",
+    "watch": "mocha --require test/test.js --watch --recursive --ui bdd --timeout 3000 --reporter spec",
     "spec": "npm run mocha",
     "spec-prod": "npm run build && NODE_ENV=production npm run mocha",
     "ci": "npm run coverage && npm run coveralls",
     "clean-deps": "rm -rf node_modules",
     "clean": "rm -rf lib",
-    "fulltest": "npm run clean-deps && npm install && npm run build && npm run spec",
     "build": "npm run clean && mkdir -p lib && npm run build-datauri && npm run build-cli && npm run pkg-json",
     "build-datauri": "babel --presets es2015-node4 -d lib/datauri src/datauri && babel --presets es2015 -d lib/datauri/old src/datauri",
     "build-cli": "babel --presets es2015-node4 -d lib/datauri-cli src/cli && babel --presets es2015 -d lib/datauri-cli/old src/cli",
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && babel-node tools/pkg-json.js",
-    "check": "npm run lint && npm run spec-prod",
     "deploy": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
     "preversion": "npm run check",
     "postversion": "npm run build"
   },
+  "maintainers": [
+    {
+      "name": "Helder Santana",
+      "email": "heldr@me.com",
+      "url": "heldr.com"
+    },
+    {
+      "name": "Ruy Adorno",
+      "url": "http://ruyadorno.com"
+    },
+    {
+      "name": "Caio Gondim",
+      "email": "me@caiogondim.com",
+      "url": "https://caiogondim.com"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/heldr/datauri.git"
+    "url": "git://github.com/data-uri/datauri.git"
   },
   "engines": {
     "node": ">= 0.10"

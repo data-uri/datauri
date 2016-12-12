@@ -1,18 +1,18 @@
 <h1 align="center">
   <br>
-  <img width="365" src="https://cdn.rawgit.com/heldr/datauri/master/media/datauri.svg" alt="datauri">
+  <img width="365" src="https://cdn.rawgit.com/data-uri/datauri/master/media/datauri.svg" alt="datauri">
   <br>
   <br>
   <br>
 </h1>
 
-Node.js [Module](#module) and [Client](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
+Node.js [Module](#module) and [CLI](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
 
 >  The data URI scheme is a uniform resource identifier (URI) scheme that provides a way to include data in-line in web pages as if they were external resources.
 
 from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
-[![Build Status](https://travis-ci.org/heldr/datauri.svg?branch=master)](http://travis-ci.org/heldr/datauri) [![Coverage Status](https://coveralls.io/repos/heldr/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/heldr/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
+[![Build Status](https://travis-ci.org/data-uri/datauri.svg?branch=master)](http://travis-ci.org/data-uri/datauri) [![Coverage Status](https://coveralls.io/repos/data-uri/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/data-uri/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 MODULE
 -------
@@ -35,8 +35,8 @@ MODULE
   * [grunt](#grunt)
 6. [Develop](#develop)
 7. [License](#license)
-8. [ChangeLog](https://github.com/heldr/datauri/releases)
-9. [Tools using datauri](https://github.com/heldr/datauri/blob/master/README.md#tools-using-datauri)
+8. [ChangeLog](https://github.com/data-uri/datauri/releases)
+9. [Tools using datauri](https://github.com/data-uri/datauri/blob/master/README.md#tools-using-datauri)
 
 ### Readable Stream
 ```js
@@ -188,22 +188,15 @@ DEVELOP
 
 ```CLI
 $ npm install
-$ npm run check
 ```
 
 To run test specs
 
 ```CLI
-$ npm run spec
-```
-
-If you'd like to test the full process including npm installer, just run:
-
-```CLI
-$ npm run fulltest
+$ npm test
 ```
 
 ## License
 
 MIT License
-(c) [Helder Santana](http://heldr.com)
+(c) [Data-URI.js](http://github.com/data-uri)

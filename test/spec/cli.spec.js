@@ -17,7 +17,7 @@ const cli = cli_cmd;
 
 let dUri, cssContent;
 
-describe('Data-uri Client', () => {
+describe('Data-uri CLI', () => {
 
   describe('generate a data-uri string', () => {
     it('should give advice when a user do not type anything after datauri', async() => {
