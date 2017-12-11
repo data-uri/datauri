@@ -1,13 +1,8 @@
 require('babel-core/register');
 require('babel-polyfill');
 
-var path = require('path');
+const path = require('path');
 
-var isProd = (process.env.NODE_ENV === 'production');
-
-global.cli_cmd = isProd ? 'node lib/datauri-cli' : './node_modules/.bin/babel-node --presets es2015 src/cli/module.js';
-global.datauri_path = isProd ? '../../lib/datauri' : '../../src/datauri/module.js';
-
-if (isProd) {
-  process.env.DATAURI_N= process.cwd() + '/lib/datauri/index.js';
+if (process.env.NODE_ENV === 'test') {
+  process.env.DATAURI_REQUIRE_PATH = path.join(process.cwd(), 'src/datauri/index.js');
 }

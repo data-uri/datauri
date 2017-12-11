@@ -1,10 +1,11 @@
+import path from 'path';
 import sinon from 'sinon';
 import { should as Should } from 'chai';
 import * as cssExp from '../expected/css';
 import fs from 'fs';
 import { Writable } from 'stream';
 
-const DataURI = require(datauri_path)
+const DataURI = require(path.join(process.cwd(), 'src/datauri'));
 const should = Should();
 const fixture    = 'test/fixture.gif';
 const wrongFile  = 'PAPARIPUPI';

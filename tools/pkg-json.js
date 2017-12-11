@@ -1,7 +1,5 @@
-'use strict';
-import pkg from '../package.json';
-import fs from './fs';
-
+const pkg = require('../package.json');
+const fs = require('fs-extra');
 const buildConfig = pkg['datauri-build'];
 const names = Object.keys(buildConfig);
 
@@ -22,14 +20,13 @@ const createPkg = async(name, meta) => {
   const newPkg = Object.assign({}, config, meta);
   const encoding = 'utf-8';
 
-  await fs.writeFile(`lib/${name}/package.json`, JSON.stringify(newPkg), encoding);
-  await fs.writeFile(`lib/${name}/.npmignore`, 'node_modules', encoding);
+  await fs.copy(`src/${name}`, `lib/${name}`);
+  await fs.outputFile(`lib/${name}/package.json`, JSON.stringify(newPkg), encoding);
+  await fs.outputFile(`lib/${name}/.npmignore`, 'node_modules', encoding);
 
-  const index = await fs.readFile('index.js', encoding);
   const readme = await fs.readFile(`docs/${name}.md`, encoding);
 
-  await fs.writeFile(`lib/${name}/index.js`, index, encoding);
-  await fs.writeFile(`lib/${name}/readme.md`, readme, encoding);
+  await fs.outputFile(`lib/${name}/readme.md`, readme, encoding);
 }
 
 function getMetadata(name) {

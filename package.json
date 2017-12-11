@@ -11,17 +11,15 @@
     "coveralls": "npm run coverage-lcov | ./node_modules/.bin/coveralls",
     "watch": "mocha --require test/test.js --watch --recursive --ui bdd --timeout 3000 --reporter spec",
     "spec": "npm run mocha",
-    "spec-prod": "npm run build && NODE_ENV=production npm run mocha",
+    "spec-prod": "NODE_ENV=test npm run mocha",
     "ci": "npm run coverage && npm run coveralls",
     "clean-deps": "rm -rf node_modules",
     "clean": "rm -rf lib",
-    "build": "npm run clean && mkdir -p lib && npm run build-datauri && npm run build-cli && npm run pkg-json",
-    "build-datauri": "babel -d lib/datauri src/datauri",
-    "build-cli": "babel -d lib/datauri-cli src/cli",
-    "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && babel-node tools/pkg-json.js",
+    "build": "npm run clean && npm run pkg-json",
+    "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && node tools/pkg-json.js",
     "deploy": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
     "preversion": "npm run check",
-    "postversion": "npm run build"
+    "postversion": "npm run build && git commit --amend -a"
   },
   "maintainers": [
     {
@@ -64,7 +62,6 @@
   "author": "Helder Santana",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.1.2",
     "babel-core": "^6.1.2",
     "babel-polyfill": "^6.0.16",
     "babel-preset-env": "^1.6.1",

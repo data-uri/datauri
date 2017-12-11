@@ -1,16 +1,17 @@
-import Api from './api';
+'use strict';
+const Api = require('./api');
 
 const ENC_TYPE = configSize => configSize > 1 ? 'encode' : 'encodeSync';
 
 class DataURI extends Api {
 
-  constructor(...config) {
+  constructor() {
     super();
 
-    const { length: configSize } = config;
+    const configSize = arguments.length;
 
     if (configSize) {
-      this[ENC_TYPE(configSize)](...config);
+      this[ENC_TYPE(configSize)].apply(this, arguments);
     }
   }
 
@@ -25,9 +26,9 @@ class DataURI extends Api {
   }
 
   static sync(fileName) {
-    const { content } = new DataURI(fileName);
+    const datauri = new DataURI(fileName);
 
-    return content;
+    return datauri.content;
   }
 
 }
