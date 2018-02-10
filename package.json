@@ -28,7 +28,7 @@
     {
       "name": "Helder Santana",
       "email": "heldr@me.com",
-      "url": "heldr.com"
+      "url": "http://heldr.com"
     },
     {
       "name": "Ruy Adorno",
@@ -76,12 +76,12 @@
     "copy-paste": "^1.1.4",
     "coveralls": "~2.11.4",
     "eslint": "^1.9.0",
-    "image-size": "^0.3.5",
-    "mimer": "^0.2.1",
+    "image-size": "^0.6.2",
+    "mimer": "^0.3.2",
     "minimist": "^1.2.0",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "1.0.0",
-    "semver": "^5.0.3",
+    "semver": "^5.5.0",
     "sinon": "~1.17.2"
   },
   "config": {
