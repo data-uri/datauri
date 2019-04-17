@@ -47,6 +47,11 @@ $ datauri brand.png --css --background-size
 ```
 ## [ChangeLog](https://github.com/data-uri/datauri/releases)
 
+## Requirements
+
+Node.js 4+
+
+
 ## License
 
 MIT License

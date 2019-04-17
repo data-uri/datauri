@@ -1,1 +1,2 @@
-export default data => `data:${data.mimetype};base64,${data.base64}`;
+'use strict';
+module.exports = data => `data:${data.mimetype};base64,${data.base64 || ''}`;

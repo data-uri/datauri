@@ -1,14 +1,11 @@
-import path from 'path';
-import {
-  existsSync,
-  readFileSync,
-  createReadStream
-} from 'fs';
-import mimer from 'mimer';
-import getDimensions from 'image-size';
-import uri from './template/uri';
-import css from './template/css';
-import Stream from 'stream';
+'use strict';
+const path = require('path');
+const fs = require('fs');
+const mimer = require('mimer');
+const getDimensions = require('image-size');
+const uri = require('./template/uri');
+const css = require('./template/css');
+const Stream = require('stream');
 
 class Api extends Stream {
   constructor() {
@@ -29,8 +26,7 @@ class Api extends Stream {
   createMetadata(fileName) {
     this.fileName = fileName;
     this.mimetype = mimer(fileName);
-    const { mimetype, base64 = '' } = this;
-    this.content = uri({ mimetype, base64 });
+    this.content = uri(this);
 
     return this;
   }
@@ -40,7 +36,7 @@ class Api extends Stream {
       return handler(err);
     }
 
-    handler.call(this, null, this.content, this);
+    return handler.call(this, null, this.content, this);
   }
 
   encode(fileName, handler) {
@@ -52,7 +48,7 @@ class Api extends Stream {
     const propagateStream = chunk => this.emit('data', chunk);
 
     propagateStream(this.createMetadata(fileName).content);
-    createReadStream(fileName, { encoding: 'base64' })
+    fs.createReadStream(fileName, { 'encoding': 'base64' })
       .on('data', propagateStream)
       .on('data', chunk => base64Chunks.push(chunk))
       .on('error', err => {
@@ -72,8 +68,8 @@ class Api extends Stream {
       throw new Error('Insert a File path as string argument');
     }
 
-    if (existsSync(fileName)) {
-      let fileContent = readFileSync(fileName);
+    if (fs.existsSync(fileName)) {
+      const fileContent = fs.readFileSync(fileName);
 
       return this.format(fileName, fileContent).content;
     }
@@ -81,7 +77,8 @@ class Api extends Stream {
     throw new Error(`The file ${fileName} was not found!`);
   }
 
-  getCSS(config={}) {
+  getCSS(config) {
+    config = config || {};
     if (!this.content) {
       throw new Error('Create a data-uri config using the method encodeSync');
     }
@@ -97,4 +94,4 @@ class Api extends Stream {
   }
 }
 
-export default Api;
+module.exports = Api;

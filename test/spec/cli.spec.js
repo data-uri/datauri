@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import { should as Should } from 'chai';
 import { exec } from 'child_process';
 import * as cssExp from '../expected/css';
@@ -13,7 +14,7 @@ const execute = cmd => new Promise((resolve, reject) => {
   exec(cmd, (err, data) => err ? reject(err) : resolve(data));
 });
 
-const cli = cli_cmd;
+const cli = path.join(process.cwd(), 'src/datauri-cli/index.js');
 
 let dUri, cssContent;
 

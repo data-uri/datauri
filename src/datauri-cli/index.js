@@ -1,6 +1,7 @@
-import minimist from 'minimist';
-import cli from './cli';
-
+#!/usr/bin/env node
+'use strict';
+const minimist = require('minimist');
+const cli = require('./cli');
 const flags = minimist(process.argv.slice(2));
 
 if (flags.hasOwnProperty('_') && flags._.length) {

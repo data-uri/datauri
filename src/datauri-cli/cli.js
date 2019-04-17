@@ -1,7 +1,7 @@
-import fs from 'fs';
-import { copy } from 'copy-paste';
-
-const DataURIPath = process.env.DATAURI_N || 'datauri';
+'use strict';
+const fs = require('fs');
+const copy = require('copy-paste').copy;
+const DataURIPath = process.env.DATAURI_REQUIRE_PATH || 'datauri';
 const DataURI = require(DataURIPath);
 const clipboard = content =>
   copy(content, err => console.log(!err ? 'Copied!' : err));
@@ -21,7 +21,7 @@ class Cli {
       return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
     }
 
-    this.output(this.dataURI.content);
+    return this.output(this.dataURI.content);
   }
 
   writeCSS(file, content, action) {
@@ -41,19 +41,19 @@ class Cli {
       });
     }
 
-    this.writeCSS(file, content, 'created');
+    return this.writeCSS(file, content, 'created');
   }
 
-  css(...config) {
-    if (typeof config[0] === 'string') {
-      return this.processCSSFile.apply(this, config);
+  css() {
+    if (typeof arguments[0] === 'string') {
+      return this.processCSSFile.apply(this, arguments);
     }
 
-    this.output(config[1]);
+    return this.output(arguments[1]);
   }
 }
 
-export default (flags) => {
+module.exports = (flags) => {
   const cli = new Cli(flags);
   const outputHandler = flags.copy ? clipboard : console.log;
 
