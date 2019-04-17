@@ -4,7 +4,6 @@ const Api = require('./api');
 const ENC_TYPE = configSize => configSize > 1 ? 'encode' : 'encodeSync';
 
 class DataURI extends Api {
-
   constructor() {
     super();
 
@@ -30,7 +29,6 @@ class DataURI extends Api {
 
     return datauri.content;
   }
-
 }
 
 module.exports = DataURI;

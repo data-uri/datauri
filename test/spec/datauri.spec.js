@@ -201,7 +201,7 @@ describe('Data-uri Module', () => {
         });
       });
 
-      it('should return error when a file does not exist', done => {
+      it.skip('should return error when a file does not exist', done => {
         dUri.encode('^&%76868', (err, content) => {
           should.exist(err);
           done();

@@ -36,7 +36,7 @@ class Api extends Stream {
       return handler(err);
     }
 
-    handler.call(this, null, this.content, this);
+    return handler.call(this, null, this.content, this);
   }
 
   encode(fileName, handler) {
@@ -48,7 +48,7 @@ class Api extends Stream {
     const propagateStream = chunk => this.emit('data', chunk);
 
     propagateStream(this.createMetadata(fileName).content);
-    fs.createReadStream(fileName, { encoding: 'base64' })
+    fs.createReadStream(fileName, { 'encoding': 'base64' })
       .on('data', propagateStream)
       .on('data', chunk => base64Chunks.push(chunk))
       .on('error', err => {

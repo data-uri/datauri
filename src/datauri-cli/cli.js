@@ -21,7 +21,7 @@ class Cli {
       return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
     }
 
-    this.output(this.dataURI.content);
+    return this.output(this.dataURI.content);
   }
 
   writeCSS(file, content, action) {
@@ -41,7 +41,7 @@ class Cli {
       });
     }
 
-    this.writeCSS(file, content, 'created');
+    return this.writeCSS(file, content, 'created');
   }
 
   css() {
@@ -49,7 +49,7 @@ class Cli {
       return this.processCSSFile.apply(this, arguments);
     }
 
-    this.output(arguments[1]);
+    return this.output(arguments[1]);
   }
 }
 
