@@ -6,7 +6,7 @@
 
  from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
-[![Build Status](https://travis-ci.org/data-uri/datauri.svg?branch=master)](http://travis-ci.org/data-uri/datauri) [![Coverage Status](https://coveralls.io/repos/data-uri/datauri/badge.svg?branch=master&service=github)](https://coveralls.io/github/data-uri/datauri?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
+[![Build Status](https://travis-ci.org/data-uri/datauri.svg?branch=master)](http://travis-ci.org/data-uri/datauri) [[![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 ## CLI
 `npm install -g datauri-cli` (it may require Root privileges)
@@ -49,7 +49,7 @@ $ datauri brand.png --css --background-size
 
 ## Requirements
 
-Node.js 4+
+Node.js 8+
 
 
 ## License

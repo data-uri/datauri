@@ -1,15 +1,15 @@
 'use strict';
 const fs = require('fs');
 const copy = require('copy-paste').copy;
-const DataURIPath = process.env.DATAURI_REQUIRE_PATH || 'datauri';
-const DataURI = require(DataURIPath);
+const DataURIPath = process.env.DATAURI_REQUIRE_PATH || 'datauri/sync';
+const DataURISync = require(DataURIPath);
 const clipboard = content =>
   copy(content, err => console.log(!err ? 'Copied!' : err));
 
 class Cli {
   constructor(flags) {
     this.flags = flags;
-    this.dataURI = new DataURI(flags._[0]);
+    this.dataURI = DataURISync(flags._[0]);
   }
 
   setOutputHandler(output) {
