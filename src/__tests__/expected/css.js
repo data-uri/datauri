@@ -1,30 +1,30 @@
-export const simple = [
+module.exports.simple = [
   '\n.fixture {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '}'
 ].join('\n');
 
-export const customName = [
+module.exports.customName = [
   '\n.foobar {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '}'
 ].join('\n');
 
-export const width = [
+module.exports.width = [
   '\n.fixture {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '    width: 1px;',
   '}'
 ].join('\n');
 
-export const height = [
+module.exports.height = [
   '\n.fixture {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '    height: 1px;',
   '}'
 ].join('\n');
 
-export const both = [
+module.exports.both = [
   '\n.fixture {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '    width: 1px;',
@@ -32,8 +32,7 @@ export const both = [
   '}'
 ].join('\n');
 
-
-export const bgsize = [
+module.exports.bgsize = [
   '\n.fixture {',
   '    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');',
   '    background-size: 1px 1px;',

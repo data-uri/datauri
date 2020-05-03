@@ -14,13 +14,12 @@ function createConfig(source, keys) {
 }
 
 
-const createPkg = async(name, meta) => {
+const createPkg = async (name, meta) => {
   const props = ['version', 'repository', 'engines', 'keywords', 'author', 'license', 'maintainers'];
   const config = createConfig(pkg, props);
   const newPkg = Object.assign({}, config, meta);
   const encoding = 'utf-8';
 
-  await fs.copy(`src/${name}`, `lib/${name}`);
   await fs.outputFile(`lib/${name}/package.json`, JSON.stringify(newPkg), encoding);
   await fs.outputFile(`lib/${name}/.npmignore`, 'node_modules', encoding);
 
@@ -45,4 +44,4 @@ function getMetadata(name) {
   return meta;
 }
 
-names.forEach(async(name) => await createPkg(name, getMetadata(name)))
+names.forEach(async (name) => await createPkg(name, getMetadata(name)))

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "lib": [
+      "es2017"
+    ],
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "outDir": "lib",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    }
+  },
+  "include": [
+    "src/datauri/*",
+    "src/datauri-cli/**/*"
+  ],
+  "exclude": [
+    "<outDir>",
+    "node_modules/**/*",
+    "src/__tests__/**/*.spec.ts"
+  ]
+}
