@@ -4,7 +4,7 @@ import { exec } from 'child_process';
 import * as cssExp from './expected/css';
 import { paste } from 'copy-paste';
 const fixture = 'src/__tests__/fixtures/fixture.gif';
-const expectedString = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+const expectedString = 'data:image/gif;name=fixture.gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const expected = new RegExp(expectedString);
 
 const execute = (cmd: string) => new Promise((resolve, reject) => {

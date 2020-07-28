@@ -39,11 +39,11 @@ datauri('test/myfile.png', (err, content, meta) => {
       throw err;
   }
 
-  console.log(content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+  console.log(content); //=> "data:image/png;name=myfile.png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 
   console.log(meta.mimetype); //=> "image/png"
   console.log(meta.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-  console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
+  console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;name=...;base64,iVBORw..."
   console.log(meta.getCSS({
     class: "myClass",
     width: true,
@@ -58,11 +58,11 @@ datauri('test/myfile.png', (err, content, meta) => {
 const Datauri = require('datauri/sync');
 const meta = Datauri('test/myfile.png');
 
-console.log(meta.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(meta.content); //=> "data:image/png;name=myfile.png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(meta.mimetype); //=> "image/png"
 console.log(meta.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-console.log(meta.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;name=...;base64,iVBORw..."
+console.log(meta.getCSS("myClass")); //=> "\n.myClass {\n    background-image: url('data:image/png;name=...base64,iVBORw..."
 ```
 
 ### From a Buffer
@@ -74,7 +74,7 @@ const parser = new DatauriParser();
 
 const buffer = fs.readFileSync('./hello');
 
-parser.format('.png', buffer); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+parser.format('.png', buffer); //=> "data:image/png;name=hello;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 ```
 
 ### From a string
@@ -82,7 +82,7 @@ parser.format('.png', buffer); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEU
 const DatauriParser = require('datauri/parser');
 const parser = new DatauriParser();
 
-parser.format('.png', 'xkcd'); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+parser.format('.png', 'xkcd'); //=> "data:image/png;name=.png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 ```
 
 Contribute

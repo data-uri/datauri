@@ -7,7 +7,7 @@ const expected = {
   fileName: fixture,
   base64: 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
   mimetype: 'image/gif',
-  content: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+  content: 'data:image/gif;name=fixture.gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 };
 
 describe('Data-uri Parser', () => {
@@ -20,7 +20,7 @@ describe('Data-uri Parser', () => {
     expect(parser).toHaveProperty('fileName', '.png');
     expect(parser).toHaveProperty('base64', 'eGtjZA==');
     expect(parser).toHaveProperty('mimetype', 'image/png');
-    expect(parser).toHaveProperty('content', 'data:image/png;base64,eGtjZA==');
+    expect(parser).toHaveProperty('content', 'data:image/png;name=.png;base64,eGtjZA==');
   });
 
   describe('async', () => {
@@ -63,11 +63,11 @@ describe('Data-uri Parser', () => {
     });
 
     it('should create a class with datauri background using target file name', () => {
-      expect(meta.getCSS()).toBe('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+      expect(meta.getCSS()).toBe('\n.fixture {\n    background-image: url(\'data:image/gif;name=fixture.gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
     });
 
     it('should create a class with datauri background using a defined name', () => {
-      expect(meta.getCSS({ class: 'foobar' })).toBe('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
+      expect(meta.getCSS({ class: 'foobar' })).toBe('\n.foobar {\n    background-image: url(\'data:image/gif;name=fixture.gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
     });
 
     it('should create a class with datauri background with width', () => {

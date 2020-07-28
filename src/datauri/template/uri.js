@@ -1,2 +1,9 @@
 'use strict';
-module.exports = data => `data:${data.mimetype};base64,${data.base64 || ''}`;
+
+const path = require('path');
+
+module.exports = data => {
+  const fileName = path.basename(data.fileName);
+
+  return `data:${data.mimetype};name=${encodeURIComponent(fileName)};base64,${data.base64 || ''}`;
+};
