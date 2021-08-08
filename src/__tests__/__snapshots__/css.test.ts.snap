@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data-uri CSS Parser should create a class with datauri background using a defined name 1`] = `
+"
+.foobar {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;
+
+exports[`Data-uri CSS Parser should create a class with datauri background using target file name 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;
+
+exports[`Data-uri CSS Parser should create a class with datauri background with background-size 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  background-size: 1px 1px;
+}"
+`;
+
+exports[`Data-uri CSS Parser should create a class with datauri background with both width and height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CSS Parser should create a class with datauri background with height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CSS Parser should create a class with datauri background with width 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+}"
+`;

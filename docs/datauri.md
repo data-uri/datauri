@@ -43,13 +43,23 @@ datauri('test/myfile.png', (err, content, meta) => {
 
   console.log(meta.mimetype); //=> "image/png"
   console.log(meta.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-  console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-  console.log(meta.getCSS({
-    class: "myClass",
-    width: true,
-    height: true
-  })); //=> adds image width and height and custom class name
 });
+```
+
+### CSS parser
+
+```js
+const datauriCSS = require('datauri/css');
+
+await datauriCSS('test/myfile.png');
+//=> "\n.case {\n    background-image: url('data:image/png; base64,iVBORw..."
+
+await datauriCSS('test/myfile.png', {
+  className: "myClass",
+  width: true,
+  height: true
+});
+//=> adds image width and height and custom class name
 ```
 
 ### Synchronous calls
@@ -103,12 +113,16 @@ $ npm test
 
 ## Requirements
 
-Node.js 8+
+Node.js 10+
 
-Previous Node versions and deprecated features:
+### Previous Node versions and deprecated features:
 
+Node.js 8
+`npm install --save datauri@3`
+docs: https://github.com/data-uri/datauri/blob/v3.0.0/docs/datauri.md
+
+Node.js 4+
 `npm install --save datauri@2`
-
 docs: https://github.com/data-uri/datauri/blob/v2.0.0/docs/datauri.md
 
 ## License
