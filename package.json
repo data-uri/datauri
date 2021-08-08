@@ -1,7 +1,7 @@
 {
   "name": "datauri-build",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
     "test": "npm run prettier:check && npm run lint && npm run build && npm run jest",
     "jest": "jest",
@@ -68,8 +68,8 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "fs-extra": "7.0.1",
-    "image-size": "0.8.3",
+    "fs-extra": "^10.0.0",
+    "image-size": "^1.0.0",
     "jest": "^27.0.6",
     "mimer": "1.1.0",
     "minimist": "1.2.5",
@@ -87,22 +87,19 @@
     "datauri": {
       "dependencies": [
         "image-size",
-        "mimer",
-        "semver"
+        "mimer"
       ],
       "description": "Create DataURI scheme easily"
     },
     "datauri-cli": {
       "dependencies": [
         "minimist",
-        "copy-paste",
-        "semver"
+        "copy-paste"
       ],
       "bin": {
         "datauri": "./index.js"
       },
       "description": "Create DataURI scheme using terminal"
     }
-  },
-  "dependencies": {}
+  }
 }

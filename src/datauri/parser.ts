@@ -1,6 +1,6 @@
 import { promises } from 'fs';
 import mimer from 'mimer';
-import uri from './template/uriTemplate';
+import { uriParser } from './template/uriTemplate';
 import { DataURI } from './types';
 
 const { readFile } = promises;
@@ -42,9 +42,11 @@ class DataURIParser {
   }
 
   private createMetadata(fileName: string) {
+    const { base64, mimetype = mimer(fileName) } = this;
+
     this.fileName = fileName;
-    this.mimetype = mimer(fileName);
-    this.content = uri(this);
+    this.mimetype = mimetype;
+    this.content = uriParser({ base64, mimetype });
 
     return this;
   }
