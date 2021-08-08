@@ -14,11 +14,11 @@ from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
 ## MODULE [![Build Status](https://github.com/data-uri/datauri/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/data-uri/datauri/actions/workflows/main.yml?query=branch%3Amain)
 
-`npm install -S datauri`
+`npm install datauri`
 
 ### Getting started
 
-By default, datauri module returns a promise, which is resolved with `data:uri` string or rejected with file read error:
+By default, datauri module returns a promise, which is resolved with `data:uri` string or rejected with read file error:
 
 ```js
 const datauri = require('datauri');
@@ -43,6 +43,7 @@ datauri('test/myfile.png', (err, content, meta) => {
 
   console.log(meta.mimetype); //=> "image/png"
   console.log(meta.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+  console.log(meta.buffer); //=> file buffer
 });
 ```
 
@@ -71,8 +72,7 @@ const meta = Datauri('test/myfile.png');
 console.log(meta.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(meta.mimetype); //=> "image/png"
 console.log(meta.base64); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
-console.log(meta.getCSS()); //=> "\n.case {\n    background-image: url('data:image/png;base64,iVBORw..."
-console.log(meta.getCSS('myClass')); //=> "\n.myClass {\n    background-image: url('data:image/png;base64,iVBORw..."
+console.log(meta.buffer); //=> file buffer
 ```
 
 ### From a Buffer

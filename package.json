@@ -1,7 +1,7 @@
 {
   "name": "datauri-build",
   "private": true,
-  "version": "3.0.0",
+  "version": "4.0.1",
   "scripts": {
     "test": "npm run prettier:check && npm run lint && npm run build && npm run jest",
     "jest": "jest",
@@ -13,7 +13,7 @@
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && node tools/pkg-json.js",
     "release": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
     "preversion": "npm run test",
-    "postversion": "git commit --amend -a",
+    "postversion": "git commit --amend -a && npm run build",
     "prettier:check": "prettier --check 'src/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts'"
   },
