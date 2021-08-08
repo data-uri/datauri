@@ -225,4 +225,23 @@ describe('Data-uri CLI', () => {
       });
     });
   });
+
+  if (process.env.CI !== 'true' && process.env.CODESPACES !== 'true') {
+    describe('--copy', () => {
+      it('should copy a datauri', async () => {
+        const stdout = await execute(`${cli} ${fixture} --copy`);
+
+        expect(stdout).toBeTruthy();
+
+        expect(paste()).toEqual(expectedString);
+      });
+
+      it('should copy css with datauri', async () => {
+        const stdout = await execute(`${cli} ${fixture} --copy --css`);
+
+        expect(stdout).toBeTruthy();
+        expect(paste()).toMatchSnapshot();
+      });
+    });
+  }
 });
