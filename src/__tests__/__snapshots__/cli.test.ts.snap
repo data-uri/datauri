@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data-uri CLI --css create a css file should insert a css class with a height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css create a css file should insert a css class with a specific name 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;
+
+exports[`Data-uri CLI --css create a css file should insert a css class with a width 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css create a css file should insert a css class with both width a backgroundSize 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+  background-size: 1px 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css create a css file should insert a css class with both width and height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css create a css file should insert a css class with the target file name 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with a specific name 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}
+"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with background-size 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  background-size: 1px 1px;
+}
+"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with image height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  height: 1px;
+}
+"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with image width 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+}
+"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with image width and height 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+  height: 1px;
+}
+"
+`;
+
+exports[`Data-uri CLI --css output a css should display a css class with the target file name 1`] = `
+"
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}
+"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with a custom name 1`] = `
+".small-icon {color: #000;}
+.pipoca {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with a height 1`] = `
+".small-icon {color: #000;}
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with a width 1`] = `
+".small-icon {color: #000;}
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with both width a backgroundSize 1`] = `
+".small-icon {color: #000;}
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  background-size: 1px 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with both width and height 1`] = `
+".small-icon {color: #000;}
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+  width: 1px;
+  height: 1px;
+}"
+`;
+
+exports[`Data-uri CLI --css update a css file should insert a css class with the target file name 1`] = `
+".small-icon {color: #000;}
+.fixture {
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+}"
+`;

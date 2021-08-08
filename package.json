@@ -1,9 +1,10 @@
 {
   "name": "datauri-build",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
-    "test": "npm run lint && npm run build && jest",
+    "test": "npm run prettier:check && npm run lint && npm run build && npm run jest",
+    "jest": "jest",
     "lint": "eslint src",
     "clean-deps": "rm -rf node_modules",
     "clean": "rm -rf lib",
@@ -12,7 +13,9 @@
     "pkg-json": "mkdir -p lib/datauri && mkdir -p lib/datauri-cli && node tools/pkg-json.js",
     "release": "npm run build && npm publish lib/datauri-cli && npm publish lib/datauri",
     "preversion": "npm run test",
-    "postversion": "git commit --amend -a"
+    "postversion": "git commit --amend -a",
+    "prettier:check": "prettier --check 'src/**/*.ts'",
+    "prettier:fix": "prettier --write 'src/**/*.ts'"
   },
   "maintainers": [
     {
@@ -35,7 +38,7 @@
     "url": "git://github.com/data-uri/datauri.git"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 10"
   },
   "keywords": [
     "datauri",
@@ -56,19 +59,24 @@
   "license": "MIT",
   "devDependencies": {
     "@types/copy-paste": "^1.1.30",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.13",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
     "blanket": "1.2.3",
     "copy-paste": "1.3.0",
-    "eslint": "6.8.0",
-    "fs-extra": "7.0.1",
-    "image-size": "0.8.3",
-    "jest": "^25.5.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "fs-extra": "^10.0.0",
+    "image-size": "1.0.0",
+    "jest": "^27.0.6",
     "mimer": "1.1.0",
     "minimist": "1.2.5",
-    "ts-jest": "^25.4.0",
-    "ts-node": "^8.10.1",
-    "typescript": "3.8.3"
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
   },
   "config": {
     "blanket": {
@@ -79,22 +87,19 @@
     "datauri": {
       "dependencies": [
         "image-size",
-        "mimer",
-        "semver"
+        "mimer"
       ],
       "description": "Create DataURI scheme easily"
     },
     "datauri-cli": {
       "dependencies": [
         "minimist",
-        "copy-paste",
-        "semver"
+        "copy-paste"
       ],
       "bin": {
         "datauri": "./index.js"
       },
       "description": "Create DataURI scheme using terminal"
     }
-  },
-  "dependencies": {}
+  }
 }

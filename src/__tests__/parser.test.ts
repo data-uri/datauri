@@ -1,4 +1,3 @@
-import * as cssExp from './expected/css';
 import path from 'path';
 import DataURIParser from '../datauri/parser';
 
@@ -11,7 +10,6 @@ const expected = {
 };
 
 describe('Data-uri Parser', () => {
-
   it('should format', () => {
     const parser = new DataURIParser();
 
@@ -36,7 +34,7 @@ describe('Data-uri Parser', () => {
       expect(content).toBe(expected.content);
     });
 
-    it('should run datauri as function with callback', done => {
+    it('should run datauri as function with callback', (done) => {
       parser.encode(fixture, function (err, content, fullTree) {
         expect(err).toBeFalsy();
         expect(content).toBe(expected.content);
@@ -48,42 +46,6 @@ describe('Data-uri Parser', () => {
 
         done();
       });
-    });
-  });
-
-  describe('#getCSS', () => {
-    let meta: any;
-
-    beforeEach((done) => {
-      const parser = new DataURIParser();
-      parser.encode(fixture, (err, content, instance) => {
-        meta = instance;
-        done();
-      });
-    });
-
-    it('should create a class with datauri background using target file name', () => {
-      expect(meta.getCSS()).toBe('\n.fixture {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
-    });
-
-    it('should create a class with datauri background using a defined name', () => {
-      expect(meta.getCSS({ class: 'foobar' })).toBe('\n.foobar {\n    background-image: url(\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\');\n}');
-    });
-
-    it('should create a class with datauri background with width', () => {
-      expect(meta.getCSS({ width: true })).toBe(cssExp.width);
-    });
-
-    it('should create a class with datauri background with height', () => {
-      expect(meta.getCSS({ height: true })).toBe(cssExp.height);
-    });
-
-    it('should create a class with datauri background with both width and height', () => {
-      expect(meta.getCSS({ width: true, height: true })).toBe(cssExp.both);
-    });
-
-    it('should create a class with datauri background with background-size', () => {
-      expect(meta.getCSS({ "background-size": true })).toBe(cssExp.bgsize);
     });
   });
 });

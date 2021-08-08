@@ -1,7 +1,7 @@
-import DataURIParser from "./parser";
+import DataURIParser from './parser';
 import fs from 'fs';
 
-function DataURISync(fileName: string) {
+function DataURISync(fileName: string): DataURIParser {
   if (!fileName || !fileName.trim || fileName.trim() === '') {
     throw new Error('Insert a File path as string argument');
   }

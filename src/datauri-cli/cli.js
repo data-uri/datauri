@@ -1,55 +1,52 @@
 'use strict';
-const fs = require('fs');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { promises: fs, existsSync } = require('fs');
 const copy = require('copy-paste').copy;
-const DataURIPath = process.env.DATAURI_REQUIRE_PATH || 'datauri/sync';
-const DataURISync = require(DataURIPath);
-const clipboard = content =>
-  copy(content, err => console.log(!err ? 'Copied!' : err));
+const DataURIPath = process.env.DATAURI_REQUIRE_PATH || 'datauri';
+const DataURICSSPath = process.env.DATAURI_CSS_PATH || 'datauri/css';
+const DataURI = require(DataURIPath);
+const DataURICSS = require(DataURICSSPath);
+const clipboard = (content) => copy(content, (err) => console.log(!err ? 'Copied!' : err));
 
 class Cli {
   constructor(flags) {
     this.flags = flags;
-    this.dataURI = DataURISync(flags._[0]);
+    this.filePath = flags._[0];
   }
 
   setOutputHandler(output) {
     this.output = output;
   }
 
-  run() {
+  async run() {
     if (this.flags.css) {
-      return this.css(this.flags.css, this.dataURI.getCSS(this.flags));
+      return this.css(this.flags.css, await DataURICSS(this.filePath, this.flags));
     }
 
-    return this.output(this.dataURI.content);
+    return this.output(await DataURI(this.filePath));
   }
 
-  writeCSS(file, content, action) {
-    fs.writeFile(file, content, 'utf-8', (err) => {
-      if (err) {
-        throw err;
-      }
-
-      console.log(`File ${action}: ${file}`);
-    });
+  async writeCSS(file, content, action) {
+    await fs.writeFile(file, content, 'utf-8');
+    console.log(`File ${action}: ${file}`);
   }
 
-  processCSSFile(file, content) {
-    if (fs.existsSync(file)) {
-      return fs.readFile(file, 'utf-8', (err, cssContent) => {
-        this.writeCSS(file, cssContent + content, 'updated');
-      });
+  async processCSSFile(file, content) {
+    if (existsSync(file)) {
+      const cssContent = await fs.readFile(file, 'utf-8');
+
+      return this.writeCSS(file, cssContent + content, 'updated');
     }
 
     return this.writeCSS(file, content, 'created');
   }
 
-  css() {
-    if (typeof arguments[0] === 'string') {
-      return this.processCSSFile.apply(this, arguments);
+  css(...args) {
+    if (typeof args[0] === 'string') {
+      return this.processCSSFile(...args);
     }
 
-    return this.output(arguments[1]);
+    return this.output(args[1]);
   }
 }
 
@@ -58,5 +55,6 @@ module.exports = (flags) => {
   const outputHandler = flags.copy ? clipboard : console.log;
 
   cli.setOutputHandler(outputHandler);
-  cli.run();
+
+  return cli.run();
 };
