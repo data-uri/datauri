@@ -1,5 +1,8 @@
 name: DataURI
 on:
+  push:
+    branches:
+      - main
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
 jobs:
@@ -11,8 +14,11 @@ jobs:
     name: Check package on Node.js ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+        if: ${{ github.event_name == 'pull_request_target' && github.base_ref == 'refs/heads/main' }}
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
