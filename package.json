@@ -38,7 +38,7 @@
     "url": "git://github.com/data-uri/datauri.git"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 10"
   },
   "keywords": [
     "datauri",
