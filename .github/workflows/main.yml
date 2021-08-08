@@ -1,8 +1,5 @@
-name: Check DataURI package
+name: DataURI
 on:
-  push:
-    branches:
-      - main
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
 jobs:
@@ -10,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '10', '12', '14', '16' ]
-    name: Check DataURI package on Node.js ${{ matrix.node }}
+        node: ['10', '12', '14', '16']
+    name: Check package on Node.js ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
