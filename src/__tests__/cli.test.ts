@@ -226,7 +226,8 @@ describe('Data-uri CLI', () => {
     });
   });
 
-  if (!process.env.CI && process.env.CODESPACES !== 'true') {
+  // avoid xclip/xserver issue on CI
+  if (process.platform !== 'linux') {
     describe('--copy', () => {
       it('should copy a datauri', async () => {
         const stdout = await execute(`${cli} ${fixture} --copy`);
