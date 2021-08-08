@@ -6,11 +6,13 @@
 
 from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 
-[![Build Status](https://github.com/data-uri/datauri/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/data-uri/datauri/actions/workflows/main.yml?query=branch%3Amain)
-
-## CLI
+## CLI [![Build Status](https://github.com/data-uri/datauri/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/data-uri/datauri/actions/workflows/main.yml?query=branch%3Amain)
 
 `npm install -g datauri-cli` (it may require Root privileges)
+
+or
+
+`npx datauri-cli <file_path> <flags>`
 
 ### Print
 
@@ -53,7 +55,7 @@ $ datauri brand.png --css --backgroundSize
 
 ## Requirements
 
-Node.js 8+
+Node.js 10+
 
 ## License
 

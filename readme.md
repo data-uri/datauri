@@ -8,19 +8,23 @@
 
 [Module](http://npm.im/datauri) and [CLI](http://npm.im/datauri-cli) to generate [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme).
 
-[![Build Status](https://github.com/data-uri/datauri/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/data-uri/datauri/actions/workflows/main.yml?query=branch%3Amain) [![Dependency Status](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/560b7b3f5a262f001e0007e2) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
+[![Build Status](https://github.com/data-uri/datauri/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/data-uri/datauri/actions/workflows/main.yml?query=branch%3Amain) [![NPM version](http://img.shields.io/npm/dm/datauri.svg?style=flat)](https://www.npmjs.org/package/datauri)
 
 ## Module
 
-`npm i --save datauri`
+`npm i datauri`
 
-[See more in NPM page](http://npm.im/datauri)
+[API Docs](http://npm.im/datauri)
 
 ## CLI
 
 `npm i -g datauri-cli`
 
-[See more in NPM page](http://npm.im/datauri-cli)
+or
+
+`npx datauri-cli <file_path> <flags>`
+
+[CLI Docs](http://npm.im/datauri-cli)
 
 ## [ChangeLog](https://github.com/data-uri/datauri/releases)
 
