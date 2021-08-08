@@ -11,6 +11,8 @@ jobs:
     name: Check package on Node.js ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
