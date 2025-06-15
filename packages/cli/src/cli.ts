@@ -1,10 +1,17 @@
 import type { DatauriCSSConfig } from "@datauri/css";
-import { copy } from "copy-paste";
 import { DataURIParser } from "datauri";
 import { existsSync, promises as fs } from "node:fs";
 
-const clipboard = (content: string): void => {
-  copy(content, (err: Error | null) => console.log(!err ? "Copied!" : err));
+const clipboard = async (content: string) => {
+  const { default: clipboardy } = await import("clipboardy");
+
+  try {
+    await clipboardy.write(content);
+    console.log("Data URI copied to clipboard.");
+  } catch (err) {
+    console.error("Failed to copy to clipboard:", err);
+    return;
+  }
 };
 
 interface Flags {

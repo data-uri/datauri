@@ -42,7 +42,6 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "catalog:",
-    "@types/copy-paste": "^1.1.33",
     "@types/minimist": "^1.2.5",
     "@types/node": "catalog:",
     "config": "workspace:*",
@@ -52,7 +51,7 @@
   },
   "dependencies": {
     "@datauri/css": "workspace:*",
-    "copy-paste": "2.1.1",
+    "clipboardy": "^4.0.0",
     "datauri": "workspace:*",
     "minimist": "1.2.8"
   },
