@@ -8,6 +8,14 @@
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./parser": {
+      "import": "./dist/parser.mjs",
+      "require": "./dist/parser.cjs"
+    },
+    "./sync": {
+      "import": "./dist/sync.mjs",
+      "require": "./dist/sync.cjs"
     }
   },
   "version": "5.0.0",

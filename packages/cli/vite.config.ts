@@ -6,8 +6,7 @@ export default defineConfig({
     ssr: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'DataURI CLI',
-      formats: ['es']
+      name: 'DataURI CLI'
     },
     rollupOptions: {
       external: ['node:fs', 'datauri', '@datauri/css', 'copy-paste', 'minimist'],

@@ -1,5 +1,4 @@
 import superConfig from 'config/vite.config';
-import { resolve } from 'node:path';
 import { defineConfig, mergeConfig } from 'vite';
 
 export default mergeConfig(
@@ -7,7 +6,7 @@ export default mergeConfig(
   defineConfig({
     build: {
       lib: {
-        entry: resolve(__dirname, 'src/index.ts'),
+        entry: ['src/index.ts', 'src/sync.ts'],
         name: 'DataURI module'
       },
       rollupOptions: {

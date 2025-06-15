@@ -1,4 +1,4 @@
-import type { DataURIParser } from 'datauri/dist/parser';
+import type { DataURIParser } from 'datauri';
 import { imageSize } from 'image-size';
 import type { ISize } from 'image-size/dist/types/interface';
 import path from 'node:path';

@@ -14,5 +14,5 @@ export default function DataURISync(fileName: string): DataURIParser {
     return parser.format(fileName, fileContent);
   }
 
-  throw new Error(`The file ${fileName} was not found!`);
+  throw new Error(`${fileName} was not found!`);
 }

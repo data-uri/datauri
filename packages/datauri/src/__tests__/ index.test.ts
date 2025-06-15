@@ -8,9 +8,9 @@ describe('DataURIASync', () => {
   let mockEncode: Mock;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     mockEncode = vi.fn().mockResolvedValue('data:text/plain;base64,SGVsbG8=');
     DataURIParser.prototype.encode = mockEncode;
-    vi.clearAllMocks();
   });
 
   it('should call parser.encode with correct parameters', async () => {
