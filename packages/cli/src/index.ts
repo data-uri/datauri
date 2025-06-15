@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import minimist from "minimist";
+import { version } from "../package.json";
 import cli, { type CLIFlags } from "./cli";
 
 const flags = minimist<CLIFlags>(process.argv.slice(2));
@@ -11,10 +12,12 @@ const flags = minimist<CLIFlags>(process.argv.slice(2));
     flags.help !== true
   ) {
     await cli(flags);
+  } else if (flags.version === true) {
+    console.log(`v${version}`);
   } else {
     console.log(
       [
-        "\nData-uri usage:",
+        `\nData-URI CLI (v${version}) usage:`,
         "\ndatauri <target_file>",
         "datauri <target_file> --css",
         "datauri <target_file> --copy",
@@ -23,6 +26,7 @@ const flags = minimist<CLIFlags>(process.argv.slice(2));
         "datauri <target_file> --css=<css_output> --className=<css_class_name>",
         "datauri <target_file> --css=<css_output> --className=<css_class_name> --width --height",
         "datauri <target_file> --css=<css_output> --className=<css_class_name> --backgroundSize",
+        "datauri --version\n",
       ].join("\n"),
     );
   }

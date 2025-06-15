@@ -63,6 +63,9 @@ $ datauri brand.png --css --className=MyNewClass
 | `--width`           | Set the width of the image in CSS (default: image width)                    |
 | `--height`          | Set the height of the image in CSS (default: image height                   |
 | `--backgroundSize`  | Set the background-size property in CSS (default: image dimensions)         |
+| `--help`            | Show commands help information                                              |
+| `--version`         | Show the current version of the CLI                                         |
+| `--debug`           | Show debug information                                                      |
 
 
 ## [ChangeLog](https://github.com/data-uri/datauri/releases)
