@@ -18,6 +18,19 @@ export interface DatauriCSSConfig {
   dimensions?: ISize;
 }
 
+/**
+ * Parses a Data URI and generates CSS based on the provided configuration.
+ *
+ * @param {DataURIParser} parser - An instance of DataURIParser containing the file and content to parse.
+ * @param {DatauriCSSConfig} [config=defaultCSSConfig] - Configuration options for generating CSS.
+ * @param {boolean} [config.width] - Whether to include the width of the image in the CSS.
+ * @param {boolean} [config.height] - Whether to include the height of the image in the CSS.
+ * @param {boolean} [config.backgroundSize] - Whether to include the background-size property in the CSS.
+ * @param {string} [config.className] - Custom class name for the generated CSS.
+ * @param {ISize} [config.dimensions] - Dimensions of the image (width and height).
+ * @returns {Promise<string>} - A string containing the generated CSS.
+ * @throws {Error} - Throws an error if the parser is not initialized with a valid file and content.
+ */
 export default async function DataURICSSParser(
   parser: DataURIParser,
   config: DatauriCSSConfig = defaultCSSConfig
