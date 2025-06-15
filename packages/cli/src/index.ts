@@ -15,19 +15,75 @@ const flags = minimist<CLIFlags>(process.argv.slice(2));
   } else if (flags.version === true) {
     console.log(`v${version}`);
   } else {
-    console.log(
-      [
-        `\nData-URI CLI (v${version}) usage:`,
-        "\ndatauri <target_file>",
-        "datauri <target_file> --css",
-        "datauri <target_file> --copy",
-        "datauri <target_file> --css --copy",
-        "datauri <target_file> --css=<css_output>",
-        "datauri <target_file> --css=<css_output> --className=<css_class_name>",
-        "datauri <target_file> --css=<css_output> --className=<css_class_name> --width --height",
-        "datauri <target_file> --css=<css_output> --className=<css_class_name> --backgroundSize",
-        "datauri --version\n",
-      ].join("\n"),
-    );
+    const commandsHelp = [
+      {
+        command: "datauri <target_file>",
+        description: "Generate a Data URI for the specified target file.",
+      },
+      {
+        command: "datauri --version",
+        description: "Display the current version of the Data-URI CLI.",
+      },
+      {
+        command: "datauri <target_file> --css",
+        description: "Generate a Data URI and output it as CSS.",
+      },
+      {
+        command: "datauri <target_file> --css --debug",
+        description: "Generate a Data URI as CSS with debug information.",
+      },
+      {
+        command: "datauri <target_file> --css --copy",
+        description: "Generate a Data URI as CSS and copy it to the clipboard.",
+      },
+      {
+        command: "datauri <target_file> --css=<css_output>",
+        description:
+          "Generate a Data URI as CSS and save it to the specified output file.",
+      },
+      {
+        command:
+          "datauri <target_file> --css=<css_output> --className=<css_class_name>",
+        description: "Generate a Data URI as CSS with a specified class name.",
+      },
+      {
+        command:
+          "datauri <target_file> --css=<css_output> --className=<css_class_name> --width --height",
+        description:
+          "Generate a Data URI as CSS with class name, width, and height properties.",
+      },
+      {
+        command:
+          "datauri <target_file> --css=<css_output> --className=<css_class_name> --backgroundSize",
+        description:
+          "Generate a Data URI as CSS with class name and background-size property.",
+      },
+      {
+        command: "datauri <target_file> --copy",
+        description: "Generate a Data URI and copy it to the clipboard.",
+      },
+    ];
+
+    const relevantCommands = commandsHelp.filter((cmd) => {
+      // Create an array of flag names that are explicitly true
+      const activeFlags = Object.entries(flags)
+        .filter(
+          ([key, value]) => value === true && key !== "_" && key !== "help",
+        )
+        .map(([key]) => `--${key}`);
+
+      // For each active flag, check if the command includes it
+      return activeFlags.every((flag) => cmd.command.includes(flag));
+    });
+
+    const displayCommands =
+      relevantCommands.length > 0 ? relevantCommands : commandsHelp;
+
+    console.log(`
+Data-URI CLI (v${version}) usage:\n
+${displayCommands
+  .map(({ command, description }) => `${command}\n  -> ${description}\n`)
+  .join("\n")}
+    `);
   }
 })();
