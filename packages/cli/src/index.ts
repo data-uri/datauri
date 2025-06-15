@@ -65,14 +65,12 @@ const flags = minimist<CLIFlags>(process.argv.slice(2));
     ];
 
     const relevantCommands = commandsHelp.filter((cmd) => {
-      // Create an array of flag names that are explicitly true
       const activeFlags = Object.entries(flags)
         .filter(
           ([key, value]) => value === true && key !== "_" && key !== "help",
         )
         .map(([key]) => `--${key}`);
 
-      // For each active flag, check if the command includes it
       return activeFlags.every((flag) => cmd.command.includes(flag));
     });
 
@@ -82,7 +80,7 @@ const flags = minimist<CLIFlags>(process.argv.slice(2));
     console.log(`
 Data-URI CLI (v${version}) usage:\n
 ${displayCommands
-  .map(({ command, description }) => `${command}\n  -> ${description}\n`)
+  .map(({ command, description }) => `# ${description}\n  ${command}\n`)
   .join("\n")}
     `);
   }
