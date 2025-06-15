@@ -1,5 +1,6 @@
 {
   "name": "datauri",
+  "version": "5.0.0",
   "type": "module",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
@@ -19,7 +20,6 @@
       "require": "./dist/sync.cjs"
     }
   },
-  "version": "5.0.0",
   "scripts": {
     "test": "vitest --run",
     "lint": "npx @biomejs/biome check --write ./src",
