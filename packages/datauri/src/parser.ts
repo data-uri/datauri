@@ -29,11 +29,12 @@ export class DataURIParser {
     }
   }
 
-  getMetadata(): { fileName?: string; mimetype?: string; content?: string } {
+  getMetadata(): { fileName?: string; mimetype?: string; content?: string; base64?: string } {
     return {
       fileName: this.fileName,
       mimetype: this.mimetype,
-      content: this.content
+      content: this.content,
+      base64: this.base64
     };
   }
 

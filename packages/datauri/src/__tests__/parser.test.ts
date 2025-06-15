@@ -84,13 +84,15 @@ describe('DataURIParser', () => {
       parser.fileName = 'test.txt';
       parser.mimetype = 'text/plain';
       parser.content = 'data:text/plain;base64,SGVsbG8gV29ybGQ=';
+      parser.base64 = 'SGVsbG8gV29ybGQ=';
 
       const metadata = parser.getMetadata();
 
       expect(metadata).toEqual({
         fileName: 'test.txt',
         mimetype: 'text/plain',
-        content: 'data:text/plain;base64,SGVsbG8gV29ybGQ='
+        content: 'data:text/plain;base64,SGVsbG8gV29ybGQ=',
+        base64: 'SGVsbG8gV29ybGQ='
       });
     });
 
@@ -100,7 +102,8 @@ describe('DataURIParser', () => {
       expect(metadata).toEqual({
         fileName: undefined,
         mimetype: undefined,
-        content: undefined
+        content: undefined,
+        base64: undefined
       });
     });
   });
