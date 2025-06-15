@@ -57,10 +57,9 @@ $ datauri brand.png --css --className=MyNewClass
 ### Table of flags
 | Flag                | Description                                                                 |
 |---------------------|-----------------------------------------------------------------------------|
-| `--css`             | Output CSS with data-uri background                                         |
+| `--css`             | Output CSS with data-uri background, or specify css file to update          |
 | `--className`       | Define a className for the CSS class                                        |
 | `--copy`            | Copy the output to clipboard                                                |
-| `--output`          | Specify the output file for CSS                                             |
 | `--width`           | Set the width of the image in CSS (default: image width)                    |
 | `--height`          | Set the height of the image in CSS (default: image height                   |
 | `--backgroundSize`  | Set the background-size property in CSS (default: image dimensions)         |
