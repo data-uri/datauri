@@ -1,4 +1,4 @@
-import type { DataURIMetaSchema, DataURIParser } from "datauri";
+import type { DataURIMetaSchema } from "datauri";
 import { imageSize } from "image-size";
 import type { ISize } from "image-size/dist/types/interface";
 import path from "node:path";
@@ -21,15 +21,15 @@ export interface DatauriCSSConfig {
 /**
  * Parses a Data URI and generates CSS based on the provided configuration.
  *
- * @param {DataURIParser} meta - An instance of DataURIParser containing the file and content to parse.
+ * @param {DataURIMetaSchema} meta - Metadata schema containing the file name, content, and buffer of the Data URI.
  * @param {DatauriCSSConfig} [config=defaultCSSConfig] - Configuration options for generating CSS.
- * @param {boolean} [config.width] - Whether to include the width of the image in the CSS.
- * @param {boolean} [config.height] - Whether to include the height of the image in the CSS.
- * @param {boolean} [config.backgroundSize] - Whether to include the background-size property in the CSS.
- * @param {string} [config.className] - Custom class name for the generated CSS.
- * @param {ISize} [config.dimensions] - Dimensions of the image (width and height).
- * @returns {Promise<string>} - A string containing the generated CSS.
- * @throws {Error} - Throws an error if the parser is not initialized with a valid file and content.
+ * @param {boolean} [config.width] - If true, includes the width of the image in the generated CSS.
+ * @param {boolean} [config.height] - If true, includes the height of the image in the generated CSS.
+ * @param {boolean} [config.backgroundSize] - If true, includes the background-size property in the generated CSS.
+ * @param {string} [config.className] - Specifies a custom class name for the generated CSS. Defaults to the file name without its extension.
+ * @param {ISize} [config.dimensions] - Specifies the dimensions of the image (width and height). Automatically calculated if not provided and the buffer is available.
+ * @returns {Promise<string>} - Resolves to a string containing the generated CSS.
+ * @throws {Error} - Throws an error if the metadata schema does not contain valid file name, content, or buffer.
  */
 export default async function DataURICSSParser(
   meta: DataURIMetaSchema,

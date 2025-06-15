@@ -43,8 +43,10 @@ export class DataURIParser {
 
   /**
    * Retrieves metadata about the encoded Data URI.
-   * @param key - Optional key to retrieve specific metadata (e.g., 'fileName').
-   * @returns An object containing all metadata, or the value of the specified key, or undefined if the key does not exist.
+   * @param {keyof DataURIMetaSchema} [key] - Optional key to retrieve specific metadata (e.g., 'fileName').
+   * @returns {DataURIMetaSchema | Buffer | string | undefined} - An object containing all metadata if no key is provided,
+   * the value of the specified key if valid, or throws an error if the key does not exist.
+   * @throws {Error} - Throws an error if an invalid metadata key is provided.
    */
   getMeta(): DataURIMetaSchema;
   getMeta(key: "buffer"): Buffer;
