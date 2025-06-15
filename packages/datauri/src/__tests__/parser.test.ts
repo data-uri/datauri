@@ -1,51 +1,231 @@
-import path from 'node:path';
-import DataURIParser from '../parser';
+import mimer from 'mimer';
+import { readFile } from 'node:fs/promises';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { DataURIParser } from '../parser';
+import type { DataURIInput } from '../types';
 
-const fixture = path.resolve(__dirname, './fixtures/fixture.gif');
-const expected = {
-  fileName: fixture,
-  base64: 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-  mimetype: 'image/gif',
-  content: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-};
+vi.mock('node:fs/promises');
+vi.mock('mimer');
 
-describe('Data-uri Parser', () => {
-  it('should format', () => {
-    const parser = new DataURIParser();
+const mockReadFile = vi.mocked(readFile);
+const mockMimer = vi.mocked(mimer);
 
-    parser.format('.png', 'xkcd');
+describe('DataURIParser', () => {
+  let parser: DataURIParser;
 
-    expect(parser).toHaveProperty('fileName', '.png');
-    expect(parser).toHaveProperty('base64', 'eGtjZA==');
-    expect(parser).toHaveProperty('mimetype', 'image/png');
-    expect(parser).toHaveProperty('content', 'data:image/png;base64,eGtjZA==');
+  beforeEach(() => {
+    parser = new DataURIParser();
+    vi.clearAllMocks();
   });
 
-  describe('async', () => {
-    let parser: DataURIParser;
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-    beforeEach(() => {
-      parser = new DataURIParser();
+  describe('encode', () => {
+    it('should successfully encode a file and return data URI', async () => {
+      const fileName = 'test.txt';
+      const fileBuffer = Buffer.from('Hello World');
+
+      mockReadFile.mockResolvedValue(fileBuffer);
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = await parser.encode(fileName);
+
+      expect(mockReadFile).toHaveBeenCalledWith(fileName);
+      expect(result).toBeDefined();
+      expect(result).toContain('data:text/plain;base64,');
+      expect(parser.fileName).toBe(fileName);
+      expect(parser.mimetype).toBe('text/plain');
+      expect(parser.base64).toBe('SGVsbG8gV29ybGQ=');
+      expect(parser.buffer).toEqual(fileBuffer);
     });
 
-    it('should run datauri as promise', async () => {
-      const content = await parser.encode(fixture);
+    it('should call handler with success when provided', async () => {
+      const fileName = 'test.txt';
+      const fileBuffer = Buffer.from('Hello World');
+      const handler = vi.fn();
 
-      expect(content).toBe(expected.content);
+      mockReadFile.mockResolvedValue(fileBuffer);
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = await parser.encode(fileName, handler);
+
+      expect(handler).toHaveBeenCalledWith(undefined, expect.any(String), parser);
+      expect(result).toBeDefined();
+      expect(result).toContain('data:text/plain;base64,');
     });
 
-    it('should run datauri as function with callback', (done) => {
-      parser.encode(fixture, (err, content, fullTree) => {
-        expect(err).toBeFalsy();
-        expect(content).toBe(expected.content);
+    it('should throw error when readFile fails and no handler provided', async () => {
+      const fileName = 'nonexistent.txt';
+      const error = new Error('File not found');
 
-        expect(fullTree).toHaveProperty('fileName', expected.fileName);
-        expect(fullTree).toHaveProperty('base64', expected.base64);
-        expect(fullTree).toHaveProperty('mimetype', expected.mimetype);
-        expect(fullTree).toHaveProperty('content', expected.content);
+      mockReadFile.mockRejectedValue(error);
 
-        done();
+      await expect(parser.encode(fileName)).rejects.toThrow('File not found');
+    });
+
+    it('should call handler with error when readFile fails and handler provided', async () => {
+      const fileName = 'nonexistent.txt';
+      const error = new Error('File not found');
+      const handler = vi.fn();
+
+      mockReadFile.mockRejectedValue(error);
+
+      const result = await parser.encode(fileName, handler);
+
+      expect(handler).toHaveBeenCalledWith(error);
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('getMetadata', () => {
+    it('should return metadata object with current values', () => {
+      parser.fileName = 'test.txt';
+      parser.mimetype = 'text/plain';
+      parser.content = 'data:text/plain;base64,SGVsbG8gV29ybGQ=';
+
+      const metadata = parser.getMetadata();
+
+      expect(metadata).toEqual({
+        fileName: 'test.txt',
+        mimetype: 'text/plain',
+        content: 'data:text/plain;base64,SGVsbG8gV29ybGQ='
       });
+    });
+
+    it('should return metadata with undefined values when not set', () => {
+      const metadata = parser.getMetadata();
+
+      expect(metadata).toEqual({
+        fileName: undefined,
+        mimetype: undefined,
+        content: undefined
+      });
+    });
+  });
+
+  describe('format', () => {
+    it('should format with Buffer input', () => {
+      const fileName = 'test.txt';
+      const fileBuffer = Buffer.from('Hello World');
+
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = parser.format(fileName, fileBuffer);
+
+      expect(result).toBe(parser);
+      expect(parser.buffer).toEqual(fileBuffer);
+      expect(parser.base64).toBe('SGVsbG8gV29ybGQ=');
+      expect(parser.fileName).toBe(fileName);
+      expect(parser.mimetype).toBe('text/plain');
+      expect(parser.content).toBeDefined();
+      expect(parser.content).toContain('data:text/plain;base64,');
+      expect(parser.content).toContain('SGVsbG8gV29ybGQ=');
+    });
+
+    it('should format with string input', () => {
+      const fileName = 'test.txt';
+      const fileContent = 'Hello World';
+
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = parser.format(fileName, fileContent);
+
+      expect(result).toBe(parser);
+      expect(parser.buffer).toEqual(Buffer.from(fileContent));
+      expect(parser.base64).toBe('SGVsbG8gV29ybGQ=');
+      expect(parser.fileName).toBe(fileName);
+      expect(parser.mimetype).toBe('text/plain');
+      expect(parser.content).toBeDefined();
+      expect(parser.content).toContain('data:text/plain;base64,');
+    });
+
+    it('should format with Uint8Array input', () => {
+      const fileName = 'test.txt';
+      const fileContent = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]);
+
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = parser.format(fileName, fileContent as DataURIInput);
+
+      expect(result).toBe(parser);
+      expect(parser.buffer).toEqual(Buffer.from(fileContent));
+      expect(parser.base64).toBe('SGVsbG8gV29ybGQ=');
+      expect(parser.fileName).toBe(fileName);
+      expect(parser.mimetype).toBe('text/plain');
+      expect(parser.content).toBeDefined();
+      expect(parser.content).toContain('data:text/plain;base64,');
+    });
+
+    it('should handle different file types correctly', () => {
+      const fileName = 'image.png';
+      const fileBuffer = Buffer.from('fake-png-data');
+
+      mockMimer.mockReturnValue('image/png');
+
+      parser.format(fileName, fileBuffer);
+
+      expect(parser.mimetype).toBe('image/png');
+      expect(mockMimer).toHaveBeenCalledWith(fileName);
+      expect(parser.content).toContain('data:image/png;base64,');
+      expect(parser.content).toContain('ZmFrZS1wbmctZGF0YQ==');
+    });
+  });
+
+  describe('createMetadata (private method behavior)', () => {
+    it('should use mimer to determine mimetype when not provided', () => {
+      const fileName = 'test.jpg';
+      const fileBuffer = Buffer.from('fake-image-data');
+
+      mockMimer.mockReturnValue('image/jpeg');
+
+      parser.format(fileName, fileBuffer);
+
+      expect(mockMimer).toHaveBeenCalledWith(fileName);
+      expect(parser.mimetype).toBe('image/jpeg');
+      expect(parser.content).toContain('data:image/jpeg;base64,');
+    });
+
+    it('should handle files without extension', () => {
+      const fileName = 'README';
+      const fileBuffer = Buffer.from('readme content');
+
+      mockMimer.mockReturnValue('text/plain');
+
+      parser.format(fileName, fileBuffer);
+
+      expect(mockMimer).toHaveBeenCalledWith(fileName);
+      expect(parser.fileName).toBe(fileName);
+      expect(parser.content).toContain('data:text/plain;base64,');
+    });
+  });
+
+  describe('integration scenarios', () => {
+    it('should handle empty file', async () => {
+      const fileName = 'empty.txt';
+      const emptyBuffer = Buffer.alloc(0);
+
+      mockReadFile.mockResolvedValue(emptyBuffer);
+      mockMimer.mockReturnValue('text/plain');
+
+      const result = await parser.encode(fileName);
+
+      expect(result).toContain('data:text/plain;base64,');
+      expect(parser.base64).toBe('');
+    });
+
+    it('should handle binary file', async () => {
+      const fileName = 'test.bin';
+      const binaryBuffer = Buffer.from([0x00, 0x01, 0x02, 0xff]);
+
+      mockReadFile.mockResolvedValue(binaryBuffer);
+      mockMimer.mockReturnValue('application/octet-stream');
+
+      const result = await parser.encode(fileName);
+
+      expect(result).toContain('data:application/octet-stream;base64,');
+      expect(parser.base64).toBe('AAEC/w==');
     });
   });
 });

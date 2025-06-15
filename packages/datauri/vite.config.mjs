@@ -13,6 +13,10 @@ export default mergeConfig(
       rollupOptions: {
         external: ['mimer']
       }
+    },
+    test: {
+      globals: true,
+      environment: 'node' // or 'jsdom' if testing browser code
     }
   })
 );
