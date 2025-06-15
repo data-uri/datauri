@@ -1,21 +1,21 @@
+import path from "node:path";
 import type { DataURIMetaSchema } from "datauri";
 import { imageSize } from "image-size";
 import type { ISize } from "image-size/dist/types/interface";
-import path from "node:path";
 import { cssParser } from "./template/cssTemplate";
 
 const defaultCSSConfig = {};
 
 function createClassName(fileName: string) {
-  return path.basename(fileName, path.extname(fileName));
+	return path.basename(fileName, path.extname(fileName));
 }
 
 export interface DatauriCSSConfig {
-  width?: boolean;
-  height?: boolean;
-  backgroundSize?: boolean;
-  className?: string;
-  dimensions?: ISize;
+	width?: boolean;
+	height?: boolean;
+	backgroundSize?: boolean;
+	className?: string;
+	dimensions?: ISize;
 }
 
 /**
@@ -32,32 +32,32 @@ export interface DatauriCSSConfig {
  * @throws {Error} - Throws an error if the metadata schema does not contain valid file name, content, or buffer.
  */
 export async function DataURICSSParser(
-  meta: DataURIMetaSchema,
-  config: DatauriCSSConfig = defaultCSSConfig,
+	meta: DataURIMetaSchema,
+	config: DatauriCSSConfig = defaultCSSConfig,
 ): Promise<string> {
-  const cssConfig: DatauriCSSConfig = {
-    ...defaultCSSConfig,
-    ...config,
-  };
+	const cssConfig: DatauriCSSConfig = {
+		...defaultCSSConfig,
+		...config,
+	};
 
-  const { content, fileName, buffer } = meta;
+	const { content, fileName, buffer } = meta;
 
-  if (typeof content !== "string" || typeof fileName !== "string" || !buffer) {
-    throw new Error(
-      "DataURIParser must be initialized with a valid file and content.",
-    );
-  }
+	if (typeof content !== "string" || typeof fileName !== "string" || !buffer) {
+		throw new Error(
+			"DataURIParser must be initialized with a valid file and content.",
+		);
+	}
 
-  if (
-    (cssConfig.width || cssConfig.height || cssConfig.backgroundSize) &&
-    buffer
-  ) {
-    cssConfig.dimensions = imageSize(buffer);
-  }
+	if (
+		(cssConfig.width || cssConfig.height || cssConfig.backgroundSize) &&
+		buffer
+	) {
+		cssConfig.dimensions = imageSize(buffer);
+	}
 
-  return cssParser({
-    ...cssConfig,
-    className: cssConfig.className ?? createClassName(fileName),
-    background: content,
-  });
+	return cssParser({
+		...cssConfig,
+		className: cssConfig.className ?? createClassName(fileName),
+		background: content,
+	});
 }

@@ -4,38 +4,38 @@ import type { DatauriCSSConfig } from "../";
 type ImageDimensions = ISizeCalculationResult;
 
 type CSS_CONFIG = DatauriCSSConfig & {
-  className: string;
-  background: string;
-  dimensions?: ImageDimensions;
+	className: string;
+	background: string;
+	dimensions?: ImageDimensions;
 };
 
 const spacesChar = "  ";
 
 const propMap = new Map<string, (size: ImageDimensions) => string>([
-  [
-    "backgroundSize",
-    (size) => `background-size: ${size.width}px ${size.height}px`,
-  ],
-  ["width", (size) => `width: ${size.width}px`],
-  ["height", (size) => `height: ${size.height}px`],
+	[
+		"backgroundSize",
+		(size) => `background-size: ${size.width}px ${size.height}px`,
+	],
+	["width", (size) => `width: ${size.width}px`],
+	["height", (size) => `height: ${size.height}px`],
 ]);
 
 const parseImageSize = (ast: CSS_CONFIG) =>
-  Object.keys(ast).reduce<string[]>((rule, propName) => {
-    const prop = propMap.get(propName);
+	Object.keys(ast).reduce<string[]>((rule, propName) => {
+		const prop = propMap.get(propName);
 
-    if (prop && ast.dimensions) {
-      return rule.concat(`${spacesChar}${prop(ast.dimensions)};`);
-    }
+		if (prop && ast.dimensions) {
+			return rule.concat(`${spacesChar}${prop(ast.dimensions)};`);
+		}
 
-    return rule;
-  }, []);
+		return rule;
+	}, []);
 
 export const cssParser = (config: CSS_CONFIG): string =>
-  [
-    "",
-    `.${config.className.replace(/\s+/gi, "_")} {`,
-    `${spacesChar}background-image: url('${config.background}');`,
-  ]
-    .concat(...(config.dimensions ? [parseImageSize(config), "}"] : ["}"]))
-    .join("\n");
+	[
+		"",
+		`.${config.className.replace(/\s+/gi, "_")} {`,
+		`${spacesChar}background-image: url('${config.background}');`,
+	]
+		.concat(...(config.dimensions ? [parseImageSize(config), "}"] : ["}"]))
+		.join("\n");
