@@ -1,4 +1,4 @@
-import DataURICSS, { type DatauriCSSConfig } from "@datauri/css";
+import type { DatauriCSSConfig } from "@datauri/css";
 import { copy } from "copy-paste";
 import { DataURIParser } from "datauri";
 import { existsSync, promises as fs } from "node:fs";
@@ -37,9 +37,13 @@ class Cli {
     }
 
     if (this.flags.css) {
+      const { default: DataURICSS } = await import("@datauri/css");
       return this.css(
         this.flags.css,
-        await DataURICSS(this.parser.getMeta(), this.flags as DatauriCSSConfig),
+        await DataURICSS(
+          this.parser.getMeta(),
+          this.flags.css as DatauriCSSConfig,
+        ),
       );
     }
 
