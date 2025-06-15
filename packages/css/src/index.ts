@@ -1,21 +1,21 @@
-import type { DataURIParser } from 'datauri';
-import { imageSize } from 'image-size';
-import type { ISize } from 'image-size/dist/types/interface';
-import path from 'node:path';
-import { cssParser } from './template/cssTemplate';
+import path from "node:path";
+import type { DataURIParser } from "datauri";
+import { imageSize } from "image-size";
+import type { ISize } from "image-size/dist/types/interface";
+import { cssParser } from "./template/cssTemplate";
 
 const defaultCSSConfig = {};
 
 function createClassName(fileName: string) {
-  return path.basename(fileName, path.extname(fileName));
+	return path.basename(fileName, path.extname(fileName));
 }
 
 export interface DatauriCSSConfig {
-  width?: boolean;
-  height?: boolean;
-  backgroundSize?: boolean;
-  className?: string;
-  dimensions?: ISize;
+	width?: boolean;
+	height?: boolean;
+	backgroundSize?: boolean;
+	className?: string;
+	dimensions?: ISize;
 }
 
 /**
@@ -32,25 +32,27 @@ export interface DatauriCSSConfig {
  * @throws {Error} - Throws an error if the parser is not initialized with a valid file and content.
  */
 export default async function DataURICSSParser(
-  parser: DataURIParser,
-  config: DatauriCSSConfig = defaultCSSConfig
+	parser: DataURIParser,
+	config: DatauriCSSConfig = defaultCSSConfig,
 ): Promise<string> {
-  const ast: DatauriCSSConfig = {
-    ...defaultCSSConfig,
-    ...config
-  };
+	const ast: DatauriCSSConfig = {
+		...defaultCSSConfig,
+		...config,
+	};
 
-  if (!parser.buffer || !parser.fileName || !parser?.content) {
-    throw new Error('DataURIParser must be initialized with a valid file and content.');
-  }
+	if (!parser.buffer || !parser.fileName || !parser?.content) {
+		throw new Error(
+			"DataURIParser must be initialized with a valid file and content.",
+		);
+	}
 
-  if ((ast.width || ast.height || ast.backgroundSize) && parser.buffer) {
-    ast.dimensions = imageSize(parser.buffer);
-  }
+	if ((ast.width || ast.height || ast.backgroundSize) && parser.buffer) {
+		ast.dimensions = imageSize(parser.buffer);
+	}
 
-  return cssParser({
-    ...ast,
-    className: ast.className ?? createClassName(parser.fileName),
-    background: parser.content
-  });
+	return cssParser({
+		...ast,
+		className: ast.className ?? createClassName(parser.fileName),
+		background: parser.content,
+	});
 }

@@ -4,10 +4,8 @@
   "version": "5.0.0",
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "test": "turbo run test",
-    "release": "turbo run release"
+    "test": "turbo run test"
   },
   "packageManager": "pnpm@9.12.1",
   "maintainers": [

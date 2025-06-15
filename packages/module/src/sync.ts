@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-import { DataURIParser } from './parser';
+import fs from "node:fs";
+import { DataURIParser } from "./parser";
 
 /**
  * Converts a file into a Data URI format synchronously.
@@ -9,17 +9,17 @@ import { DataURIParser } from './parser';
  * @throws {Error} - Throws an error if the file path is invalid or the file does not exist.
  */
 export default function DataURISync(fileName: string): DataURIParser {
-  if (!fileName || !fileName.trim || fileName.trim() === '') {
-    throw new Error('Insert a File path as string argument');
-  }
+	if (!fileName || !fileName.trim || fileName.trim() === "") {
+		throw new Error("Insert a File path as string argument");
+	}
 
-  const parser = new DataURIParser();
+	const parser = new DataURIParser();
 
-  if (fs.existsSync(fileName)) {
-    const fileContent = fs.readFileSync(fileName);
+	if (fs.existsSync(fileName)) {
+		const fileContent = fs.readFileSync(fileName);
 
-    return parser.format(fileName, fileContent);
-  }
+		return parser.format(fileName, fileContent);
+	}
 
-  throw new Error(`${fileName} was not found!`);
+	throw new Error(`${fileName} was not found!`);
 }

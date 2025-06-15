@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Test",
+    "command": "pnpm run test",
+    "hide": "on_success",
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "Build",
+    "command": "pnpm run build",
+    "hide": "on_success",
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "Lint",
+    "command": "pnpm run lint",
+    "hide": "on_success",
+    "shell": {
+      "program": "sh"
+    }
+  }
+]
