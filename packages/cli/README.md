@@ -14,15 +14,15 @@ or
 
 `npx datauri-cli <file_path> <flags>`
 
-### Print
+### Getting started
 
-To print a data-uri scheme from a file
+To output data-uri content:
 
 ```CLI
 $ datauri brand.png
 ```
 
-or copy into your clipboard
+or copy to clipboard:
 
 ```CLI
 $ datauri brand.png --copy
@@ -34,6 +34,11 @@ To output css with data-uri background:
 
 ```CLI
 $ datauri brand.png --css
+```
+
+or copy to clipboard:
+
+```CLI
 $ datauri brand.png --css --copy
 ```
 
@@ -43,19 +48,29 @@ or create/update file:
 $ datauri brand.png --css=asset/background.css
 ```
 
-If you want to define a Class Name, width and etc just type:
+If you want to define a className for the CSS class, you can use the `--className` option:
 
 ```CLI
 $ datauri brand.png --css --className=MyNewClass
-$ datauri brand.png --css --width --height
-$ datauri brand.png --css --backgroundSize
 ```
+
+### Table of flags
+| Flag                | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `--css`             | Output CSS with data-uri background                                         |
+| `--className`       | Define a className for the CSS class                                        |
+| `--copy`            | Copy the output to clipboard                                                |
+| `--output`          | Specify the output file for CSS                                             |
+| `--width`           | Set the width of the image in CSS (default: image width)                    |
+| `--height`          | Set the height of the image in CSS (default: image height                   |
+| `--backgroundSize`  | Set the background-size property in CSS (default: image dimensions)         |
+
 
 ## [ChangeLog](https://github.com/data-uri/datauri/releases)
 
 ## Requirements
 
-Node.js 10+
+Node.js 16+
 
 ## License
 
