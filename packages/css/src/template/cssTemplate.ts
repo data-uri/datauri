@@ -1,9 +1,9 @@
-import { ISizeCalculationResult } from 'image-size/dist/types/interface';
-import { DataURI } from '../types';
+import type { ISizeCalculationResult } from 'image-size/dist/types/interface';
+import type { DatauriCSSConfig } from '../';
 
 type ImageDimensions = ISizeCalculationResult;
 
-type CSS_AST = DataURI.CSSConfig & {
+type CSS_AST = DatauriCSSConfig & {
   className: string;
   background: string;
   dimensions?: ImageDimensions;

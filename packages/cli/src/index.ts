@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-'use strict';
-/* eslint-disable @typescript-eslint/no-var-requires */
-const minimist = require('minimist');
-const cli = require('./cli');
+import minimist from 'minimist';
+import cli from './cli';
+
 const flags = minimist(process.argv.slice(2));
 
 (async () => {

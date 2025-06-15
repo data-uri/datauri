@@ -1,0 +1,5 @@
+{
+  "extends": "./node_modules/config/ts.json",
+  "include": ["src/**/*"],
+  "exclude": ["<outDir>", "node_modules/**/*", "src/__tests__/**/*.test.ts"]
+}

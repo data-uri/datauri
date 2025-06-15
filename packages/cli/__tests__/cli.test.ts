@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import { exec } from 'child_process';
 import { paste } from 'copy-paste';
+import { exec } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 const fixture = 'src/__tests__/fixtures/fixture.gif';
 const expectedString =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';

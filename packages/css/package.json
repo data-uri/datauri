@@ -1,0 +1,59 @@
+{
+  "name": "@datauri/css",
+  "type": "module",
+  "version": "5.0.0",
+  "scripts": {
+    "test": "vitest --run",
+    "lint": "npx @biomejs/biome check --write ./src",
+    "build": "tsc"
+  },
+  "maintainers": [
+    {
+      "name": "Helder Santana",
+      "email": "heldr@me.com",
+      "url": "http://heldr.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/data-uri/datauri.git"
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "keywords": [
+    "datauri",
+    "data uri",
+    "data",
+    "uri",
+    "data-uri",
+    "optimization",
+    "uri",
+    "optimize",
+    "inline",
+    "png",
+    "jpg",
+    "woff",
+    "base64"
+  ],
+  "author": "Helder Santana",
+  "description": "Create DataURI scheme easily",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vitest": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "typescript": "catalog:",
+    "config": "workspace:*"
+  },
+  "dependencies": {
+    "image-size": "1.0.0"
+  },
+  "peerDependencies": {
+    "datauri": "workspace:*"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

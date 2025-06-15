@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2017",
+    "lib": ["es2017"],
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "baseUrl": "."
+  }
+}

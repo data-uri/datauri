@@ -1,5 +1,5 @@
-import path from 'path';
-import DataURIParser from '../datauri/parser';
+import path from 'node:path';
+import DataURIParser from '../parser';
 
 const fixture = path.resolve(__dirname, './fixtures/fixture.gif');
 const expected = {
@@ -35,7 +35,7 @@ describe('Data-uri Parser', () => {
     });
 
     it('should run datauri as function with callback', (done) => {
-      parser.encode(fixture, function (err, content, fullTree) {
+      parser.encode(fixture, (err, content, fullTree) => {
         expect(err).toBeFalsy();
         expect(content).toBe(expected.content);
 

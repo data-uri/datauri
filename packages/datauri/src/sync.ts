@@ -1,7 +1,7 @@
-import DataURIParser from './parser';
-import fs from 'fs';
+import fs from 'node:fs';
+import { DataURIParser } from './parser';
 
-function DataURISync(fileName: string): DataURIParser {
+export function DataURISync(fileName: string): DataURIParser {
   if (!fileName || !fileName.trim || fileName.trim() === '') {
     throw new Error('Insert a File path as string argument');
   }
@@ -16,5 +16,3 @@ function DataURISync(fileName: string): DataURIParser {
 
   throw new Error(`The file ${fileName} was not found!`);
 }
-
-export = DataURISync;

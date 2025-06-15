@@ -1,0 +1,9 @@
+packages:
+  - 'packages/*'
+catalog:
+  vitest-version: &vitest-version 3.2.3
+  vitest: *vitest-version
+  '@types/node': ^20.14.2
+  '@biomejs/biome': 1.9.4
+  typescript: 5.8.3
+  vite: 6.3.5

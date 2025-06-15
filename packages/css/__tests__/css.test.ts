@@ -1,5 +1,5 @@
-import path from 'path';
-import DataURICSSParser from '../datauri/css';
+import path from 'node:path';
+import DataURICSSParser from '../css';
 
 const fixture = path.resolve(__dirname, './fixtures/fixture.gif');
 

@@ -1,0 +1,12 @@
+{
+  "name": "config",
+  "version": "0.0.0",
+  "description": "all packages configurations",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "vite": "catalog:"
+  }
+}

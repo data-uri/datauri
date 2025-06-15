@@ -1,0 +1,64 @@
+{
+  "name": "datauri",
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "version": "5.0.0",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "vitest --run",
+    "lint": "npx @biomejs/biome check --write ./src",
+    "clean-deps": "rm -rf node_modules",
+    "build": "vite build",
+    "release": "npm run build && npm publish .",
+    "preversion": "npm run test",
+    "postversion": "git commit --amend -a && npm run build"
+  },
+  "maintainers": [
+    {
+      "name": "Helder Santana",
+      "email": "heldr@me.com",
+      "url": "http://heldr.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/data-uri/datauri.git"
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "keywords": [
+    "datauri",
+    "data uri",
+    "data",
+    "uri",
+    "data-uri",
+    "optimization",
+    "uri",
+    "optimize",
+    "inline",
+    "png",
+    "jpg",
+    "woff",
+    "base64"
+  ],
+  "author": "Helder Santana",
+  "description": "Create DataURI scheme easily",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "typescript": "catalog:",
+    "config": "workspace:*"
+  },
+  "dependencies": {
+    "mimer": "2.0.2"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

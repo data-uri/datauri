@@ -1,28 +1,28 @@
-import { promises } from 'fs';
 import mimer from 'mimer';
+import { promises } from 'node:fs';
 import { uriParser } from './template/uriTemplate';
-import { DataURI } from './types';
+import type { DataURICallback, DataURIInput } from './types';
 
 const { readFile } = promises;
 
-class DataURIParser {
+export class DataURIParser {
   fileName?: string;
   mimetype?: string;
   content?: string;
   base64?: string;
   buffer?: Buffer;
 
-  async encode(fileName: string, handler?: DataURI.Callback): Promise<string | undefined> {
+  async encode(fileName: string, handler?: DataURICallback): Promise<string | undefined> {
     try {
       const buffer = await readFile(fileName);
 
       this.format(fileName, buffer);
-      handler && handler(undefined, this.content, this);
+      handler?.(undefined, this.content, this);
 
       return this.content;
     } catch (err) {
       if (handler) {
-        handler(err);
+        handler(err as Error);
 
         return;
       }
@@ -31,7 +31,7 @@ class DataURIParser {
     }
   }
 
-  format(fileName: string, fileContent: DataURI.Input): DataURIParser {
+  format(fileName: string, fileContent: DataURIInput): DataURIParser {
     const fileBuffer = fileContent instanceof Buffer ? fileContent : Buffer.from(fileContent);
 
     this.buffer = fileBuffer;
@@ -51,5 +51,3 @@ class DataURIParser {
     return this;
   }
 }
-
-export = DataURIParser;
