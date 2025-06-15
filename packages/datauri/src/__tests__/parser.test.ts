@@ -1,14 +1,11 @@
-import mimer from 'mimer';
 import { readFile } from 'node:fs/promises';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DataURIParser } from '../parser';
 import type { DataURIInput } from '../types';
 
 vi.mock('node:fs/promises');
-vi.mock('mimer');
 
 const mockReadFile = vi.mocked(readFile);
-const mockMimer = vi.mocked(mimer);
 
 describe('DataURIParser', () => {
   let parser: DataURIParser;
@@ -28,7 +25,6 @@ describe('DataURIParser', () => {
       const fileBuffer = Buffer.from('Hello World');
 
       mockReadFile.mockResolvedValue(fileBuffer);
-      mockMimer.mockReturnValue('text/plain');
 
       const result = await parser.encode(fileName);
 
@@ -47,7 +43,6 @@ describe('DataURIParser', () => {
       const handler = vi.fn();
 
       mockReadFile.mockResolvedValue(fileBuffer);
-      mockMimer.mockReturnValue('text/plain');
 
       const result = await parser.encode(fileName, handler);
 
@@ -112,9 +107,6 @@ describe('DataURIParser', () => {
     it('should format with Buffer input', () => {
       const fileName = 'test.txt';
       const fileBuffer = Buffer.from('Hello World');
-
-      mockMimer.mockReturnValue('text/plain');
-
       const result = parser.format(fileName, fileBuffer);
 
       expect(result).toBe(parser);
@@ -130,9 +122,6 @@ describe('DataURIParser', () => {
     it('should format with string input', () => {
       const fileName = 'test.txt';
       const fileContent = 'Hello World';
-
-      mockMimer.mockReturnValue('text/plain');
-
       const result = parser.format(fileName, fileContent);
 
       expect(result).toBe(parser);
@@ -147,9 +136,6 @@ describe('DataURIParser', () => {
     it('should format with Uint8Array input', () => {
       const fileName = 'test.txt';
       const fileContent = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]);
-
-      mockMimer.mockReturnValue('text/plain');
-
       const result = parser.format(fileName, fileContent as DataURIInput);
 
       expect(result).toBe(parser);
@@ -164,13 +150,9 @@ describe('DataURIParser', () => {
     it('should handle different file types correctly', () => {
       const fileName = 'image.png';
       const fileBuffer = Buffer.from('fake-png-data');
-
-      mockMimer.mockReturnValue('image/png');
-
       parser.format(fileName, fileBuffer);
 
       expect(parser.mimetype).toBe('image/png');
-      expect(mockMimer).toHaveBeenCalledWith(fileName);
       expect(parser.content).toContain('data:image/png;base64,');
       expect(parser.content).toContain('ZmFrZS1wbmctZGF0YQ==');
     });
@@ -181,11 +163,8 @@ describe('DataURIParser', () => {
       const fileName = 'test.jpg';
       const fileBuffer = Buffer.from('fake-image-data');
 
-      mockMimer.mockReturnValue('image/jpeg');
-
       parser.format(fileName, fileBuffer);
 
-      expect(mockMimer).toHaveBeenCalledWith(fileName);
       expect(parser.mimetype).toBe('image/jpeg');
       expect(parser.content).toContain('data:image/jpeg;base64,');
     });
@@ -197,7 +176,6 @@ describe('DataURIParser', () => {
       const emptyBuffer = Buffer.alloc(0);
 
       mockReadFile.mockResolvedValue(emptyBuffer);
-      mockMimer.mockReturnValue('text/plain');
 
       const result = await parser.encode(fileName);
 
@@ -210,7 +188,6 @@ describe('DataURIParser', () => {
       const binaryBuffer = Buffer.from([0x00, 0x01, 0x02, 0xff]);
 
       mockReadFile.mockResolvedValue(binaryBuffer);
-      mockMimer.mockReturnValue('application/octet-stream');
 
       const result = await parser.encode(fileName);
 
