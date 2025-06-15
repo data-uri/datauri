@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 import minimist from "minimist";
-import cli from "./cli";
+import cli, { type CLIFlags } from "./cli";
 
-const flags = minimist(process.argv.slice(2));
+const flags = minimist<CLIFlags>(process.argv.slice(2));
 
 (async () => {
-  if (Object.prototype.hasOwnProperty.call(flags, "_") && flags._.length) {
+  if (
+    Object.prototype.hasOwnProperty.call(flags, "_") &&
+    flags._.length &&
+    flags.help !== true
+  ) {
     await cli(flags);
   } else {
     console.log(
