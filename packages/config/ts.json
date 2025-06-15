@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "strict": true,

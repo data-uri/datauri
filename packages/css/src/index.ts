@@ -31,7 +31,7 @@ export interface DatauriCSSConfig {
  * @returns {Promise<string>} - Resolves to a string containing the generated CSS.
  * @throws {Error} - Throws an error if the metadata schema does not contain valid file name, content, or buffer.
  */
-export default async function DataURICSSParser(
+export async function DataURICSSParser(
   meta: DataURIMetaSchema,
   config: DatauriCSSConfig = defaultCSSConfig,
 ): Promise<string> {

@@ -1,5 +1,5 @@
 import type { DatauriCSSConfig } from "@datauri/css";
-import { DataURIParser } from "datauri";
+import { DataURIParser } from "datauri/parser";
 import { existsSync, promises as fs } from "node:fs";
 
 const clipboard = async (content: string) => {
@@ -44,10 +44,10 @@ class Cli {
     }
 
     if (this.flags.css) {
-      const { default: DataURICSS } = await import("@datauri/css");
+      const { DataURICSSParser } = await import("@datauri/css");
       return this.css(
         this.flags.css,
-        await DataURICSS(
+        await DataURICSSParser(
           this.parser.getMeta(),
           this.flags.css as DatauriCSSConfig,
         ),

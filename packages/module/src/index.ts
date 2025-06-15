@@ -9,13 +9,12 @@ import type { DataURICallback } from "./types";
  * @returns {Promise<string | undefined>} A promise that resolves to the encoded Data URI string, or undefined if an error occurs.
  */
 export default function DataURIASync(
-	fileName: string,
-	handler?: DataURICallback,
+  fileName: string,
+  handler?: DataURICallback,
 ): Promise<string | undefined> {
-	const parser = new DataURIParser();
+  const parser = new DataURIParser();
 
-	return parser.encode(fileName, handler);
+  return parser.encode(fileName, handler);
 }
 
-export { DataURIParser } from "./parser";
 export type * from "./types";
