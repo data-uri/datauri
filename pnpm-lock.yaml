@@ -26,11 +26,8 @@ importers:
 
   .:
     devDependencies:
-      '@types/copy-paste':
-        specifier: ^1.1.30
-        version: 1.1.33
       '@types/node':
-        specifier: ^16.18.126
+        specifier: ^16.7.1
         version: 16.18.126
       ts-node:
         specifier: ^10.2.1
@@ -54,8 +51,8 @@ importers:
         specifier: workspace:*
         version: link:../css
       copy-paste:
-        specifier: 1.3.0
-        version: 1.3.0
+        specifier: 2.1.1
+        version: 2.1.1
       datauri:
         specifier: workspace:*
         version: link:../datauri
@@ -66,6 +63,9 @@ importers:
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 1.9.4
+      '@types/copy-paste':
+        specifier: ^1.1.33
+        version: 1.1.33
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
@@ -594,8 +594,8 @@ packages:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
 
-  copy-paste@1.3.0:
-    resolution: {integrity: sha512-HA6le4vPZW2EuPFixuGUpVRKPdAmZyRlF30x5lTbfX7xXHN9NwX/+Sff7Getowosoe/lZIFwrjn4hvsYGe2vRw==}
+  copy-paste@2.1.1:
+    resolution: {integrity: sha512-zC/YZvBiiP9sNSH6+8EMGOO8g6dHWg6dPlLJ2giOmErVPzwKOxaQ83uyZ/wWfJM9+ejKmcJ76V2bKaZWTwwtBA==}
 
   create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -893,9 +893,6 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
-
-  sync-exec@0.6.2:
-    resolution: {integrity: sha512-FHup6L3hMWn+2asiIC/7kj/3CaMM8aAAKPx62DRk42hQkz4H2yBADR0OnnY8Eh5Bxrzb371aPUfnW4WzAUYItQ==}
 
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
@@ -1446,11 +1443,9 @@ snapshots:
       delayed-stream: 1.0.0
     optional: true
 
-  copy-paste@1.3.0:
+  copy-paste@2.1.1:
     dependencies:
       iconv-lite: 0.4.24
-    optionalDependencies:
-      sync-exec: 0.6.2
 
   create-require@1.1.1: {}
 
@@ -1814,9 +1809,6 @@ snapshots:
       js-tokens: 9.0.1
 
   symbol-tree@3.2.4:
-    optional: true
-
-  sync-exec@0.6.2:
     optional: true
 
   tinybench@2.9.0: {}

@@ -21,21 +21,6 @@
     "type": "git",
     "url": "git://github.com/data-uri/datauri.git"
   },
-  "keywords": [
-    "datauri",
-    "data uri",
-    "data",
-    "uri",
-    "data-uri",
-    "optimization",
-    "uri",
-    "optimize",
-    "inline",
-    "png",
-    "jpg",
-    "woff",
-    "base64"
-  ],
   "author": "Helder Santana",
   "license": "MIT",
   "devDependencies": {
