@@ -8,226 +8,210 @@ vi.mock("node:fs/promises");
 const mockReadFile = vi.mocked(readFile);
 
 describe("DataURIParser", () => {
-	let parser: DataURIParser;
+  let parser: DataURIParser;
 
-	beforeEach(() => {
-		parser = new DataURIParser();
-		vi.clearAllMocks();
-	});
+  beforeEach(() => {
+    parser = new DataURIParser();
+    vi.clearAllMocks();
+  });
 
-	afterEach(() => {
-		vi.restoreAllMocks();
-	});
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-	describe("encode", () => {
-		it("should successfully encode a file and return data URI", async () => {
-			const fileName = "test.txt";
-			const fileBuffer = Buffer.from("Hello World");
+  describe("encode", () => {
+    it("should successfully encode a file and return data URI", async () => {
+      const fileName = "test.txt";
+      const fileBuffer = Buffer.from("Hello World");
 
-			mockReadFile.mockResolvedValue(fileBuffer);
+      mockReadFile.mockResolvedValue(fileBuffer);
 
-			const result = await parser.encode(fileName);
+      const result = await parser.encode(fileName);
 
-			expect(mockReadFile).toHaveBeenCalledWith(fileName);
-			expect(result).toBeDefined();
-			expect(result).toContain("data:text/plain;base64,");
-			expect(parser.fileName).toBe(fileName);
-			expect(parser.mimetype).toBe("text/plain");
-			expect(parser.base64).toBe("SGVsbG8gV29ybGQ=");
-			expect(parser.buffer).toEqual(fileBuffer);
-		});
+      expect(mockReadFile).toHaveBeenCalledWith(fileName);
+      expect(result).toBeDefined();
+      expect(result).toContain("data:text/plain;base64,");
+      expect(parser.getMeta("fileName")).toBe(fileName);
+      expect(parser.getMeta("mimetype")).toBe("text/plain");
+      expect(parser.getMeta("base64")).toBe("SGVsbG8gV29ybGQ=");
+      expect(parser.getMeta("buffer")).toEqual(fileBuffer);
+    });
 
-		it("should call handler with success when provided", async () => {
-			const fileName = "test.txt";
-			const fileBuffer = Buffer.from("Hello World");
-			const handler = vi.fn();
+    it("should call handler with success when provided", async () => {
+      const fileName = "test.txt";
+      const fileBuffer = Buffer.from("Hello World");
+      const handler = vi.fn();
 
-			mockReadFile.mockResolvedValue(fileBuffer);
+      mockReadFile.mockResolvedValue(fileBuffer);
 
-			const result = await parser.encode(fileName, handler);
+      const result = await parser.encode(fileName, handler);
 
-			expect(handler).toHaveBeenCalledWith(
-				undefined,
-				expect.any(String),
-				parser,
-			);
-			expect(result).toBeDefined();
-			expect(result).toContain("data:text/plain;base64,");
-		});
+      expect(handler).toHaveBeenCalledWith(
+        undefined,
+        expect.any(String),
+        parser.getMeta(),
+      );
+      expect(result).toBeDefined();
+      expect(result).toContain("data:text/plain;base64,");
+    });
 
-		it("should throw error when readFile fails and no handler provided", async () => {
-			const fileName = "nonexistent.txt";
-			const error = new Error("File not found");
+    it("should throw error when readFile fails and no handler provided", async () => {
+      const fileName = "nonexistent.txt";
+      const error = new Error("File not found");
 
-			mockReadFile.mockRejectedValue(error);
+      mockReadFile.mockRejectedValue(error);
 
-			await expect(parser.encode(fileName)).rejects.toThrow("File not found");
-		});
+      await expect(parser.encode(fileName)).rejects.toThrow("File not found");
+    });
 
-		it("should call handler with error when readFile fails and handler provided", async () => {
-			const fileName = "nonexistent.txt";
-			const error = new Error("File not found");
-			const handler = vi.fn();
+    it("should call handler with error when readFile fails and handler provided", async () => {
+      const fileName = "nonexistent.txt";
+      const error = new Error("File not found");
+      const handler = vi.fn();
 
-			mockReadFile.mockRejectedValue(error);
+      mockReadFile.mockRejectedValue(error);
 
-			const result = await parser.encode(fileName, handler);
+      const result = await parser.encode(fileName, handler);
 
-			expect(handler).toHaveBeenCalledWith(error);
-			expect(result).toBeUndefined();
-		});
-	});
+      expect(handler).toHaveBeenCalledWith(error);
+      expect(result).toBeUndefined();
+    });
+  });
 
-	describe("getMetadata", () => {
-		it("should return metadata object with current values", () => {
-			parser.fileName = "test.txt";
-			parser.mimetype = "text/plain";
-			parser.content = "data:text/plain;base64,SGVsbG8gV29ybGQ=";
-			parser.base64 = "SGVsbG8gV29ybGQ=";
+  describe("getMetadata", () => {
+    it("should return metadata object with current values", () => {
+      const fileName = "test.txt";
+      const fileBuffer = Buffer.from("Hello World");
 
-			const metadata = parser.getMetadata();
+      parser.format(fileName, fileBuffer);
 
-			expect(metadata).toEqual({
-				fileName: "test.txt",
-				mimetype: "text/plain",
-				content: "data:text/plain;base64,SGVsbG8gV29ybGQ=",
-				base64: "SGVsbG8gV29ybGQ=",
-			});
-		});
+      const metadata = parser.getMeta();
 
-		it("should return metadata with undefined values when not set", () => {
-			const metadata = parser.getMetadata();
+      expect(metadata).toEqual({
+        fileName: "test.txt",
+        mimetype: "text/plain",
+        content: "data:text/plain;base64,SGVsbG8gV29ybGQ=",
+        base64: "SGVsbG8gV29ybGQ=",
+        buffer: fileBuffer,
+      });
+    });
 
-			expect(metadata).toEqual({
-				fileName: undefined,
-				mimetype: undefined,
-				content: undefined,
-				base64: undefined,
-			});
-		});
+    it("should return metadata with undefined values when not set", () => {
+      const metadata = parser.getMeta();
 
-		it("should return only the fileName when requested", () => {
-			parser.fileName = "test.txt";
-			parser.mimetype = "text/plain";
-			parser.content = "data:text/plain;base64,SGVsbG8gV29ybGQ=";
-			parser.base64 = "SGVsbG8gV29ybGQ=";
+      expect(metadata).toEqual({
+        fileName: undefined,
+        mimetype: undefined,
+        content: undefined,
+        base64: undefined,
+      });
+    });
 
-			const fileNameMetadata = parser.getMetadata("fileName");
-			const mimetypeMetadata = parser.getMetadata("mimetype");
-			const contentMetadata = parser.getMetadata("content");
-			const base64Metadata = parser.getMetadata("base64");
+    it("should return undefined for a specific key when not set", () => {
+      const fileNameMetadata = parser.getMeta("fileName");
 
-			expect(fileNameMetadata).toBe(parser.fileName);
-			expect(mimetypeMetadata).toBe(parser.mimetype);
-			expect(contentMetadata).toBe(parser.content);
-			expect(base64Metadata).toBe(parser.base64);
-		});
+      expect(fileNameMetadata).toBeUndefined();
+    });
 
-		it("should return undefined for a specific key when not set", () => {
-			const fileNameMetadata = parser.getMetadata("fileName");
+    it("should throw an error for invalid key", () => {
+      expect(() => parser.getMeta("invalidKey" as never)).toThrow(
+        "Invalid metadata key: invalidKey",
+      );
+    });
+  });
 
-			expect(fileNameMetadata).toBeUndefined();
-		});
+  describe("format", () => {
+    it("should format with Buffer input", () => {
+      const fileName = "test.txt";
+      const fileBuffer = Buffer.from("Hello World");
+      const result = parser.format(fileName, fileBuffer);
 
-		it("should throw an error for invalid key", () => {
-			expect(() => parser.getMetadata("invalidKey")).toThrow(
-				"Invalid metadata key: invalidKey",
-			);
-		});
-	});
+      expect(result).toBe(parser);
+      expect(parser.getMeta("buffer")).toEqual(fileBuffer);
+      expect(parser.getMeta("base64")).toBe("SGVsbG8gV29ybGQ=");
+      expect(parser.getMeta("fileName")).toBe(fileName);
+      expect(parser.getMeta("mimetype")).toBe("text/plain");
+      expect(parser.getMeta("content")).toBe(
+        "data:text/plain;base64,SGVsbG8gV29ybGQ=",
+      );
+    });
 
-	describe("format", () => {
-		it("should format with Buffer input", () => {
-			const fileName = "test.txt";
-			const fileBuffer = Buffer.from("Hello World");
-			const result = parser.format(fileName, fileBuffer);
+    it("should format with string input", () => {
+      const fileName = "test.txt";
+      const fileContent = "Hello World";
+      const result = parser.format(fileName, fileContent);
 
-			expect(result).toBe(parser);
-			expect(parser.buffer).toEqual(fileBuffer);
-			expect(parser.base64).toBe("SGVsbG8gV29ybGQ=");
-			expect(parser.fileName).toBe(fileName);
-			expect(parser.mimetype).toBe("text/plain");
-			expect(parser.content).toBeDefined();
-			expect(parser.content).toContain("data:text/plain;base64,");
-			expect(parser.content).toContain("SGVsbG8gV29ybGQ=");
-		});
+      expect(result).toBe(parser);
+      expect(parser.getMeta("buffer")).toEqual(Buffer.from(fileContent));
+      expect(parser.getMeta("base64")).toBe("SGVsbG8gV29ybGQ=");
+      expect(parser.getMeta("fileName")).toBe(fileName);
+      expect(parser.getMeta("mimetype")).toBe("text/plain");
+      expect(parser.getMeta("content")).toBeDefined();
+      expect(parser.getMeta("content")).toContain("data:text/plain;base64,");
+    });
 
-		it("should format with string input", () => {
-			const fileName = "test.txt";
-			const fileContent = "Hello World";
-			const result = parser.format(fileName, fileContent);
+    it("should format with Uint8Array input", () => {
+      const fileName = "test.txt";
+      const fileContent = new Uint8Array([
+        72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100,
+      ]);
+      const result = parser.format(fileName, fileContent as DataURIInput);
 
-			expect(result).toBe(parser);
-			expect(parser.buffer).toEqual(Buffer.from(fileContent));
-			expect(parser.base64).toBe("SGVsbG8gV29ybGQ=");
-			expect(parser.fileName).toBe(fileName);
-			expect(parser.mimetype).toBe("text/plain");
-			expect(parser.content).toBeDefined();
-			expect(parser.content).toContain("data:text/plain;base64,");
-		});
+      expect(result).toBe(parser);
+      expect(parser.getMeta("buffer")).toEqual(Buffer.from(fileContent));
+      expect(parser.getMeta("base64")).toBe("SGVsbG8gV29ybGQ=");
+      expect(parser.getMeta("fileName")).toBe(fileName);
+      expect(parser.getMeta("mimetype")).toBe("text/plain");
+      expect(parser.getMeta("content")).toBeDefined();
+      expect(parser.getMeta("content")).toContain("data:text/plain;base64,");
+    });
 
-		it("should format with Uint8Array input", () => {
-			const fileName = "test.txt";
-			const fileContent = new Uint8Array([
-				72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100,
-			]);
-			const result = parser.format(fileName, fileContent as DataURIInput);
+    it("should handle different file types correctly", () => {
+      const fileName = "image.png";
+      const fileBuffer = Buffer.from("fake-png-data");
+      parser.format(fileName, fileBuffer);
 
-			expect(result).toBe(parser);
-			expect(parser.buffer).toEqual(Buffer.from(fileContent));
-			expect(parser.base64).toBe("SGVsbG8gV29ybGQ=");
-			expect(parser.fileName).toBe(fileName);
-			expect(parser.mimetype).toBe("text/plain");
-			expect(parser.content).toBeDefined();
-			expect(parser.content).toContain("data:text/plain;base64,");
-		});
+      expect(parser.getMeta("mimetype")).toBe("image/png");
+      expect(parser.getMeta("content")).toContain("data:image/png;base64,");
+      expect(parser.getMeta("content")).toContain("ZmFrZS1wbmctZGF0YQ==");
+    });
+  });
 
-		it("should handle different file types correctly", () => {
-			const fileName = "image.png";
-			const fileBuffer = Buffer.from("fake-png-data");
-			parser.format(fileName, fileBuffer);
+  describe("createMetadata (private method behavior)", () => {
+    it("should use mimer to determine mimetype when not provided", () => {
+      const fileName = "test.jpg";
+      const fileBuffer = Buffer.from("fake-image-data");
 
-			expect(parser.mimetype).toBe("image/png");
-			expect(parser.content).toContain("data:image/png;base64,");
-			expect(parser.content).toContain("ZmFrZS1wbmctZGF0YQ==");
-		});
-	});
+      parser.format(fileName, fileBuffer);
 
-	describe("createMetadata (private method behavior)", () => {
-		it("should use mimer to determine mimetype when not provided", () => {
-			const fileName = "test.jpg";
-			const fileBuffer = Buffer.from("fake-image-data");
+      expect(parser.getMeta("mimetype")).toBe("image/jpeg");
+      expect(parser.getMeta("content")).toContain("data:image/jpeg;base64,");
+    });
+  });
 
-			parser.format(fileName, fileBuffer);
+  describe("integration scenarios", () => {
+    it("should handle empty file", async () => {
+      const fileName = "empty.txt";
+      const emptyBuffer = Buffer.alloc(0);
 
-			expect(parser.mimetype).toBe("image/jpeg");
-			expect(parser.content).toContain("data:image/jpeg;base64,");
-		});
-	});
+      mockReadFile.mockResolvedValue(emptyBuffer);
 
-	describe("integration scenarios", () => {
-		it("should handle empty file", async () => {
-			const fileName = "empty.txt";
-			const emptyBuffer = Buffer.alloc(0);
+      const result = await parser.encode(fileName);
 
-			mockReadFile.mockResolvedValue(emptyBuffer);
+      expect(result).toContain("data:text/plain;base64,");
+      expect(parser.getMeta("base64")).toBe("");
+    });
 
-			const result = await parser.encode(fileName);
+    it("should handle binary file", async () => {
+      const fileName = "test.bin";
+      const binaryBuffer = Buffer.from([0x00, 0x01, 0x02, 0xff]);
 
-			expect(result).toContain("data:text/plain;base64,");
-			expect(parser.base64).toBe("");
-		});
+      mockReadFile.mockResolvedValue(binaryBuffer);
 
-		it("should handle binary file", async () => {
-			const fileName = "test.bin";
-			const binaryBuffer = Buffer.from([0x00, 0x01, 0x02, 0xff]);
+      const result = await parser.encode(fileName);
 
-			mockReadFile.mockResolvedValue(binaryBuffer);
-
-			const result = await parser.encode(fileName);
-
-			expect(result).toContain("data:application/octet-stream;base64,");
-			expect(parser.base64).toBe("AAEC/w==");
-		});
-	});
+      expect(result).toContain("data:application/octet-stream;base64,");
+      expect(parser.getMeta("base64")).toBe("AAEC/w==");
+    });
+  });
 });
