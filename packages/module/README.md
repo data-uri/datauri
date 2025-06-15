@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="365" src="https://cdn.rawgit.com/data-uri/datauri/master/media/datauri.svg" alt="datauri">
+  <img width="365" src="https://avatars.githubusercontent.com/u/24514423?s=365&v=4" alt="datauri">
   <br>
   <br>
   <br>
@@ -17,22 +17,27 @@ from: [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme)
 `npm install datauri`
 
 ### Getting started
-
-By default, datauri module returns a promise, which is resolved with `data:uri` string or rejected with read file error:
+By default, datauri module returns a promise, which is resolved with an object containing the data URI content and metadata about the file.
 
 ```js
-const datauri = require('datauri');
+import datauri from 'datauri';
+// const datauri = require('datauri'); // for CommonJS
 
-const content = await datauri('test/myfile.png');
+const { content, ...meta } = await datauri('test/myfile.png');
 
 console.log(content);
 //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(meta.base64);
+//=> "iVBORw0KGgoAAAANSUhEUgAA..."
+console.log(meta.mimetype);
+//=> "image/png"
 ```
 
 ### Callback style and meta data
+If you prefer to use a callback style, you can pass a callback function as the second argument. The callback will receive an error (if any), the data URI content, and metadata about the file.
 
 ```js
-const datauri = require('datauri');
+import datauri from 'datauri';
 
 datauri('test/myfile.png', (err, content, meta) => {
   if (err) {
@@ -48,14 +53,19 @@ datauri('test/myfile.png', (err, content, meta) => {
 ```
 
 ### CSS parser
+To generate a CSS class with the data URI as a background image, you can use the `@datauri/css` package. This is useful for embedding images directly into your CSS files.
+
+`npm install datauri @datauri/css`
 
 ```js
-const datauriCSS = require('datauri/css');
+import datauri from 'datauri';
+import datauriCSS from '@datauri/css';
 
-await datauriCSS('test/myfile.png');
-//=> "\n.case {\n    background-image: url('data:image/png; base64,iVBORw..."
+const data = await datauri('test/myfile.png');
+await datauriCSS(data);
+//=> "\n.myfile {\n    background-image: url('data:image/png; base64,iVBORw..."
 
-await datauriCSS('test/myfile.png', {
+await datauriCSS(data, {
   className: 'myClass',
   width: true,
   height: true
@@ -64,10 +74,10 @@ await datauriCSS('test/myfile.png', {
 ```
 
 ### Synchronous calls
-
+If you want to use synchronous calls, you can use `datauri/sync` module. This is useful for small files or when you need to block execution until the data URI is generated.
 ```js
-const Datauri = require('datauri/sync');
-const meta = Datauri('test/myfile.png');
+import datauri from 'datauri/sync';
+const meta = datauri('test/myfile.png');
 
 console.log(meta.content); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
 console.log(meta.mimetype); //=> "image/png"
@@ -86,6 +96,9 @@ const parser = new DatauriParser();
 const buffer = fs.readFileSync('./hello');
 
 parser.format('.png', buffer); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+
+parser.getMeta('base64'); //=> "iVBORw0KGgoAAAANSUhEUgAA..."
+parser.getMeta('mimetype'); //=> "image/png"
 ```
 
 ### From a string
@@ -94,28 +107,36 @@ parser.format('.png', buffer); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEU
 const DatauriParser = require('datauri/parser');
 const parser = new DatauriParser();
 
-parser.format('.png', 'xkcd'); //=> "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+parser.format('.txt', 'xkcd'); //=> "data:plain/text;base64,eGtjZA=="
+parser.getMeta('base64'); //=> "eGtjZA=="
+parser.getMeta('mimetype'); //=> "text/plain"
 ```
 
 ## Contribute
 
+Data URI is developed in a monorepo with [pnpm](https://pnpm.io/), [biome](https://biomejs.dev/) and [vitest](https://vitest.dev/). After cloning the repository, you can install the dependencies and run the tests with the following commands:
+
 ```CLI
-$ npm install
+$ pnpm i
 ```
 
 To run test specs
 
 ```CLI
-$ npm test
+$ pnpm test
 ```
 
 ## [ChangeLog](https://github.com/data-uri/datauri/releases)
 
 ## Requirements
 
-Node.js 10+
+Node.js 16+
 
 ### Previous Node versions and deprecated features:
+
+Node.js 10 until 15
+`npm install --save datauri@4`
+docs: https://github.com/data-uri/datauri/blob/v4.1.0/docs/datauri.md
 
 Node.js 8
 `npm install --save datauri@3`
