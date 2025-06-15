@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { DataURIParser } from './parser';
 
-export function DataURISync(fileName: string): DataURIParser {
+export default function DataURISync(fileName: string): DataURIParser {
   if (!fileName || !fileName.trim || fileName.trim() === '') {
     throw new Error('Insert a File path as string argument');
   }

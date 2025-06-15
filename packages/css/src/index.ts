@@ -1,4 +1,4 @@
-import type { DataURIParser } from 'datauri';
+import type { DataURIParser } from 'datauri/dist/parser';
 import { imageSize } from 'image-size';
 import type { ISize } from 'image-size/dist/types/interface';
 import path from 'node:path';
@@ -18,7 +18,7 @@ export interface DatauriCSSConfig {
   dimensions?: ISize;
 }
 
-export async function DataURICSSParser(
+export default async function DataURICSSParser(
   parser: DataURIParser,
   config: DatauriCSSConfig = defaultCSSConfig
 ): Promise<string> {
@@ -26,7 +26,12 @@ export async function DataURICSSParser(
     ...defaultCSSConfig,
     ...config
   };
-  if (ast.width || ast.height || ast.backgroundSize) {
+
+  if (!parser.buffer || !parser.fileName || !parser?.content) {
+    throw new Error('DataURIParser must be initialized with a valid file and content.');
+  }
+
+  if ((ast.width || ast.height || ast.backgroundSize) && parser.buffer) {
     ast.dimensions = imageSize(parser.buffer);
   }
 

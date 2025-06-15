@@ -1,18 +1,22 @@
 {
   "name": "datauri",
   "type": "module",
+  "types": "dist/index.d.ts",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "version": "5.0.0",
-  "types": "dist/index.d.ts",
   "scripts": {
     "test": "vitest --run",
     "lint": "npx @biomejs/biome check --write ./src",
-    "clean-deps": "rm -rf node_modules",
-    "build": "vite build",
-    "release": "npm run build && npm publish .",
-    "preversion": "npm run test",
-    "postversion": "git commit --amend -a && npm run build"
+    "build": "pnpm run build:js && pnpm run build:types",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "build:js": "vite build"
   },
   "maintainers": [
     {

@@ -1,7 +1,7 @@
 import { DataURIParser } from './parser';
 import type { DataURICallback } from './types';
 
-export function DataURIASync(
+export default function DataURIASync(
   fileName: string,
   handler?: DataURICallback
 ): Promise<string | undefined> {
@@ -10,4 +10,5 @@ export function DataURIASync(
   return parser.encode(fileName, handler);
 }
 
+export { DataURIParser } from './parser';
 export type * from './types';

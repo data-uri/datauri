@@ -1,9 +1,7 @@
 import mimer from 'mimer';
-import { promises } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { uriParser } from './template/uriTemplate';
 import type { DataURICallback, DataURIInput } from './types';
-
-const { readFile } = promises;
 
 export class DataURIParser {
   fileName?: string;
@@ -29,6 +27,14 @@ export class DataURIParser {
 
       throw err;
     }
+  }
+
+  getMetadata(): { fileName?: string; mimetype?: string; content?: string } {
+    return {
+      fileName: this.fileName,
+      mimetype: this.mimetype,
+      content: this.content
+    };
   }
 
   format(fileName: string, fileContent: DataURIInput): DataURIParser {

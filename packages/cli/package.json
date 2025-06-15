@@ -5,7 +5,8 @@
   "scripts": {
     "test": "vitest --run",
     "lint": "npx @biomejs/biome check --write ./src",
-    "build": "tsc"
+    "build": "vite build",
+    "postbuild": "chmod +x dist/index.mjs"
   },
   "maintainers": [
     {
@@ -40,16 +41,19 @@
   "description": "Create DataURI scheme easily",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "catalog:",
-    "vitest": "catalog:",
     "@biomejs/biome": "catalog:",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "catalog:",
+    "config": "workspace:*",
     "typescript": "catalog:",
-    "config": "workspace:*"
+    "vite": "catalog:",
+    "vitest": "catalog:"
   },
   "dependencies": {
-    "minimist": "1.2.8",
+    "@datauri/css": "workspace:*",
+    "copy-paste": "1.3.0",
     "datauri": "workspace:*",
-    "copy-paste": "1.3.0"
+    "minimist": "1.2.8"
   },
   "files": [
     "dist",

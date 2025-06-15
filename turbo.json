@@ -9,6 +9,10 @@
       "dependsOn": ["build"],
       "inputs": ["src/**/*.ts", "__tests__/**/*.ts"]
     },
+    "publish": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
     "lint": {},
     "//#format": {},
     "//#format:check": {},

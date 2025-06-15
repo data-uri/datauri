@@ -1,6 +1,6 @@
-import DataURICSS from '@datauri/css';
+import DataURICSS, { type DatauriCSSConfig } from '@datauri/css';
 import { copy } from 'copy-paste';
-import DataURI from 'datauri';
+import { DataURIParser } from 'datauri';
 import { existsSync, promises as fs } from 'node:fs';
 
 const clipboard = (content: string): void => {
@@ -16,11 +16,13 @@ interface Flags {
 class Cli {
   private flags: Flags;
   private filePath: string;
-  private output: (content: string) => void;
+  private output: (content: string) => void = () => {};
+  private parser: DataURIParser;
 
   constructor(flags: Flags) {
     this.flags = flags;
     this.filePath = flags._[0];
+    this.parser = new DataURIParser();
   }
 
   setOutputHandler(output: (content: string) => void) {
@@ -28,11 +30,20 @@ class Cli {
   }
 
   async run() {
-    if (this.flags.css) {
-      return this.css(this.flags.css, await DataURICSS(this.filePath, this.flags));
+    const parsedData = await this.parser.encode(this.filePath);
+
+    if (!parsedData) {
+      throw new Error(`Error parsing file: ${this.filePath}`);
     }
 
-    this.output(await DataURI(this.filePath));
+    if (this.flags.css) {
+      return this.css(
+        this.flags.css,
+        await DataURICSS(this.parser, this.flags as DatauriCSSConfig)
+      );
+    }
+
+    this.output(parsedData);
   }
 
   async writeCSS(file: string, content: string, action: string) {
