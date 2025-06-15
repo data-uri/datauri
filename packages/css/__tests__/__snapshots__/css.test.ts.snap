@@ -1,48 +1,79 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Data-uri CSS Parser should create a class with datauri background using a defined name 1`] = `
+exports[`DataURICSSParser > should generate CSS with default config 1`] = `
 "
-.foobar {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
 }"
 `;
 
-exports[`Data-uri CSS Parser should create a class with datauri background using target file name 1`] = `
+exports[`DataURICSSParser > should generate className from fileName without extension 1`] = `
 "
-.fixture {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+.my-awesome-icon.complex.name {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
 }"
 `;
 
-exports[`Data-uri CSS Parser should create a class with datauri background with background-size 1`] = `
+exports[`DataURICSSParser > should handle config with all options enabled 1`] = `
 "
-.fixture {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-  background-size: 1px 1px;
+.full-featured-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+  width: 2px;
+  height: 2px;
+  background-size: 2px 2px;
 }"
 `;
 
-exports[`Data-uri CSS Parser should create a class with datauri background with both width and height 1`] = `
+exports[`DataURICSSParser > should handle different file extensions 1`] = `
 "
-.fixture {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-  width: 1px;
-  height: 1px;
+.icon {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIj48L3N2Zz4=');
 }"
 `;
 
-exports[`Data-uri CSS Parser should create a class with datauri background with height 1`] = `
+exports[`DataURICSSParser > should include background-size when backgroundSize flag is true 1`] = `
 "
-.fixture {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-  height: 1px;
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+  background-size: 2px 2px;
 }"
 `;
 
-exports[`Data-uri CSS Parser should create a class with datauri background with width 1`] = `
+exports[`DataURICSSParser > should include dimensions when height flag is true 1`] = `
 "
-.fixture {
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-  width: 1px;
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+  height: 2px;
+}"
+`;
+
+exports[`DataURICSSParser > should include dimensions when width and height flags are true 1`] = `
+"
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+  width: 2px;
+  height: 2px;
+}"
+`;
+
+exports[`DataURICSSParser > should include dimensions when width flag is true 1`] = `
+"
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+  width: 2px;
+}"
+`;
+
+exports[`DataURICSSParser > should use custom className when provided 1`] = `
+"
+.my-custom-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
+}"
+`;
+
+exports[`DataURICSSParser > should work without config parameter 1`] = `
+"
+.test-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAABjUlEQVR42mJ8//8/AzD/');
 }"
 `;

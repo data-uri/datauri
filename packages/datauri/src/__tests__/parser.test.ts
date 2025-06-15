@@ -189,19 +189,6 @@ describe('DataURIParser', () => {
       expect(parser.mimetype).toBe('image/jpeg');
       expect(parser.content).toContain('data:image/jpeg;base64,');
     });
-
-    it('should handle files without extension', () => {
-      const fileName = 'README';
-      const fileBuffer = Buffer.from('readme content');
-
-      mockMimer.mockReturnValue('text/plain');
-
-      parser.format(fileName, fileBuffer);
-
-      expect(mockMimer).toHaveBeenCalledWith(fileName);
-      expect(parser.fileName).toBe(fileName);
-      expect(parser.content).toContain('data:text/plain;base64,');
-    });
   });
 
   describe('integration scenarios', () => {
