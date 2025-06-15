@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="365" src="https://cdn.rawgit.com/data-uri/datauri/master/media/datauri.svg" alt="datauri">
+  <img width="365" src="https://cdn.rawgit.com/data-uri/datauri/{branch_name}/media/datauri.svg" alt="datauri">
   <br>
   <br>
   <br>
