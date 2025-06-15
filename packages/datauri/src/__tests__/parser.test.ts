@@ -101,6 +101,33 @@ describe('DataURIParser', () => {
         base64: undefined
       });
     });
+
+    it('should return only the fileName when requested', () => {
+      parser.fileName = 'test.txt';
+      parser.mimetype = 'text/plain';
+      parser.content = 'data:text/plain;base64,SGVsbG8gV29ybGQ=';
+      parser.base64 = 'SGVsbG8gV29ybGQ=';
+
+      const fileNameMetadata = parser.getMetadata('fileName');
+      const mimetypeMetadata = parser.getMetadata('mimetype');
+      const contentMetadata = parser.getMetadata('content');
+      const base64Metadata = parser.getMetadata('base64');
+
+      expect(fileNameMetadata).toBe(parser.fileName);
+      expect(mimetypeMetadata).toBe(parser.mimetype);
+      expect(contentMetadata).toBe(parser.content);
+      expect(base64Metadata).toBe(parser.base64);
+    });
+
+    it('should return undefined for a specific key when not set', () => {
+      const fileNameMetadata = parser.getMetadata('fileName');
+
+      expect(fileNameMetadata).toBeUndefined();
+    });
+
+    it('should throw an error for invalid key', () => {
+      expect(() => parser.getMetadata('invalidKey')).toThrow('Invalid metadata key: invalidKey');
+    });
   });
 
   describe('format', () => {

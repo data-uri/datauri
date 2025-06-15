@@ -38,16 +38,28 @@ export class DataURIParser {
 
   /**
    * Retrieves metadata about the encoded Data URI.
-   * @returns {object} - An object containing fileName, mimetype, content, and base64 properties.
+   * @param {string} [key] - Optional key to retrieve specific metadata (e.g., 'fileName').
+   * @returns {object | string | undefined} - An object containing all metadata, or the value of the specified key, or undefined if the key does not exist.
    */
-  getMetadata() {
-    const { fileName, mimetype, content, base64 } = this;
-    return {
-      fileName,
-      mimetype,
-      content,
-      base64
+  getMetadata(
+    key?: string
+  ): Pick<DataURIParser, 'fileName' | 'mimetype' | 'content' | 'base64'> | string | undefined {
+    const metadata = {
+      fileName: this.fileName,
+      mimetype: this.mimetype,
+      content: this.content,
+      base64: this.base64
     };
+
+    if (!key) {
+      return metadata;
+    }
+
+    if (!(key in metadata)) {
+      throw new Error(`Invalid metadata key: ${key}`);
+    }
+
+    return metadata[key as keyof typeof metadata];
   }
 
   /**
